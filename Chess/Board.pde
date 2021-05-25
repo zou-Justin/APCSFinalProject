@@ -1,7 +1,6 @@
 class Board{
   int size;
   double movecount;
-  
   public Board(){
     size = 700;
     movecount = 0.0;

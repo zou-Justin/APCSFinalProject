@@ -1,0 +1,2 @@
+class Pawn extends Pieces{
+}
