@@ -61,8 +61,16 @@ class Board{
   void display(){
     for(int i = 0; i < pieces.length; i++){
       for(int j = 0; j < pieces[0].length; j++){
-        if (i == 0 || i == 1 || i == 7 || i ==6){
-          image(pieces[i][j].getImage(), i * 80 + 30, j * 80 + 30, 80, 80);
+        if (i == 0){
+          image(pieces[i][j].getImage(), j * 80 + 30, i * 80 + 590, 80, 80);
+        }
+        if (i == 1)
+          image(pieces[i][j].getImage(), j * 80 + 30, i * 80 + 430, 80, 80);
+        if (i == 6){
+          image(pieces[i][j].getImage(),  j * 80 + 30, 110, 80, 80);
+        }
+         if (i == 7){
+          image(pieces[i][j].getImage(),  j * 80 + 30, 30, 80, 80);
         }
       }
     }
