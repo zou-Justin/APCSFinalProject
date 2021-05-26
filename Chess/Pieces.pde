@@ -8,7 +8,7 @@ class Pieces{
     white = w;
     type = t;
   }
-  
+
   PImage getImage(){
     if(type.equals("pawn")){
       img = loadImage("WhitePawn.png");
