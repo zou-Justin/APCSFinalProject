@@ -1,41 +1,19 @@
-class Piece{
+class Pieces{
   
   boolean white;
-  boolean removed;
   String type;
-  String location;
+  PImage img;
   
-  public Piece(boolean w, boolean r, String t, String l){
+  public Pieces(boolean w, String t){
     white = w;
-    removed = r;
     type = t;
-    location = l;
   }
   
-  public String[] AvailableSquares(){
+  PImage getImage(){
     if(type.equals("pawn")){
-      
+      img = loadImage("WhitePawn.png");
     }
-    if(type.equals("knight")){
-      
-    }
-    
-    if(type.equals("bishop")){
-      
-    }
-    
-    if(type.equals("rook")){
-      
-    }
-    
-    if(type.equals("queen")){
-      
-    }
-    
-    if(type.equals("king")){
-     
-    }
+    return img;
   }
-    
   
 }
