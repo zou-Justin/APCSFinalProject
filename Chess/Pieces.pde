@@ -9,6 +9,14 @@ class Pieces{
     type = t;
   }
   
+  String getType(){
+    return type;
+  }
+  
+  boolean getColor(){
+    return white;
+  }
+  
   PImage getImage(){
     if(type.equals("pawn")){
       img = loadImage("WhitePawn.png");

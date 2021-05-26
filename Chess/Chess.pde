@@ -3,5 +3,4 @@ void setup(){
   Board a = new Board();
   
   a.setUp();
-  a.spawnPieces();
 }

@@ -23,6 +23,7 @@ class Board{
         c += 1;
       }
     }
+    spawnPieces();
   }
    int getSize(){
      return size;
@@ -54,6 +55,14 @@ class Board{
     pieces[7][3] = new Pieces(false, "queen");
     pieces[7][4] = new Pieces(false, "king");
     
+  }
+  
+  void display(){
+    for(int i = 0; i < pieces.length; i++){
+      for(int j = 0; j < pieces[0].length; j++){
+        image(pieces[i][j].getImage(), i * 80 + 30, j * 80 + 30, 50, 50);
+      }
+    }
   }
 }
   
