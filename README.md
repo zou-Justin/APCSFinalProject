@@ -12,3 +12,6 @@ Development Log:
 
 Justin 5/25/2021:
 Worked on displaying the board, displaying all the pieces and finding the sprites
+
+Adam 5/25/21:
+Worked on building the basics of the board and piece classes. Created the shapes/colors for the board
