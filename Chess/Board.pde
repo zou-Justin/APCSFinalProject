@@ -24,6 +24,7 @@ class Board{
       }
     }
     spawnPieces();
+    display();
   }
    int getSize(){
      return size;
@@ -58,11 +59,12 @@ class Board{
   }
   
   void display(){
-    for(int i = 0; i < pieces.length; i++){
       for(int j = 0; j < pieces[0].length; j++){
-        image(pieces[i][j].getImage(), i * 80 + 30, j * 80 + 30, 50, 50);
+        image(pieces[0][j].getImage(), j * 80 + 30, j * 80 + 30, 50, 50);
+        image(pieces[1][j].getImage(), j * 80 + 30, j * 80 + 30, 50, 50);
+        image(pieces[6][j].getImage(), j * 80 + 30, j * 80 + 30, 50, 50);
+        image(pieces[7][j].getImage(), j * 80 + 30, j * 80 + 30, 50, 50);
       }
     }
-  }
 }
   
