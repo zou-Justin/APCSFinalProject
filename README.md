@@ -15,3 +15,6 @@ Worked on displaying the board, displaying all the pieces and finding the sprite
 
 Adam 5/25/21:
 Worked on building the basics of the board and piece classes. Created the shapes/colors for the board
+
+Adam 5/26/21:
+Cleaned up unnecessary code. Added the concept of generic pieces to symbolize empty squares. Set up availableSquares method for pawns. Started on the general availableSquares method which will be the basis of movement
