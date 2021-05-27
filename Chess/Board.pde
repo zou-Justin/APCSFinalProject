@@ -90,6 +90,7 @@ class Board{
         }
       }
     }
+    println(pieces[1][0].getType());
   }
   
   void availableSquares(int x, int y){
@@ -142,9 +143,12 @@ class Board{
       if(pieces[i][col].getType().equals("generic"))
         pieces[i][col].setAvailable(true);
       else{
-        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor()))
+        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor())){
           pieces[i][col].setAvailable(true);
-        i += 100;
+        }
+        else{
+        //i += 100;
+
       }
     }
     for(int i = row; i >= 0; i--){
@@ -153,7 +157,7 @@ class Board{
       else{
         if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor()))
           pieces[i][col].setAvailable(true);
-        i -= 100;
+        //i -= 100;
       }
     }
     for(int j = col; j < 8; j++){
@@ -162,7 +166,7 @@ class Board{
       else{
         if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][j].getColor()))
           pieces[row][j].setAvailable(true);
-        j += 100;
+        //j += 100;
       }
     }
     for(int j = col; j >= 0; j--){
@@ -171,7 +175,7 @@ class Board{
       else{
         if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][j].getColor()))
           pieces[row][j].setAvailable(true);
-        j -= 100;
+        //j -= 100;
       }
     }
   }
@@ -181,6 +185,7 @@ class Board{
     if(pieces[row][col].getColor() == true){
     }
   }
+  
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
