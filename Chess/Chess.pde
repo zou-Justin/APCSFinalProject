@@ -16,9 +16,9 @@ void mousePressed(){
       a.setSelected(true);
       a.availableSquares(mouseX, mouseY);
     }
-    else if (a.getSelected()){
-      a.setSelected(false);
+    else if (a.getSelected()){      
       a.move(mouseX,mouseY);
+      a.setSelected(false);
     }
   }
 }

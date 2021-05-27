@@ -120,13 +120,17 @@ class Board{
           if(row == 6 && pieces[row - 2][col].getType().equals("generic"))
             pieces[row - 2][col].setAvailable(true);
         }
-        if(col >= 1 && !(pieces[row - 1][col - 1].getType().equals("generic")))
+        if(col >= 1 && !(pieces[row - 1][col - 1].getType().equals("generic")) && (pieces[row + 1][col - 1].getColor()))
           pieces[row - 1][col - 1].setAvailable(true);
-        if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")))
+        if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")) && (pieces[row + 1][col - 1].getColor()))
           pieces[row - 1][col + 1].setAvailable(true);
       }
     }  
   
+  void avaiableBishop(int row,int col){
+    if(pieces[row][col].getColor() == true){
+    }
+  }
   void move(int x, int y){
     int r = (y - 30) / 80;
     int c = (x - 30) / 80;
