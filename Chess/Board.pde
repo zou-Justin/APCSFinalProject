@@ -82,8 +82,9 @@ class Board{
         if(pieces[i][j].getType() != "generic"){
           image(pieces[i][j].getImage(), 30 + (j * 80), 590 - (i * 80), 80, 80);
           if (pieces[i][j].getSelected()){
-            stroke(0);
-            rect(30 + (j * 80), 590 - (i * 80), 50,50);
+            noFill();
+            stroke(249, 250, 58);
+            rect(37 + (j * 80), 600 - (i * 80), 65,65);
           }
         }
       }
@@ -128,7 +129,7 @@ class Board{
     }  
   
   void move(int x, int y){
-    int r = (y - 30) / 80;
+    int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
     if (pieces[r][c].getAvailable()){
       for (int i = 0;i < pieces.length;i++){
@@ -138,13 +139,10 @@ class Board{
            pieces[i][j] = new Pieces();
          }
         }
-      }
-      
+      } 
     }
-    
-    }
-
- } 
+  }
+} 
   
 
   
