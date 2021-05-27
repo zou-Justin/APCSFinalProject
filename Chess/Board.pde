@@ -139,7 +139,7 @@ class Board{
   }
   
   void availableSquaresRook(int row, int col){
-    for(int i = row; i < 8; i++){
+    for(int i = row + 1; i < 8; i++){
       if(pieces[i][col].getType().equals("generic"))
         pieces[i][col].setAvailable(true);
       else{
@@ -151,7 +151,7 @@ class Board{
 
       }
     }
-    for(int i = row; i >= 0; i--){
+    for(int i = row - 1; i >= 0; i--){
       if(pieces[i][col].getType().equals("generic"))
         pieces[i][col].setAvailable(true);
       else{
@@ -160,20 +160,20 @@ class Board{
         //i -= 100;
       }
     }
-    for(int j = col; j < 8; j++){
+    for(int j = col + 1; j < 8; j++){
       if(pieces[row][j].getType().equals("generic"))
         pieces[row][j].setAvailable(true);
       else{
-        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][j].getColor()))
+        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][col].getColor()))
           pieces[row][j].setAvailable(true);
         //j += 100;
       }
     }
-    for(int j = col; j >= 0; j--){
+    for(int j = col - 1; j >= 0; j--){
       if(pieces[row][j].getType().equals("generic"))
         pieces[row][j].setAvailable(true);
       else{
-        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][j].getColor()))
+        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][col].getColor()))
           pieces[row][j].setAvailable(true);
         //j -= 100;
       }
