@@ -55,7 +55,7 @@ class Pieces{
     if (type.equals("king") && white == false){
       img = loadImage("king1.png");
     }
-         if (type.equals("knight") && white == true){
+    if (type.equals("knight") && white == true){
       img = loadImage("knight.png");
     }
     if (type.equals("knight") && white == false){
