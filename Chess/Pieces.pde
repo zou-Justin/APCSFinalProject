@@ -3,27 +3,30 @@ class Pieces{
   boolean white;
   String type;
   PImage img;
-  Board b;
-  int row;
-  int col;
+  boolean isAvailable;
   
-  public Pieces(boolean w, String t,int r, int c){
+  public Pieces(boolean w, String t){
     white = w;
     type = t;
-    row = r;
-    col = c;
+    isAvailable = false;
   }
-  public Pieces(){}
+  
+  public Pieces(){
+    type = "generic";
+    isAvailable = false;
+  }
+  
   String getType(){
     return type;
   }
   boolean getColor(){
     return white;
   }
-  void Selecting(){
-    
-    
+  
+  void setAvailable(boolean b){
+    isAvailable = b;
   }
+
   PImage getImage(){
     if(type.equals("pawn") && white == true){
       img = loadImage("pawn.png");
