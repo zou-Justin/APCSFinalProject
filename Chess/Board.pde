@@ -98,6 +98,8 @@ class Board{
     if(pieces[r][c].getType().equals("pawn")){
       availableSquaresPawn(r, c);
     }
+    if(pieces[r][c].getType().equals("rook"))
+      availableSquaresRook(r, c);
     if (!pieces[r][c].getType().equals("generic")){
       pieces[r][c].setSelected(true);
       setSelected(true);
@@ -132,7 +134,47 @@ class Board{
           pieces[row - 1][col + 1].setAvailable(true);
       }
     }
-  }  
+  }
+  
+  void availableSquaresRook(int row, int col){
+    for(int i = row; i < 8; i++){
+      if(pieces[i][col].getType().equals("generic"))
+        pieces[i][col].setAvailable(true);
+      else{
+        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor()))
+          pieces[i][col].setAvailable(true);
+        i += 100;
+      }
+    }
+    for(int i = row; i >= 0; i--){
+      if(pieces[i][col].getType().equals("generic"))
+        pieces[i][col].setAvailable(true);
+      else{
+        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor()))
+          pieces[i][col].setAvailable(true);
+        i -= 100;
+      }
+    }
+    for(int j = col; j < 8; j++){
+      if(pieces[row][j].getType().equals("generic"))
+        pieces[row][j].setAvailable(true);
+      else{
+        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][j].getColor()))
+          pieces[row][j].setAvailable(true);
+        j += 100;
+      }
+    }
+    for(int j = col; j >= 0; j--){
+      if(pieces[row][j].getType().equals("generic"))
+        pieces[row][j].setAvailable(true);
+      else{
+        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][j].getColor()))
+          pieces[row][j].setAvailable(true);
+        j -= 100;
+      }
+    }
+  }
+    
   
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
