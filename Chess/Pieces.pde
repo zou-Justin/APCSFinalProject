@@ -16,6 +16,7 @@ class Pieces{
   public Pieces(){
     type = "generic";
     isAvailable = false;
+    Selected = false;
   }
   
   String getType(){
