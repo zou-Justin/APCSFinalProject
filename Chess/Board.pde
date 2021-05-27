@@ -2,13 +2,21 @@ class Board{
   int size;
   double movecount;
   Pieces[][] pieces;
-  Pawn pawn;
-  boolean Selected;
+  boolean selected;
   
   public Board(){
     size = 700;
     movecount = 0.0;
     pieces = new Pieces[8][8];
+    selected = false;
+  }
+  
+  void setSelected(boolean b){
+    selected = b;
+  }
+  
+  boolean getSelected(){
+    return selected;
   }
   
   void setUp(){
@@ -20,14 +28,12 @@ class Board{
         if (c % 2 == 0)
           fill(255);
         else
-          fill(75, 36, 4);
+          fill(150, 72, 8);
         rect(i,j,80,80);
         c += 1;
       }
     }
     spawnPieces();
-    display();
-    move();
   }
    int getSize(){
      return size;
@@ -36,59 +42,93 @@ class Board{
    void spawnPieces(){
     //white
     for(int i = 0; i < 8; i++){
-      pieces[1][i] = new Pieces(true, "pawn",1,i);
+      pieces[1][i] = new Pieces(true, "pawn");
     }
-    pieces[0][0] = new Pieces(true, "rook",0,0);
-    pieces[0][7] = new Pieces(true, "rook",0,7);
-    pieces[0][1] = new Pieces(true, "knight",0,1);
-    pieces[0][6] = new Pieces(true, "knight",0,6);
-    pieces[0][2] = new Pieces(true, "bishop",0,2);
-    pieces[0][5] = new Pieces(true, "bishop",0,5);
-    pieces[0][3] = new Pieces(true, "queen",0,3);
-    pieces[0][4] = new Pieces(true, "king",0,4);
+    pieces[0][0] = new Pieces(true, "rook");
+    pieces[0][7] = new Pieces(true, "rook");
+    pieces[0][1] = new Pieces(true, "knight");
+    pieces[0][6] = new Pieces(true, "knight");
+    pieces[0][2] = new Pieces(true, "bishop");
+    pieces[0][5] = new Pieces(true, "bishop");
+    pieces[0][3] = new Pieces(true, "queen");
+    pieces[0][4] = new Pieces(true, "king");
     //black
     for(int j = 0; j < 8; j++){
-      pieces[6][j] = new Pieces(false, "pawn",6,j);
+      pieces[6][j] = new Pieces(false, "pawn");
     }
-    pieces[7][0] = new Pieces(false, "rook",7,0);
-    pieces[7][7] = new Pieces(false, "rook",7,7);
-    pieces[7][1] = new Pieces(false, "knight",7,1);
-    pieces[7][6] = new Pieces(false, "knight",7,6);
-    pieces[7][2] = new Pieces(false, "bishop",7,2);
-    pieces[7][5] = new Pieces(false, "bishop",7,5);
-    pieces[7][3] = new Pieces(false, "queen",7,3);
-    pieces[7][4] = new Pieces(false, "king",7,4);
-    
+    pieces[7][0] = new Pieces(false, "rook");
+    pieces[7][7] = new Pieces(false, "rook");
+    pieces[7][1] = new Pieces(false, "knight");
+    pieces[7][6] = new Pieces(false, "knight");
+    pieces[7][2] = new Pieces(false, "bishop");
+    pieces[7][5] = new Pieces(false, "bishop");
+    pieces[7][3] = new Pieces(false, "queen");
+    pieces[7][4] = new Pieces(false, "king");
+
+    //generic pieces to fill in the rest of the board
+    for(int i = 0; i < pieces.length; i++){
+      for(int j = 0; j < pieces[0].length; j++){
+        if(pieces[i][j] == null)
+          pieces[i][j] = new Pieces();
+      }
+    }
+   
   }
   
   void display(){
     for(int i = 0; i < pieces.length; i++){
       for(int j = 0; j < pieces[0].length; j++){ 
-       if (i == 0){
-          image(pieces[i][j].getImage(), j * 80 + 30, i * 80 + 590, 80, 80);
-        }
-        if (i == 1)
-          image(pieces[i][j].getImage(), j * 80 + 30, i * 80 + 430, 80, 80);
-        if (i == 6){
-          image(pieces[i][j].getImage(),  j * 80 + 30, 110, 80, 80);
-        }
-         if (i == 7){
-          image(pieces[i][j].getImage(),  j * 80 + 30, 30, 80, 80);
-          }
-      }
-    }
-  }
-  
-  void move(){
-    for (int i = 0;i < pieces.length;i++){
-      for (int j = 0; j < pieces[0].length;j++){
-        if (pieces[i][j].type.equals("pawn") /* along with selected*/){
-          pawn.pawnMove(); 
+        if(pieces[i][j].getType() != "generic"){
+          image(pieces[i][j].getImage(), 30 + (j * 80), 590 - (i * 80), 80, 80);
         }
       }
     }
   }
   
+  void availableSquares(int x, int y){
+    int r = (y - 30) / 80;
+    int c = (x - 30) / 80;
+    if(pieces[r][c].getType().equals("pawn"))
+      availableSquaresPawn(r, c);
+  }
+        
   
+  void availableSquaresPawn(int row, int col){
+      if(pieces[row][col].getColor() == true){
+        if(pieces[row + 1][col].getType().equals("generic")){
+          pieces[row + 1][col].setAvailable(true);
+          if(row == 1 && pieces[row + 2][col].getType().equals("generic"))
+            pieces[row + 2][col].setAvailable(true);
+        }
+        if(col >= 1 && !(pieces[row + 1][col - 1].getType().equals("generic")))
+          pieces[row + 1][col - 1].setAvailable(true);
+        if(col <= 6 && !(pieces[row + 1][col + 1].getType().equals("generic")))
+          pieces[row + 1][col + 1].setAvailable(true);
+      }else{
+         if(pieces[row - 1][col].getType().equals("generic")){
+          pieces[row - 1][col].setAvailable(true);
+          if(row == 6 && pieces[row - 2][col].getType().equals("generic"))
+            pieces[row - 2][col].setAvailable(true);
+        }
+        if(col >= 1 && !(pieces[row - 1][col - 1].getType().equals("generic")))
+          pieces[row - 1][col - 1].setAvailable(true);
+        if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")))
+          pieces[row - 1][col + 1].setAvailable(true);
+      }
+    }
 }
+    
+  
+ // void move(){
+   // for (int i = 0;i < pieces.length;i++){
+     // for (int j = 0; j < pieces[0].length;j++){
+       // if (pieces[i][j].type.equals("pawn") /* along with selected*/){
+         
+       // }
+      //}
+    //}
+  //}
+  
+  
+
   
