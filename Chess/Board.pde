@@ -35,6 +35,7 @@ class Board{
     }
     spawnPieces();
   }
+  
    int getSize(){
      return size;
    }
@@ -75,11 +76,15 @@ class Board{
    
   }
   
-  void display(){
+ void display(){
     for(int i = 0; i < pieces.length; i++){
       for(int j = 0; j < pieces[0].length; j++){ 
         if(pieces[i][j].getType() != "generic"){
           image(pieces[i][j].getImage(), 30 + (j * 80), 590 - (i * 80), 80, 80);
+          if (pieces[i][j].getSelected()){
+            stroke(0);
+            rect(30 + (j * 80),590 - (i * 80), 50,50);
+          }
         }
       }
     }
@@ -88,8 +93,12 @@ class Board{
   void availableSquares(int x, int y){
     int r = (y - 30) / 80;
     int c = (x - 30) / 80;
-    if(pieces[r][c].getType().equals("pawn"))
+    if(pieces[r][c].getType().equals("pawn")){
       availableSquaresPawn(r, c);
+    }
+    if (!pieces[r][c].getType().equals("generic")){
+      pieces[r][c].setSelected(true);
+    }
   }
         
   
@@ -97,14 +106,15 @@ class Board{
       if(pieces[row][col].getColor() == true){
         if(pieces[row + 1][col].getType().equals("generic")){
           pieces[row + 1][col].setAvailable(true);
-          if(row == 1 && pieces[row + 2][col].getType().equals("generic"))
+         if(row == 1 && pieces[row + 2][col].getType().equals("generic"))
             pieces[row + 2][col].setAvailable(true);
         }
-        if(col >= 1 && !(pieces[row + 1][col - 1].getType().equals("generic")))
+        if(col >= 1 && (!(pieces[row + 1][col - 1].getType().equals("generic"))) && !(pieces[row + 1][col - 1].getColor()))
           pieces[row + 1][col - 1].setAvailable(true);
-        if(col <= 6 && !(pieces[row + 1][col + 1].getType().equals("generic")))
+        if(col <= 6 && (!(pieces[row + 1][col + 1].getType().equals("generic"))) && !(pieces[row + 1][col - 1].getColor()))
           pieces[row + 1][col + 1].setAvailable(true);
-      }else{
+      }
+      else{
          if(pieces[row - 1][col].getType().equals("generic")){
           pieces[row - 1][col].setAvailable(true);
           if(row == 6 && pieces[row - 2][col].getType().equals("generic"))
@@ -115,20 +125,26 @@ class Board{
         if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")))
           pieces[row - 1][col + 1].setAvailable(true);
       }
+    }  
+  
+  void move(int x, int y){
+    int r = (y - 30) / 80;
+    int c = (x - 30) / 80;
+    if (pieces[r][c].getAvailable()){
+      for (int i = 0;i < pieces.length;i++){
+        for (int j = 0; j < pieces[0].length;j++){
+         if(pieces[i][j].getSelected()){
+           pieces[r][c] = pieces[i][j];
+           pieces[i][j] = new Pieces();
+         }
+        }
+      }
+      
     }
-}
     
-  
- // void move(){
-   // for (int i = 0;i < pieces.length;i++){
-     // for (int j = 0; j < pieces[0].length;j++){
-       // if (pieces[i][j].type.equals("pawn") /* along with selected*/){
-         
-       // }
-      //}
-    //}
-  //}
-  
+    }
+
+ } 
   
 
   

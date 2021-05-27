@@ -4,11 +4,13 @@ class Pieces{
   String type;
   PImage img;
   boolean isAvailable;
+  boolean Selected;
   
   public Pieces(boolean w, String t){
     white = w;
     type = t;
     isAvailable = false;
+    Selected = false;
   }
   
   public Pieces(){
@@ -26,7 +28,19 @@ class Pieces{
   void setAvailable(boolean b){
     isAvailable = b;
   }
-
+  
+  boolean getAvailable(){
+    return isAvailable;
+  }
+  boolean getSelected(){
+    return Selected;
+  }
+  
+  void setSelected(boolean b){
+    Selected = b;
+  }
+  
+  
   PImage getImage(){
     if(type.equals("pawn") && white == true){
       img = loadImage("pawn.png");
