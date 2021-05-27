@@ -83,7 +83,7 @@ class Board{
           image(pieces[i][j].getImage(), 30 + (j * 80), 590 - (i * 80), 80, 80);
           if (pieces[i][j].getSelected()){
             stroke(0);
-            rect(30 + (j * 80),590 - (i * 80), 50,50);
+            rect(30 + (j * 80), 590 - (i * 80), 50,50);
           }
         }
       }
@@ -91,7 +91,7 @@ class Board{
   }
   
   void availableSquares(int x, int y){
-    int r = (y - 30) / 80;
+    int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
     if(pieces[r][c].getType().equals("pawn")){
       availableSquaresPawn(r, c);
