@@ -184,37 +184,44 @@ class Board{
     }
   }
   void availableSquaresKnight(int row,int col){
-    if (row+2 < 8 && col-1 >=0 && col+1 < 8){
-    if (pieces[row+2][col+1].getType().equals("generic")){
-      pieces[row+2][col+1].setAvailable(true);
-    }
-    else if (pieces[row+2][col-1].getType().equals("generic")){
-      pieces[row+2][col-1].setAvailable(true);
+    if(row + 2 < 8){
+      if(col + 1 < 8){
+        if(pieces[row + 2][col + 1].getType().equals("generic") || (pieces[row + 2][col + 1].getColor() != pieces[row][col].getColor()))
+          pieces[row + 2][col + 1].setAvailable(true);
+      }
+      if(col - 1 >= 0){
+        if(pieces[row + 2][col - 1].getType().equals("generic") || (pieces[row + 2][col - 1].getColor() != pieces[row][col].getColor()))
+          pieces[row + 2][col - 1].setAvailable(true);
       }
     }
-    if (row-2 >= 0 && col-1 >=0 && col+1 < 8){
-      if (pieces[row-2][col+1].getType().equals("generic")){
-      pieces[row-2][col+1].setAvailable(true);
+    if(row + 1 < 8){
+      if(col + 2 < 8){
+        if(pieces[row + 1][col + 2].getType().equals("generic") || (pieces[row + 1][col + 2].getColor() != pieces[row][col].getColor()))
+          pieces[row + 1][col + 2].setAvailable(true);
       }
-     if (pieces[row-2][col-1].getType().equals("generic")){
-      pieces[row-2][col-1].setAvailable(true);
-      }
-   }
-   
-    if (row-1 >= 0 && row+1 < 8 && col-2 >=0){
-      if (pieces[row-1][col-2].getType().equals("generic")){
-        pieces[row-1][col-2].setAvailable(true);
-      }
-      if (pieces[row+1][col-2].getType().equals("generic")){
-        pieces[row+1][col-2].setAvailable(true);
+      if(col - 2 >= 0){
+        if(pieces[row + 1][col - 2].getType().equals("generic") || (pieces[row + 1][col - 2].getColor() != pieces[row][col].getColor()))
+          pieces[row + 1][col - 2].setAvailable(true);
       }
     }
-    if (row-1 >= 0 && row+1 <8 && col+2 < 8){
-      if (pieces[row-1][col+2].getType().equals("generic")){
-        pieces[row-1][col+2].setAvailable(true);
+    if(row - 1 >= 0){
+      if(col + 2 < 8){
+        if(pieces[row - 1][col + 2].getType().equals("generic") || (pieces[row - 1][col + 2].getColor() != pieces[row][col].getColor()))
+          pieces[row - 1][col + 2].setAvailable(true);
       }
-       if (pieces[row+1][col+2].getType().equals("generic")){
-        pieces[row+1][col+2].setAvailable(true);
+      if(col - 2 >= 0){
+        if(pieces[row - 1][col - 2].getType().equals("generic") || (pieces[row - 1][col - 2].getColor() != pieces[row][col].getColor()))
+          pieces[row - 1][col - 2].setAvailable(true);
+      }
+    }
+    if(row - 2 >= 0){
+      if(col + 1 < 8){
+        if(pieces[row - 2][col + 1].getType().equals("generic") || (pieces[row - 2][col + 1].getColor() != pieces[row][col].getColor()))
+          pieces[row - 2][col + 1].setAvailable(true);
+      }
+      if(col - 1 >= 0){
+        if(pieces[row - 2][col - 1].getType().equals("generic") || (pieces[row - 2][col - 1].getColor() != pieces[row][col].getColor()))
+          pieces[row - 2][col - 1].setAvailable(true);
       }
     }
   }
