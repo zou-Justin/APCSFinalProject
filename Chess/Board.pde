@@ -200,7 +200,6 @@ class Board{
       pieces[row-2][col-1].setAvailable(true);
       }
    }
-   
     if (row-1 >= 0 && row+1 < 8 && col-2 >=0){
       if (pieces[row-1][col-2].getType().equals("generic")){
         pieces[row-1][col-2].setAvailable(true);
