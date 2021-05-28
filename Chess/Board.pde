@@ -221,52 +221,56 @@ class Board{
 
 
   void availableSquaresBishop(int row,int col){
-      for (int i = 1; i < 8;i++){   
-        if (row+i < 8 && col+i < 8){
-          if (pieces[row+i][col+i].getType().equals("generic")){
-            pieces[row+i][col+i].setAvailable(true);
+      for(int i = 1; i < 8; i++){   
+        if(row + i < 8 && col + i < 8){
+          if(pieces[row + i][col + i].getType().equals("generic")){
+            pieces[row + i][col + i].setAvailable(true);
           }
-        else {
-          if (pieces[row+i][col+i].getColor() != (pieces[row][col].getColor()))
-            pieces[row+i][col+i].setAvailable(true);       
+          else{
+          if (pieces[row + i][col + i].getColor() != (pieces[row][col].getColor()))
+            pieces[row + i][col + i].setAvailable(true);  
+          i += 100;
           }
         }
       }
-      for (int i = 1; i < 8;i++){
-        if (row +i < 8 && col-i >= 0){
-          if (pieces[row+i][col-i].getType().equals("generic")){
-            pieces[row+i][col-i].setAvailable(true);
+      for(int i = 1; i < 8; i++){
+        if(row + i < 8 && col - i >= 0){
+          if (pieces[row + i][col - i].getType().equals("generic")){
+            pieces[row + i][col - i].setAvailable(true);
           }
-        else {
-         
-          if (pieces[row+i][col-i].getColor() != pieces[row][col].getColor())
-            pieces[row+i][col-i].setAvailable(true); 
-         //i+=10;
-        
+          else{
+          if(pieces[row + i][col - i].getColor() != pieces[row][col].getColor())
+            pieces[row + i][col - i].setAvailable(true); 
+          i += 100;
+          }
         }
       }
-      }
-      for (int j = 1; j < 8;j++){
-        if (row-j >=0 && col+j < 8){
-          if (pieces[row-j][col+j].getType().equals("generic")){
-            pieces[row-j][col+j].setAvailable(true);
+      for(int j = 1; j < 8; j++){
+        if(row - j >= 0 && col + j < 8){
+          if(pieces[row - j][col + j].getType().equals("generic")){
+            pieces[row - j][col + j].setAvailable(true);
           }
-        else if (pieces[row-j][col+j].getColor() != pieces[row][col].getColor())
-            pieces[row-j][col+j].setAvailable(true); 
-          //j+=10;
+          else{
+            if(pieces[row - j][col + j].getColor() != pieces[row][col].getColor())
+              pieces[row - j][col + j].setAvailable(true); 
+          j += 100;
+          }
         }
       }
-      for (int j = 1; j < 8;j++){
-       if  (row-j >=0 && col-j >= 0){
-          if (pieces[row-j][col-j].getType().equals("generic")){
-            pieces[row-j][col-j].setAvailable(true);
+      for(int j = 1; j < 8; j++){
+       if(row - j >= 0 && col - j >= 0){
+          if (pieces[row - j][col - j].getType().equals("generic")){
+            pieces[row - j][col - j].setAvailable(true);
           }
-        else if (pieces[row-j][col-j].getColor() != pieces[row][col].getColor())
-            pieces[row-j][col-j].setAvailable(true);   
-          //j+=10;
-        }
-      }  
+          else{
+            if (pieces[row - j][col - j].getColor() != pieces[row][col].getColor())
+              pieces[row - j][col - j].setAvailable(true);   
+          j += 100;
+         }
+       }
+     }
   }
+  
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
