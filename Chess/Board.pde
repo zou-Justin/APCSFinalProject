@@ -98,24 +98,23 @@ class Board{
   void availableSquares(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
-    if(pieces[r][c].getType().equals("pawn")){
-      availableSquaresPawn(r, c);
-    }
-    if(pieces[r][c].getType().equals("rook"))
-      availableSquaresRook(r, c);
-    if(pieces[r][c].getType().equals("bishop")){
-      availableSquaresBishop(r,c);
-    }
-    if (pieces[r][c].getType().equals("knight")){
-      availableSquaresKnight(r,c);
-    }
-    if(pieces[r][c].getType().equals("king"))
-      availableSquaresKing(r, c);
-    if(pieces[r][c].getType().equals("queen"))
-      availableSquaresQueen(r, c);
-    if (!pieces[r][c].getType().equals("generic")){
-      pieces[r][c].setSelected(true);
-      setSelected(true);
+    if((movecount % 1 == 0 && pieces[r][c].getColor()) || (movecount % 1 == 0.5 && !(pieces[r][c].getColor()))){
+      if(pieces[r][c].getType().equals("pawn"))
+        availableSquaresPawn(r, c);
+      if(pieces[r][c].getType().equals("rook"))
+        availableSquaresRook(r, c);
+      if(pieces[r][c].getType().equals("bishop"))
+        availableSquaresBishop(r,c);
+      if(pieces[r][c].getType().equals("knight"))
+        availableSquaresKnight(r,c);
+      if(pieces[r][c].getType().equals("king"))
+        availableSquaresKing(r, c);
+      if(pieces[r][c].getType().equals("queen"))
+        availableSquaresQueen(r, c);
+      if(!pieces[r][c].getType().equals("generic")){
+        pieces[r][c].setSelected(true);
+        setSelected(true);
+      }
     }
   }
         
@@ -335,7 +334,17 @@ class Board{
          }
         }
       } 
+      movecount += 0.5;
     }
+    //Promotion
+    for(int p = 0; p < pieces.length; p++){
+      if(pieces[0][p].getType().equals("pawn"))
+        pieces[0][p] = new Pieces(false, "queen");
+      if(pieces[7][p].getType().equals("pawn"))
+        pieces[7][p] = new Pieces(true, "queen");
+    }
+ 
+    //Eliminating all piece selections and availablities
     for(int k = 0; k < pieces.length; k++){
       for(int m = 0; m < pieces[0].length; m++){
         pieces[k][m].setSelected(false);
