@@ -5,12 +5,14 @@ class Pieces{
   PImage img;
   boolean isAvailable;
   boolean Selected;
+  boolean hasMoved;
   
   public Pieces(boolean w, String t){
     white = w;
     type = t;
     isAvailable = false;
     Selected = false;
+    hasMoved = false;
   }
   
   public Pieces(){
@@ -39,6 +41,14 @@ class Pieces{
   
   void setSelected(boolean b){
     Selected = b;
+  }
+  
+  boolean getHasMoved(){
+    return hasMoved;
+  }
+  
+  void setHasMoved(boolean b){
+    hasMoved = b;
   }
   
   

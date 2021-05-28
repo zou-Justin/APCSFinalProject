@@ -314,7 +314,57 @@ class Board{
           pieces[row - 1][col - 1].setAvailable(true);
       }
     }
+    if(!pieces[row][col].getHasMoved()){
+      //white
+      if(row == 0 && col == 4){
+        //kingside castling
+        if(!pieces[0][7].getHasMoved()){
+          if(pieces[0][5].getType().equals("generic") && pieces[0][6].getType().equals("generic"))
+            pieces[0][6].setAvailable(true);
+        }
+        //queenside castling
+        if(!pieces[0][0].getHasMoved()){
+          if(pieces[0][1].getType().equals("generic") && pieces[0][2].getType().equals("generic") && pieces[0][3].getType().equals("generic"))
+            pieces[0][2].setAvailable(true);
+        }
+      }
+      //black
+      if(row == 7 && col == 4){
+        //kingside castling
+        if(!pieces[7][7].getHasMoved()){
+          if(pieces[7][6].getType().equals("generic") && pieces[7][5].getType().equals("generic"))
+            pieces[7][6].setAvailable(true);
+        }
+      }
+       //queenside castling
+       if(!pieces[7][0].getHasMoved()){
+         if(pieces[7][1].getType().equals("generic") && pieces[7][2].getType().equals("generic") && pieces[7][3].getType().equals("generic"))
+           pieces[7][2].setAvailable(true);
+       }
+    }
   }
+  
+  void castle(int krow, int kcol, int rrow, int rcol){
+    if(rcol == 7){
+      pieces[krow][6] = pieces[krow][kcol];
+      pieces[rrow][5] = pieces[rrow][rcol];
+      pieces[krow][kcol] = new Pieces();
+      pieces[rrow][rcol] = new Pieces();
+      pieces[krow][6].setSelected(false);
+      pieces[krow][6].setHasMoved(true);
+      pieces[rrow][5].setHasMoved(true);
+    }
+    else if(rcol == 0){
+      pieces[krow][2] = pieces[krow][kcol];
+      pieces[rrow][3] = pieces[rrow][rcol];
+      pieces[krow][kcol] = new Pieces();
+      pieces[rrow][rcol] = new Pieces();
+      pieces[krow][2].setSelected(false);
+      pieces[krow][2].setHasMoved(true);
+      pieces[rrow][3].setHasMoved(true);
+    }
+  }
+  
   
   void availableSquaresQueen(int r, int c){
     availableSquaresRook(r, c);
@@ -328,9 +378,14 @@ class Board{
       for (int i = 0; i < pieces.length; i++){
         for (int j = 0; j < pieces[0].length; j++){
          if(pieces[i][j].getSelected()){
-           pieces[r][c] = pieces[i][j];
-           pieces[i][j] = new Pieces();
-           pieces[r][c].setSelected(false);
+           if(pieces[i][j].getType().equals("king") && r == i && (c == j - 2) || (c == j + 2))
+               castle(i, j, r, c);
+           else{
+             pieces[r][c] = pieces[i][j];
+             pieces[i][j] = new Pieces();
+             pieces[r][c].setSelected(false);
+             pieces[r][c].setHasMoved(true);
+           }
          }
         }
       } 
