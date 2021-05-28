@@ -84,7 +84,7 @@ class Board{
           image(pieces[i][j].getImage(), 30 + (j * 80), 590 - (i * 80), 80, 80);
           if (pieces[i][j].getSelected()){
             noFill();
-            stroke(249, 250, 58);
+            stroke(250, 215, 13);
             rect(37 + (j * 80), 600 - (i * 80), 65,65);
           }
         }
@@ -111,6 +111,8 @@ class Board{
     }
     if(pieces[r][c].getType().equals("king"))
       availableSquaresKing(r, c);
+    if(pieces[r][c].getType().equals("queen"))
+      availableSquaresQueen(r, c);
     if (!pieces[r][c].getType().equals("generic")){
       pieces[r][c].setSelected(true);
       setSelected(true);
@@ -313,6 +315,11 @@ class Board{
           pieces[row - 1][col - 1].setAvailable(true);
       }
     }
+  }
+  
+  void availableSquaresQueen(int r, int c){
+    availableSquaresRook(r, c);
+    availableSquaresBishop(r, c);
   }
   
   void move(int x, int y){
