@@ -21,3 +21,6 @@ Cleaned up unnecessary code. Added the concept of generic pieces to symbolize em
 
 Justin 5/26/2021:
 Worked a bit on trying to figure out movement and how it would work
+
+Adam 5/27/21:
+Figured out how to select pieces and define eligible squares. Created basic movement mechanism. Designed the basic pawn movement (no promotion or en passant) and the rook movement.
