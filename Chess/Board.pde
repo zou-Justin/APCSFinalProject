@@ -109,6 +109,8 @@ class Board{
     if (pieces[r][c].getType().equals("knight")){
       availableSquaresKnight(r,c);
     }
+    if(pieces[r][c].getType().equals("king"))
+      availableSquaresKing(r, c);
     if (!pieces[r][c].getType().equals("generic")){
       pieces[r][c].setSelected(true);
       setSelected(true);
@@ -276,6 +278,41 @@ class Board{
          }
        }
      }
+  }
+  
+  void availableSquaresKing(int row, int col){
+    if(row + 1 < 8){
+      if(pieces[row + 1][col].getType().equals("generic") || (pieces[row + 1][col].getColor() != pieces[row][col].getColor()))
+        pieces[row + 1][col].setAvailable(true);
+      if(col - 1 >= 0){
+        if(pieces[row + 1][col - 1].getType().equals("generic") || (pieces[row + 1][col - 1].getColor() != pieces[row][col].getColor()))
+          pieces[row + 1][col - 1].setAvailable(true);
+      }
+      if(col + 1 < 8){
+        if(pieces[row + 1][col + 1].getType().equals("generic") || (pieces[row + 1][col + 1].getColor() != pieces[row][col].getColor()))
+          pieces[row + 1][col + 1].setAvailable(true);
+      }
+    }
+    if(col - 1 >= 0){
+      if(pieces[row][col - 1].getType().equals("generic") || (pieces[row][col - 1].getColor() != pieces[row][col].getColor()))
+        pieces[row][col - 1].setAvailable(true);
+    }
+    if(col + 1 < 8){
+      if(pieces[row][col + 1].getType().equals("generic") || (pieces[row][col + 1].getColor() != pieces[row][col].getColor()))
+        pieces[row][col + 1].setAvailable(true);
+    }
+    if(row - 1 >= 0){
+      if(pieces[row - 1][col].getType().equals("generic") || (pieces[row - 1][col].getColor() != pieces[row][col].getColor()))
+        pieces[row - 1][col].setAvailable(true);
+      if(col + 1 < 8){
+        if(pieces[row - 1][col + 1].getType().equals("generic") || (pieces[row - 1][col + 1].getColor() != pieces[row][col].getColor()))
+          pieces[row - 1][col + 1].setAvailable(true);
+      }
+      if(col - 1 >= 0){
+        if(pieces[row - 1][col - 1].getType().equals("generic") || (pieces[row - 1][col - 1].getColor() != pieces[row][col].getColor()))
+          pieces[row - 1][col - 1].setAvailable(true);
+      }
+    }
   }
   
   void move(int x, int y){
