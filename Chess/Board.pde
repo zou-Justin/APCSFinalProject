@@ -343,24 +343,24 @@ class Board{
          if(pieces[7][1].getType().equals("generic") && pieces[7][2].getType().equals("generic") && pieces[7][3].getType().equals("generic"))
            pieces[7][2].setAvailable(true);
        }
-    }
+   }
   }
   
   void castle(int krow, int kcol, int rrow, int rcol){
-    if(rcol == 7){
+    if(rcol == 6){
       pieces[krow][6] = pieces[krow][kcol];
-      pieces[rrow][5] = pieces[rrow][rcol];
+      pieces[rrow][5] = pieces[rrow][rcol+1];
       pieces[krow][kcol] = new Pieces();
-      pieces[rrow][rcol] = new Pieces();
+      pieces[rrow][rcol+1] = new Pieces();
       pieces[krow][6].setSelected(false);
       pieces[krow][6].setHasMoved(true);
       pieces[rrow][5].setHasMoved(true);
     }
-    else if(rcol == 0){
+    else if(rcol == 2){
       pieces[krow][2] = pieces[krow][kcol];
-      pieces[rrow][3] = pieces[rrow][rcol];
+      pieces[rrow][3] = pieces[rrow][rcol-2];
       pieces[krow][kcol] = new Pieces();
-      pieces[rrow][rcol] = new Pieces();
+      pieces[rrow][rcol-2] = new Pieces();
       pieces[krow][2].setSelected(false);
       pieces[krow][2].setHasMoved(true);
       pieces[rrow][3].setHasMoved(true);
@@ -380,8 +380,10 @@ class Board{
       for (int i = 0; i < pieces.length; i++){
         for (int j = 0; j < pieces[0].length; j++){
          if(pieces[i][j].getSelected()){
-           if(pieces[i][j].getType().equals("king") && r == i && (c == j - 2) || (c == j + 2))
+           if(pieces[i][j].getType().equals("king") && r == i && ((c == j - 2) || (c == j + 2))){
+                println(c);
                castle(i, j, r, c);
+           }
            else{
              pieces[r][c] = pieces[i][j];
              pieces[i][j] = new Pieces();
