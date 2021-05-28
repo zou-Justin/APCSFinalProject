@@ -90,7 +90,7 @@ class Board{
         }
       }
     }
-    println(pieces[1][0].getType());
+   
   }
   
   void availableSquares(int x, int y){
@@ -101,6 +101,9 @@ class Board{
     }
     if(pieces[r][c].getType().equals("rook"))
       availableSquaresRook(r, c);
+    if(pieces[r][c].getType().equals("bishop")){
+      availableSquaresBishop(r,c);
+    }
     if (!pieces[r][c].getType().equals("generic")){
       pieces[r][c].setSelected(true);
       setSelected(true);
@@ -129,7 +132,6 @@ class Board{
           if(row == 6 && pieces[row - 2][col].getType().equals("generic"))
             pieces[row - 2][col].setAvailable(true);
         }
-
         if(col >= 1 && !(pieces[row - 1][col - 1].getType().equals("generic")) && pieces[row - 1][col - 1].getColor())
           pieces[row - 1][col - 1].setAvailable(true);
         if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")) && pieces[row - 1][col + 1].getColor())
@@ -143,12 +145,9 @@ class Board{
       if(pieces[i][col].getType().equals("generic"))
         pieces[i][col].setAvailable(true);
       else{
-        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor())){
+        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor()))
           pieces[i][col].setAvailable(true);
-        }
-        else{
-        //i += 100;
-
+        i += 100;
       }
     }
     for(int i = row - 1; i >= 0; i--){
@@ -157,7 +156,7 @@ class Board{
       else{
         if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor()))
           pieces[i][col].setAvailable(true);
-        //i -= 100;
+        i -= 100;
       }
     }
     for(int j = col + 1; j < 8; j++){
@@ -166,7 +165,7 @@ class Board{
       else{
         if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][col].getColor()))
           pieces[row][j].setAvailable(true);
-        //j += 100;
+        j += 100;
       }
     }
     for(int j = col - 1; j >= 0; j--){
@@ -175,17 +174,55 @@ class Board{
       else{
         if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][col].getColor()))
           pieces[row][j].setAvailable(true);
-        //j -= 100;
+        j -= 100;
       }
     }
   }
     
-  
-  void avaiableBishop(int row,int col){
-    if(pieces[row][col].getColor() == true){
-    }
+  void availableSquaresBishop(int row,int col){
+      for (int i = 1; i < 8;i++){   
+        if (row+i < 8 && col+i < 8){
+          if (pieces[row+i][col+i].getType().equals("generic")){
+            pieces[row+i][col+i].setAvailable(true);
+          }
+        else {
+          if (pieces[row+i][col+i].getColor() != (pieces[row][col].getColor()))
+            pieces[row+i][col+i].setAvailable(true);       
+          i+=10;
+          }
+        }
+      }
+      for (int i = 1; i < 8;i++){
+        if (row +i < 8 && col-i >= 0){
+          if (pieces[row+i][col-i].getType().equals("generic")){
+            pieces[row+i][col-i].setAvailable(true);
+          }
+        else if (pieces[row+i][col-i].getColor() != pieces[row][col].getColor())
+            pieces[row+i][col-i].setAvailable(true); 
+         i+=10;
+        }
+      }
+      for (int j = 1; j < 8;j++){
+        if (row-j >=0 && col+j < 8){
+          if (pieces[row-j][col+j].getType().equals("generic")){
+            pieces[row-j][col+j].setAvailable(true);
+          }
+        else if (pieces[row-j][col+j].getColor() != pieces[row][col].getColor())
+            pieces[row-j][col+j].setAvailable(true); 
+          j+=10;
+        }
+      }
+      for (int j = 1; j < 8;j++){
+       if  (row-j >=0 && col-j >= 0){
+          if (pieces[row-j][col-j].getType().equals("generic")){
+            pieces[row-j][col-j].setAvailable(true);
+          }
+        else if (pieces[row-j][col-j].getColor() != pieces[row][col].getColor())
+            pieces[row-j][col-j].setAvailable(true);   
+          j+=10;
+        }
+      }  
   }
-  
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
