@@ -24,3 +24,6 @@ Worked a bit on trying to figure out movement and how it would work
 
 Adam 5/27/21:
 Figured out how to select pieces and define eligible squares. Created basic movement mechanism. Designed the basic pawn movement (no promotion or en passant) and the rook movement.
+
+Justin 5/27/2021:
+Worked with Adam on movement code. Did the bishop and some basic knight movement. Both are still works in progress.
