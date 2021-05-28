@@ -80,7 +80,7 @@ class Board{
     }
     for(int i = 0; i < pieces.length; i++){
       for(int j = 0; j < pieces[0].length; j++){ 
-        if(pieces[i][j].getType() != "generic"){
+        if(!pieces[i][j].getType().equals("generic")){
           image(pieces[i][j].getImage(), 30 + (j * 80), 590 - (i * 80), 80, 80);
           if (pieces[i][j].getSelected()){
             noFill();
@@ -88,8 +88,10 @@ class Board{
             rect(37 + (j * 80), 600 - (i * 80), 65,65);
           }
         }
+
       }
     }
+    
    
   }
   
@@ -103,6 +105,9 @@ class Board{
       availableSquaresRook(r, c);
     if(pieces[r][c].getType().equals("bishop")){
       availableSquaresBishop(r,c);
+    }
+    if (pieces[r][c].getType().equals("knight")){
+      availableSquaresKnight(r,c);
     }
     if (!pieces[r][c].getType().equals("generic")){
       pieces[r][c].setSelected(true);
@@ -178,7 +183,43 @@ class Board{
       }
     }
   }
-    
+  void availableSquaresKnight(int row,int col){
+    if (row+2 < 8 && col-1 >=0 && col+1 < 8){
+    if (pieces[row+2][col+1].getType().equals("generic")){
+      pieces[row+2][col+1].setAvailable(true);
+    }
+    else if (pieces[row+2][col-1].getType().equals("generic")){
+      pieces[row+2][col-1].setAvailable(true);
+      }
+    }
+    if (row-2 >= 0 && col-1 >=0 && col+1 < 8){
+      if (pieces[row-2][col+1].getType().equals("generic")){
+      pieces[row-2][col+1].setAvailable(true);
+      }
+     if (pieces[row-2][col-1].getType().equals("generic")){
+      pieces[row-2][col-1].setAvailable(true);
+      }
+   }
+   
+    if (row-1 >= 0 && row+1 < 8 && col-2 >=0){
+      if (pieces[row-1][col-2].getType().equals("generic")){
+        pieces[row-1][col-2].setAvailable(true);
+      }
+      if (pieces[row+1][col-2].getType().equals("generic")){
+        pieces[row+1][col-2].setAvailable(true);
+      }
+    }
+    if (row-1 >= 0 && row+1 <8 && col+2 < 8){
+      if (pieces[row-1][col+2].getType().equals("generic")){
+        pieces[row-1][col+2].setAvailable(true);
+      }
+       if (pieces[row+1][col+2].getType().equals("generic")){
+        pieces[row+1][col+2].setAvailable(true);
+      }
+    }
+  }
+
+
   void availableSquaresBishop(int row,int col){
       for (int i = 1; i < 8;i++){   
         if (row+i < 8 && col+i < 8){
@@ -188,7 +229,6 @@ class Board{
         else {
           if (pieces[row+i][col+i].getColor() != (pieces[row][col].getColor()))
             pieces[row+i][col+i].setAvailable(true);       
-          i+=10;
           }
         }
       }
@@ -197,10 +237,14 @@ class Board{
           if (pieces[row+i][col-i].getType().equals("generic")){
             pieces[row+i][col-i].setAvailable(true);
           }
-        else if (pieces[row+i][col-i].getColor() != pieces[row][col].getColor())
+        else {
+         
+          if (pieces[row+i][col-i].getColor() != pieces[row][col].getColor())
             pieces[row+i][col-i].setAvailable(true); 
-         i+=10;
+         //i+=10;
+        
         }
+      }
       }
       for (int j = 1; j < 8;j++){
         if (row-j >=0 && col+j < 8){
@@ -209,7 +253,7 @@ class Board{
           }
         else if (pieces[row-j][col+j].getColor() != pieces[row][col].getColor())
             pieces[row-j][col+j].setAvailable(true); 
-          j+=10;
+          //j+=10;
         }
       }
       for (int j = 1; j < 8;j++){
@@ -219,7 +263,7 @@ class Board{
           }
         else if (pieces[row-j][col-j].getColor() != pieces[row][col].getColor())
             pieces[row-j][col-j].setAvailable(true);   
-          j+=10;
+          //j+=10;
         }
       }  
   }
@@ -244,4 +288,4 @@ class Board{
       }
     }
   }
-} 
+}
