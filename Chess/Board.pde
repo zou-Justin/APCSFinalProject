@@ -5,7 +5,19 @@ class Board{
   boolean selected;
   boolean isKingChecked;
   Pieces[][] pieces2;
-
+  int BishopCounter = 0;
+  int RookCounter = 0;
+  int KnightCounter = 0;
+  int QueenCounter = 0;
+  int PawnCounter = 0;
+  int BishopCounterB = 0;
+  int RookCounterB = 0;
+  int KnightCounterB = 0;
+  int QueenCounterB = 0;
+  int PawnCounterB = 0;
+  String text;
+  String firstText;
+  boolean canPromote;
   
   public Board(){
     size = 700;
@@ -14,6 +26,8 @@ class Board{
     pieces2 = new Pieces[8][8];
     selected = false;
     isKingChecked = false;
+    text = "";
+    firstText = "";
    
   }
   void setChecked(boolean b){
@@ -102,6 +116,36 @@ class Board{
             rect(37 + (j * 80), 600 - (i * 80), 65,65);
           }
         }
+         if (pieces[i][j].getType().equals("bishop") && pieces[i][j].getColor()){
+           BishopCounter ++;
+         }
+          else{
+           BishopCounterB ++;
+         }
+         if (pieces[i][j].getType().equals("rook")){
+           RookCounter ++;
+         }
+         else{
+           RookCounterB ++;
+         }
+         if (pieces[i][j].getType().equals("knight")){
+           KnightCounter ++;
+         }
+         else{
+           KnightCounterB ++;
+         }
+         if (pieces[i][j].getType().equals("pawn")){
+           PawnCounter ++;
+         }
+         else{
+          PawnCounterB ++;
+         }
+         if (pieces[i][j].getType().equals("queen")){
+           QueenCounter ++;
+         }
+         else{
+           QueenCounterB ++;
+         }
       }
     }
   }
@@ -481,21 +525,19 @@ class Board{
              pieces[r][c].setSelected(false);
              pieces[r][c].setHasMoved(true);
              //}
+             if (BishopCounter < 2){
+               for (int k = 0; k < BishopCounter;k++){
+                 println("a");
+               image(pieces[r][c].getImage(),570,25,20,20);
+               }
+             }
            }
          }
         }
       } 
       movecount += 0.5;
     }
-    //Promotion
-    for(int p = 0; p < pieces.length; p++){
-      if(pieces[0][p].getType().equals("pawn"))
-        pieces[0][p] = new Pieces(false, "queen");
-      if(pieces[7][p].getType().equals("pawn"))
-        pieces[7][p] = new Pieces(true, "queen");
-    }
- 
-    //Eliminating all piece selections and availablities
+     //Eliminating all piece selections and availablities
     for(int k = 0; k < pieces.length; k++){
       for(int m = 0; m < pieces[0].length; m++){
         pieces[k][m].setSelected(false);
@@ -508,5 +550,49 @@ class Board{
         pieces2[n][s] = pieces[n][s];
       }
     }
+  }
+  
+  void Promotion(){
+       for(int p = 0; p < pieces.length; p++){
+      if(pieces[0][p].getType().equals("pawn")){
+        canPromote = true;
+        if (text.equals("queen")){
+          pieces[0][p] = new Pieces(false, "queen");
+          canPromote = false;
+        }
+        else if (text.equals("bishop")){
+          pieces[0][p] = new Pieces(false, "bishop");
+          canPromote = false;
+        }
+        else if (text.equals("knight")){
+          pieces[0][p] = new Pieces(false, "knight");
+          canPromote = false;
+        }
+        else if (text.equals("rook")){
+          pieces[0][p] = new Pieces(false, "rook");
+          canPromote = false;
+        }
+       }
+      if(pieces[7][p].getType().equals("pawn")){
+        canPromote = true;
+         if (text.equals("queen")){
+          pieces[7][p] = new Pieces(true, "queen");
+          canPromote = false;
+        }
+        else if (text.equals("bishop")){
+          pieces[7][p] = new Pieces(true, "bishop");
+          canPromote = false;
+        }
+        else if (text.equals("knight")){
+          pieces[7][p] = new Pieces(true, "knight");
+          canPromote = false;
+        }
+        else if (text.equals("rook")){
+          pieces[7][p] = new Pieces(true, "rook");
+          canPromote = false;
+          }
+      }
+    }
+    
   }
 }

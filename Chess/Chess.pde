@@ -16,6 +16,15 @@ void draw(){
     fill(0);
     text("Black to move",20,20);
   }
+  a.Promotion();
+  if (a.canPromote){
+    println("Aasd");
+    text(""+a.firstText,30,30);
+  }
+  else{
+    a.text = "";
+    a.firstText = "";
+  }
 }
 
 void mousePressed(){
@@ -28,3 +37,12 @@ void mousePressed(){
     }
   }  
 }
+
+void keyPressed() {
+  if (key == '\n'){
+    a.text = a.firstText;
+  }
+  else{
+    a.firstText = a.firstText + key; 
+  }
+  }
