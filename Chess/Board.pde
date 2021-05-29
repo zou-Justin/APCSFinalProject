@@ -71,6 +71,7 @@ class Board{
   }
   
  void display(){
+   background(170);
    stroke(0);
    int c = 1;
     for (int i = 30; i < 670; i+= 80){
@@ -94,13 +95,8 @@ class Board{
             rect(37 + (j * 80), 600 - (i * 80), 65,65);
           }
         }
-         
-     
-  
       }
     }
-    
-   
   }
   
   void availableSquares(int x, int y){
@@ -122,30 +118,6 @@ class Board{
       if(!pieces[r][c].getType().equals("generic")){
         pieces[r][c].setSelected(true);
         setSelected(true);
-      }
-    }
-    for (int i = 1; i < 8;i++){
-      if(pieces[r][c].getType().equals("king")){
-      if (r +i < 8 && c + i < 8){
-       if (pieces[r+i][c+i].equals("bishop") || pieces[r+i][c+i].equals("queen")){
-         setChecked(true);
-         }
-      }
-      if (r -i >= 0 && c + i < 8){
-        if (pieces[r-i][c+i].equals("bishop") || pieces[r-i][c+i].equals("queen")){
-         setChecked(true);
-         }
-       }
-       if (r -i >= 0 && c - i >= 0){
-         if (pieces[r-i][c-i].equals("bishop") || pieces[r-i][c-i].equals("queen")){
-         setChecked(true);
-         }
-       }
-       if (r +i < 8 && c - i >= 0){
-        if (pieces[r+i][c-i].equals("bishop") || pieces[r+i][c-i].equals("queen")){
-         setChecked(true);
-         }
-       }
       }
     }
   }

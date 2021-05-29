@@ -7,20 +7,14 @@ void setup(){
 }
 void draw(){
   a.display();
-  if (a.isKingChecked == true){
-    println("a");
-  }
-  if (a.movecount % 1 == 0){
+  textSize(20);
+  if(a.movecount % 1 == 0){
     fill(255);
-    text("Turn Color",25,25);
-    //fill(255);
-    //text("white",25,25);
+    text("White to move",20,20);
   }
-  else if (a.movecount % 1 == 0.5){
+  else if(a.movecount % 1 == 0.5){
     fill(0);
-    text("Turn Color",25,25);
-    //fill(0);
-    //text("black",660,25);
+    text("Black to move",20,20);
   }
 }
 
