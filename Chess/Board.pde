@@ -5,6 +5,7 @@ class Board{
   boolean selected;
   boolean isKingChecked;
   Pieces[][] pieces2;
+  boolean movemade;
 
   
   public Board(){
@@ -14,6 +15,7 @@ class Board{
     pieces2 = new Pieces[8][8];
     selected = false;
     isKingChecked = false;
+    movemade = false;
    
   }
   void setChecked(boolean b){
@@ -436,7 +438,7 @@ class Board{
     pieces2[trow][tcol].setHasMoved(true);
     for(int i = 0; i < pieces2.length; i++){
       for(int j = 0; j < pieces2[i].length; j++){
-        if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !(pieces2[i][j].getColor()))){
+        if((movecount % 1 == 0 && !pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && pieces2[i][j].getColor())){
           if(pieces2[i][j].getType().equals("pawn"))
             attackedSquaresPawn(i, j, pieces2);
           if(pieces2[i][j].getType().equals("rook"))
@@ -449,15 +451,12 @@ class Board{
             availableSquaresKing(i, j, pieces2);
           if(pieces2[i][j].getType().equals("queen"))
             availableSquaresQueen(i, j, pieces2);
-          if(!pieces2[i][j].getType().equals("generic")){
-            pieces2[i][j].setSelected(true);
           }
         }
       }
-    }
     for(int k = 0; k < pieces2.length; k++){
       for(int m = 0; m < pieces2[0].length; m++){
-        if(pieces2[k][m].getAvailable() && pieces2[k][m].getType().equals("king"))
+        if(pieces2[k][m].getAvailable() && pieces2[k][m].getType().equals("king") && ((movecount % 1 == 0 && pieces2[k][m].getColor()) || (movecount % 1 == 0.5 && !pieces2[k][m].getColor())))
           return true;
       }
     }
@@ -471,22 +470,26 @@ class Board{
       for (int i = 0; i < pieces.length; i++){
         for (int j = 0; j < pieces[0].length; j++){
          if(pieces[i][j].getSelected()){
-           if(pieces[i][j].getType().equals("king") && r == i && ((c == j - 2) || (c == j + 2)))
+           if(pieces[i][j].getType().equals("king") && r == i && ((c == j - 2) || (c == j + 2))){
                castle(i, j, r, c);
-           else{
+               movemade = true;
+           }else{
              //PROBLEM STATEMENT
-             //if(!illegalMove(i, j, r, c)){
+             if(!illegalMove(i, j, r, c)){
              pieces[r][c] = pieces[i][j];
              pieces[i][j] = new Pieces();
              pieces[r][c].setSelected(false);
              pieces[r][c].setHasMoved(true);
-             //}
+             movemade = true;
+             }
            }
          }
         }
       } 
-      movecount += 0.5;
+      if(movemade)
+        movecount += 0.5;
     }
+    movemade = false;
     //Promotion
     for(int p = 0; p < pieces.length; p++){
       if(pieces[0][p].getType().equals("pawn"))
