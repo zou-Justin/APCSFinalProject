@@ -30,3 +30,6 @@ Worked with Adam on movement code. Did the bishop and some basic knight movement
 
 Adam 5/28/21:
 Finished basic movement for all of the pieces.
+
+Justin 5/28/2021
+Fixed up castling, worked on a color indicator for turns, and worked a bit on checked.
