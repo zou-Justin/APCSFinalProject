@@ -27,3 +27,6 @@ Figured out how to select pieces and define eligible squares. Created basic move
 
 Justin 5/27/2021:
 Worked with Adam on movement code. Did the bishop and some basic knight movement. Both are still works in progress.
+
+Adam 5/29/21:
+Finished basic movement for all of the pieces.
