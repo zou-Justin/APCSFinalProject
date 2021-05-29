@@ -382,23 +382,62 @@ class Board{
   }
   
   void castle(int krow, int kcol, int rrow, int rcol){
+    for(int i = 0; i < pieces2.length; i++){
+      for(int j = 0; j < pieces2[i].length; j++){
+        if((movecount % 1 == 0 && !pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && pieces2[i][j].getColor())){
+          if(pieces2[i][j].getType().equals("pawn"))
+            attackedSquaresPawn(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("rook"))
+            availableSquaresRook(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("bishop"))
+            availableSquaresBishop(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("knight"))
+            availableSquaresKnight(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("king")){
+            availableSquaresKing(i, j, pieces2);
+          }
+          if(pieces2[i][j].getType().equals("queen"))
+            availableSquaresQueen(i, j, pieces2);
+          }
+        }
+      }
     if(rcol == 6){
-      pieces[krow][6] = pieces[krow][kcol];
-      pieces[rrow][5] = pieces[rrow][rcol+1];
-      pieces[krow][kcol] = new Pieces();
-      pieces[rrow][rcol+1] = new Pieces();
-      pieces[krow][6].setSelected(false);
-      pieces[krow][6].setHasMoved(true);
-      pieces[rrow][5].setHasMoved(true);
+       println("test");
+       if(pieces2[krow][kcol].getAvailable())
+         println("test2");
+       if(pieces2[krow][5].getAvailable())
+         println("test3");
+       if(pieces2[krow][6].getAvailable())
+         println("test4");
+      if(!pieces2[krow][kcol].getAvailable() && !pieces2[krow][5].getAvailable() && !pieces2[krow][6].getAvailable()){
+        pieces[krow][6] = pieces[krow][kcol];
+        pieces[rrow][5] = pieces[rrow][rcol+1];
+        pieces[krow][kcol] = new Pieces();
+        pieces[rrow][rcol+1] = new Pieces();
+        pieces[krow][6].setSelected(false);
+        pieces[krow][6].setHasMoved(true);
+        pieces[rrow][5].setHasMoved(true);
+        movemade = true;
+      }
     }
     else if(rcol == 2){
-      pieces[krow][2] = pieces[krow][kcol];
-      pieces[rrow][3] = pieces[rrow][rcol-2];
-      pieces[krow][kcol] = new Pieces();
-      pieces[rrow][rcol-2] = new Pieces();
-      pieces[krow][2].setSelected(false);
-      pieces[krow][2].setHasMoved(true);
-      pieces[rrow][3].setHasMoved(true);
+      println("test");
+       if(pieces2[krow][kcol].getAvailable())
+         println("test2");
+       if(pieces2[krow][3].getAvailable())
+         println("test3");
+       if(pieces2[krow][2].getAvailable())
+         println("test4");
+      if(!pieces2[krow][kcol].getAvailable() && !pieces2[krow][3].getAvailable() && !pieces2[krow][2].getAvailable()){
+        pieces[krow][2] = pieces[krow][kcol];
+        pieces[rrow][3] = pieces[rrow][rcol-2];
+        pieces[krow][kcol] = new Pieces();
+        pieces[rrow][rcol-2] = new Pieces();
+        pieces[krow][2].setSelected(false);
+        pieces[krow][2].setHasMoved(true);
+        pieces[rrow][3].setHasMoved(true);
+        movemade = true;
+      }
     }
   }
   
@@ -472,9 +511,7 @@ class Board{
          if(pieces[i][j].getSelected()){
            if(pieces[i][j].getType().equals("king") && r == i && ((c == j - 2) || (c == j + 2))){
                castle(i, j, r, c);
-               movemade = true;
            }else{
-             //PROBLEM STATEMENT
              if(!illegalMove(i, j, r, c)){
              pieces[r][c] = pieces[i][j];
              pieces[i][j] = new Pieces();
