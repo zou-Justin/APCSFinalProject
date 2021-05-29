@@ -449,10 +449,8 @@ class Board{
       for (int i = 0; i < pieces.length; i++){
         for (int j = 0; j < pieces[0].length; j++){
          if(pieces[i][j].getSelected()){
-           if(pieces[i][j].getType().equals("king") && r == i && ((c == j - 2) || (c == j + 2))){
-                println(c);
+           if(pieces[i][j].getType().equals("king") && r == i && ((c == j - 2) || (c == j + 2)))
                castle(i, j, r, c);
-           }
            else{
              pieces[r][c] = pieces[i][j];
              pieces[i][j] = new Pieces();
