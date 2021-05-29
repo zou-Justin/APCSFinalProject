@@ -3,6 +3,7 @@ class Board{
   double movecount;
   Pieces[][] pieces;
   boolean selected;
+  boolean isKingChecked;
 
   
   public Board(){
@@ -10,9 +11,12 @@ class Board{
     movecount = 0.0;
     pieces = new Pieces[8][8];
     selected = false;
+    isKingChecked = false;
    
   }
-  
+  void setChecked(boolean b){
+    isKingChecked = b;
+  }
   void setSelected(boolean b){
     selected = b;
   }
@@ -90,7 +94,9 @@ class Board{
             rect(37 + (j * 80), 600 - (i * 80), 65,65);
           }
         }
-
+         
+     
+  
       }
     }
     
@@ -118,8 +124,31 @@ class Board{
         setSelected(true);
       }
     }
+    for (int i = 1; i < 8;i++){
+      if(pieces[r][c].getType().equals("king")){
+      if (r +i < 8 && c + i < 8){
+       if (pieces[r+i][c+i].equals("bishop") || pieces[r+i][c+i].equals("queen")){
+         setChecked(true);
+         }
+      }
+      if (r -i >= 0 && c + i < 8){
+        if (pieces[r-i][c+i].equals("bishop") || pieces[r-i][c+i].equals("queen")){
+         setChecked(true);
+         }
+       }
+       if (r -i >= 0 && c - i >= 0){
+         if (pieces[r-i][c-i].equals("bishop") || pieces[r-i][c-i].equals("queen")){
+         setChecked(true);
+         }
+       }
+       if (r +i < 8 && c - i >= 0){
+        if (pieces[r+i][c-i].equals("bishop") || pieces[r+i][c-i].equals("queen")){
+         setChecked(true);
+         }
+       }
+      }
+    }
   }
-        
   
   void availableSquaresPawn(int row, int col){
     if(row < 7 && row > 0){
@@ -130,22 +159,30 @@ class Board{
          if(row == 1 && pieces[row + 2][col].getType().equals("generic"))
             pieces[row + 2][col].setAvailable(true);
         }
-        if(col >= 1 && (!(pieces[row + 1][col - 1].getType().equals("generic"))) && !(pieces[row + 1][col - 1].getColor()))
+        if(col >= 1 && (!(pieces[row + 1][col - 1].getType().equals("generic"))) && !(pieces[row + 1][col - 1].getColor())){
           pieces[row + 1][col - 1].setAvailable(true);
-        if(col <= 6 && (!(pieces[row + 1][col + 1].getType().equals("generic"))) && !(pieces[row + 1][col + 1].getColor()))
+        }
+        if(col <= 6 && (!(pieces[row + 1][col + 1].getType().equals("generic"))) && !(pieces[row + 1][col + 1].getColor())){
           pieces[row + 1][col + 1].setAvailable(true);
+ 
+        }
       }
       //black
       else{
          if(pieces[row - 1][col].getType().equals("generic")){
           pieces[row - 1][col].setAvailable(true);
-          if(row == 6 && pieces[row - 2][col].getType().equals("generic"))
+          if(row == 6 && pieces[row - 2][col].getType().equals("generic")){
             pieces[row - 2][col].setAvailable(true);
+          }
         }
-        if(col >= 1 && !(pieces[row - 1][col - 1].getType().equals("generic")) && pieces[row - 1][col - 1].getColor())
+        if(col >= 1 && !(pieces[row - 1][col - 1].getType().equals("generic")) && pieces[row - 1][col - 1].getColor()){
           pieces[row - 1][col - 1].setAvailable(true);
-        if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")) && pieces[row - 1][col + 1].getColor())
+
+        }
+        if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")) && pieces[row - 1][col + 1].getColor()){
           pieces[row - 1][col + 1].setAvailable(true);
+
+        }
       }
     }
   }
@@ -155,8 +192,11 @@ class Board{
       if(pieces[i][col].getType().equals("generic"))
         pieces[i][col].setAvailable(true);
       else{
-        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor()))
+        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor())){
+
           pieces[i][col].setAvailable(true);
+     
+        }
         i += 100;
       }
     }
@@ -164,8 +204,11 @@ class Board{
       if(pieces[i][col].getType().equals("generic"))
         pieces[i][col].setAvailable(true);
       else{
-        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor()))
+        if((pieces[i][col].getColor() && !(pieces[row][col].getColor())) || (!(pieces[i][col].getColor()) && pieces[row][col].getColor())){
+
           pieces[i][col].setAvailable(true);
+      
+        }
         i -= 100;
       }
     }
@@ -173,8 +216,11 @@ class Board{
       if(pieces[row][j].getType().equals("generic"))
         pieces[row][j].setAvailable(true);
       else{
-        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][col].getColor()))
+        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][col].getColor())){
+
           pieces[row][j].setAvailable(true);
+           
+        }
         j += 100;
       }
     }
@@ -182,8 +228,11 @@ class Board{
       if(pieces[row][j].getType().equals("generic"))
         pieces[row][j].setAvailable(true);
       else{
-        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][col].getColor()))
+        if((pieces[row][j].getColor() && !(pieces[row][col].getColor())) || (!(pieces[row][j].getColor()) && pieces[row][col].getColor())){
+
           pieces[row][j].setAvailable(true);
+         
+        }
         j -= 100;
       }
     }
@@ -191,42 +240,57 @@ class Board{
   void availableSquaresKnight(int row,int col){
     if(row + 2 < 8){
       if(col + 1 < 8){
-        if(pieces[row + 2][col + 1].getType().equals("generic") || (pieces[row + 2][col + 1].getColor() != pieces[row][col].getColor()))
+        if(pieces[row + 2][col + 1].getType().equals("generic") || (pieces[row + 2][col + 1].getColor() != pieces[row][col].getColor())){
+
           pieces[row + 2][col + 1].setAvailable(true);
+         
+        }
       }
       if(col - 1 >= 0){
-        if(pieces[row + 2][col - 1].getType().equals("generic") || (pieces[row + 2][col - 1].getColor() != pieces[row][col].getColor()))
+        if(pieces[row + 2][col - 1].getType().equals("generic") || (pieces[row + 2][col - 1].getColor() != pieces[row][col].getColor())){
           pieces[row + 2][col - 1].setAvailable(true);
+        
+        }
       }
     }
     if(row + 1 < 8){
       if(col + 2 < 8){
-        if(pieces[row + 1][col + 2].getType().equals("generic") || (pieces[row + 1][col + 2].getColor() != pieces[row][col].getColor()))
+        if(pieces[row + 1][col + 2].getType().equals("generic") || (pieces[row + 1][col + 2].getColor() != pieces[row][col].getColor())){
           pieces[row + 1][col + 2].setAvailable(true);
+       
+        }
       }
       if(col - 2 >= 0){
-        if(pieces[row + 1][col - 2].getType().equals("generic") || (pieces[row + 1][col - 2].getColor() != pieces[row][col].getColor()))
+        if(pieces[row + 1][col - 2].getType().equals("generic") || (pieces[row + 1][col - 2].getColor() != pieces[row][col].getColor())){
           pieces[row + 1][col - 2].setAvailable(true);
+          
+        }
       }
     }
     if(row - 1 >= 0){
       if(col + 2 < 8){
-        if(pieces[row - 1][col + 2].getType().equals("generic") || (pieces[row - 1][col + 2].getColor() != pieces[row][col].getColor()))
+        if(pieces[row - 1][col + 2].getType().equals("generic") || (pieces[row - 1][col + 2].getColor() != pieces[row][col].getColor())){
           pieces[row - 1][col + 2].setAvailable(true);
+          
+        }
       }
       if(col - 2 >= 0){
-        if(pieces[row - 1][col - 2].getType().equals("generic") || (pieces[row - 1][col - 2].getColor() != pieces[row][col].getColor()))
+        if(pieces[row - 1][col - 2].getType().equals("generic") || (pieces[row - 1][col - 2].getColor() != pieces[row][col].getColor())){
           pieces[row - 1][col - 2].setAvailable(true);
+       
+        }
       }
     }
     if(row - 2 >= 0){
       if(col + 1 < 8){
-        if(pieces[row - 2][col + 1].getType().equals("generic") || (pieces[row - 2][col + 1].getColor() != pieces[row][col].getColor()))
+        if(pieces[row - 2][col + 1].getType().equals("generic") || (pieces[row - 2][col + 1].getColor() != pieces[row][col].getColor())){
           pieces[row - 2][col + 1].setAvailable(true);
+        }
       }
       if(col - 1 >= 0){
-        if(pieces[row - 2][col - 1].getType().equals("generic") || (pieces[row - 2][col - 1].getColor() != pieces[row][col].getColor()))
+        if(pieces[row - 2][col - 1].getType().equals("generic") || (pieces[row - 2][col - 1].getColor() != pieces[row][col].getColor())){
           pieces[row - 2][col - 1].setAvailable(true);
+        }
       }
     }
   }
@@ -239,8 +303,9 @@ class Board{
             pieces[row + i][col + i].setAvailable(true);
           }
           else{
-          if (pieces[row + i][col + i].getColor() != (pieces[row][col].getColor()))
+          if (pieces[row + i][col + i].getColor() != (pieces[row][col].getColor())){
             pieces[row + i][col + i].setAvailable(true);  
+            }
           i += 100;
           }
         }
@@ -251,8 +316,9 @@ class Board{
             pieces[row + i][col - i].setAvailable(true);
           }
           else{
-          if(pieces[row + i][col - i].getColor() != pieces[row][col].getColor())
+          if(pieces[row + i][col - i].getColor() != pieces[row][col].getColor()){
             pieces[row + i][col - i].setAvailable(true); 
+          }
           i += 100;
           }
         }
@@ -263,8 +329,10 @@ class Board{
             pieces[row - j][col + j].setAvailable(true);
           }
           else{
-            if(pieces[row - j][col + j].getColor() != pieces[row][col].getColor())
+            if(pieces[row - j][col + j].getColor() != pieces[row][col].getColor()){
               pieces[row - j][col + j].setAvailable(true); 
+               
+            }
           j += 100;
           }
         }
@@ -275,8 +343,9 @@ class Board{
             pieces[row - j][col - j].setAvailable(true);
           }
           else{
-            if (pieces[row - j][col - j].getColor() != pieces[row][col].getColor())
+            if (pieces[row - j][col - j].getColor() != pieces[row][col].getColor()){
               pieces[row - j][col - j].setAvailable(true);   
+            }
           j += 100;
          }
        }
