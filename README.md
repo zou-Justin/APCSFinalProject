@@ -36,3 +36,6 @@ Fixed up castling, worked on a color indicator for turns, and worked a bit on ch
 
 Adam 5/29/21:
 Made it so you can't move when your king is in check and you can't put your king into check.
+
+Justin 5/29/2021:
+Made it so the pawn can choose what to promote to as well as trying to find a fix for the castle and check.
