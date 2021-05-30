@@ -406,14 +406,13 @@ class Board{
         }
       }
     if(rcol == 6){
-       println("test");
        if(pieces2[krow][kcol].getAvailable())
          println("test2");
        if(pieces2[krow][5].getAvailable())
          println("test3");
        if(pieces2[krow][6].getAvailable())
          println("test4");
-      if(!pieces2[krow][kcol].getAvailable() && !pieces2[krow][5].getAvailable() && !pieces2[krow][6].getAvailable()){
+      if(!pieces2[krow][kcol].getAvailable() && pieces2[krow][5].getAvailable() && pieces2[krow][6].getAvailable()){
         pieces[krow][6] = pieces[krow][kcol];
         pieces[rrow][5] = pieces[rrow][rcol+1];
         pieces[krow][kcol] = new Pieces();
@@ -432,7 +431,8 @@ class Board{
          println("test3");
        if(pieces2[krow][2].getAvailable())
          println("test4");
-      if(!pieces2[krow][kcol].getAvailable() && !pieces2[krow][3].getAvailable() && !pieces2[krow][2].getAvailable()){
+      if(!pieces2[krow][kcol].getAvailable() && pieces2[krow][3].getAvailable() && pieces2[krow][2].getAvailable()){
+        println("WHY");
         pieces[krow][2] = pieces[krow][kcol];
         pieces[rrow][3] = pieces[rrow][rcol-2];
         pieces[krow][kcol] = new Pieces();
