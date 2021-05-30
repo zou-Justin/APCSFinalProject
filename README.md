@@ -33,3 +33,6 @@ Finished basic movement for all of the pieces.
 
 Justin 5/28/2021
 Fixed up castling, worked on a color indicator for turns, and worked a bit on checked.
+
+Adam 5/29/21:
+Made it so you can't move when your king is in check and you can't put your king into check.
