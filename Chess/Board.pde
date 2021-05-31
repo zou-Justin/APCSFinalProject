@@ -390,7 +390,7 @@ class Board{
     for(int i = 0; i < pieces2.length; i++){
       for(int j = 0; j < pieces2[i].length; j++){
         if (pieces2[i][j].getColor() != pieces[rrow][rcol].getColor()){
-        if((movecount % 1 == 0 && !pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && pieces2[i][j].getColor())){
+        //if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !pieces2[i][j].getColor())){
           if(pieces2[i][j].getType().equals("pawn"))
             attackedSquaresPawn(i, j, pieces2);
           if(pieces2[i][j].getType().equals("rook"))
@@ -408,8 +408,13 @@ class Board{
         }
       }
     if(rcol == 6){ 
-      if(!pieces2[krow][kcol].getAvailable() && !(illegalMove(0,7,krow,5))){
-        println("A");
+      if(!Checked){
+        println("SAD");
+      }
+      if (!illegalMove(0,7,krow,5)){
+        println("SUPER SAD");
+      }
+      if(!pieces2[krow][5].getAvailable() && !(illegalMove(0,7,krow,5))){
         pieces[krow][6] = pieces[krow][kcol];
         pieces[rrow][5] = pieces[rrow][rcol+1];
         pieces[krow][kcol] = new Pieces();
@@ -434,7 +439,7 @@ class Board{
         //}
       }
     }
-  }
+  //}
 }
   
   
@@ -518,9 +523,7 @@ class Board{
              else if (illegalMove(i, j, r, c)){
                Checked = true;
              }
-             
-           }
-           
+           }   
          }
         }
       } 
