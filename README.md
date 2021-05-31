@@ -39,3 +39,6 @@ Made it so you can't move when your king is in check and you can't put your king
 
 Justin 5/29/2021:
 Made it so the pawn can choose what to promote to as well as trying to find a fix for the castle and check.
+
+Justin 5/30/2021:
+Spent a long time working on castling into check;started a bit on checkmate.
