@@ -117,8 +117,9 @@ class Board{
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
     if((movecount % 1 == 0 && pieces[r][c].getColor()) || (movecount % 1 == 0.5 && !(pieces[r][c].getColor()))){
-      if(pieces[r][c].getType().equals("pawn"))
+      if(pieces[r][c].getType().equals("pawn")){
         availableSquaresPawn(r, c);
+      } 
       if(pieces[r][c].getType().equals("rook"))
         availableSquaresRook(r, c, pieces);
       if(pieces[r][c].getType().equals("bishop"))
@@ -142,16 +143,19 @@ class Board{
       if(pieces[row][col].getColor() == true){
         if(pieces[row + 1][col].getType().equals("generic")){
           pieces[row + 1][col].setAvailable(true);
-         if(row == 1 && pieces[row + 2][col].getType().equals("generic"))
+         if(row == 1 && pieces[row + 2][col].getType().equals("generic")){
             pieces[row + 2][col].setAvailable(true);
+            println("A");
+         }
         }
         if(col >= 1 && (!(pieces[row + 1][col - 1].getType().equals("generic"))) && !(pieces[row + 1][col - 1].getColor())){
           pieces[row + 1][col - 1].setAvailable(true);
         }
         if(col <= 6 && (!(pieces[row + 1][col + 1].getType().equals("generic"))) && !(pieces[row + 1][col + 1].getColor())){
           pieces[row + 1][col + 1].setAvailable(true);
- 
         }
+       
+        
       }
       //black
       else{
@@ -167,7 +171,6 @@ class Board{
         }
         if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")) && pieces[row - 1][col + 1].getColor()){
           pieces[row - 1][col + 1].setAvailable(true);
-
         }
       }
     }
@@ -519,6 +522,10 @@ class Board{
              pieces[r][c].setSelected(false);
              pieces[r][c].setHasMoved(true);
              movemade = true;
+             if (pieces[r][c].getType().equals("pawn") && ((r == i + 2) || r== i-2) && c == j){
+               pieces[r][c].setPawn(true);
+               enPassant(r,c);
+              }
              }
              else if (illegalMove(i, j, r, c)){
                Checked = true;
@@ -545,6 +552,16 @@ class Board{
       }
     }
   }
+  void enPassant(int r,int c){
+              
+    if (pieces[r][c+1].equals("pawn") && pieces[r][c+1].getColor() != pieces[r][c].getColor()){
+      pieces[r-1][c].setAvailable(true);
+    }
+    
+   
+    
+  }
+  
   
   boolean checkMate(){
     for(int k = 0; k < pieces2.length; k++){

@@ -6,6 +6,7 @@ class Pieces{
   boolean isAvailable;
   boolean Selected;
   boolean hasMoved;
+  boolean FirstTurnPawn;
   
   public Pieces(boolean w, String t){
     white = w;
@@ -13,6 +14,7 @@ class Pieces{
     isAvailable = false;
     Selected = false;
     hasMoved = false;
+    FirstTurnPawn = false;
   }
   
   public Pieces(){
@@ -21,6 +23,10 @@ class Pieces{
     Selected = false;
   }
   
+  void setPawn(boolean b){
+     FirstTurnPawn = b;
+    
+  }
   String getType(){
     return type;
   }
