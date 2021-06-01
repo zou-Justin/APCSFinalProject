@@ -42,3 +42,6 @@ Made it so the pawn can choose what to promote to as well as trying to find a fi
 
 Justin 5/30/2021:
 Spent a long time working on castling into check;started a bit on checkmate.
+
+Justin 5/31/2021:
+Worked on EnPassant and changed the UML diagram for the new updated version.
