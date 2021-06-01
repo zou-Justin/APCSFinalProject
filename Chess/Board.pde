@@ -119,6 +119,7 @@ class Board{
     if((movecount % 1 == 0 && pieces[r][c].getColor()) || (movecount % 1 == 0.5 && !(pieces[r][c].getColor()))){
       if(pieces[r][c].getType().equals("pawn")){
         availableSquaresPawn(r, c);
+        enPassant(r,c+1);
       } 
       if(pieces[r][c].getType().equals("rook"))
         availableSquaresRook(r, c, pieces);
@@ -154,7 +155,6 @@ class Board{
         if(col <= 6 && (!(pieces[row + 1][col + 1].getType().equals("generic"))) && !(pieces[row + 1][col + 1].getColor())){
           pieces[row + 1][col + 1].setAvailable(true);
         }
-       
         
       }
       //black
@@ -173,6 +173,14 @@ class Board{
           pieces[row - 1][col + 1].setAvailable(true);
         }
       }
+    }
+  }
+  void enPassant(int row,int col){
+    if (col < 7 && col > 0){
+     if ((pieces[row][col-1].getFirstTurnPawn() || pieces[row][col+1].getFirstTurnPawn()) && pieces[row][col].equals("pawn") && (pieces[row][col].getColor() != pieces[row][col-1].getColor())||(pieces[row][col].getColor() != pieces[row][col+1].getColor())){
+            //just neeed to make it so this is the square the opposite color can get to
+           pieces[row-1][col-1].setAvailable(true);
+        }
     }
   }
   
@@ -269,8 +277,6 @@ class Board{
       }
     }
   }
-
-
   void availableSquaresBishop(int row, int col, Pieces[][] arr){
       for(int i = 1; i < 8; i++){   
         if(row + i < 8 && col + i < 8){
@@ -524,7 +530,9 @@ class Board{
              movemade = true;
              if (pieces[r][c].getType().equals("pawn") && ((r == i + 2) || r== i-2) && c == j){
                pieces[r][c].setPawn(true);
-               enPassant(r,c);
+              }
+              else{
+                pieces[r][c].setPawn(false);
               }
              }
              else if (illegalMove(i, j, r, c)){
@@ -552,15 +560,7 @@ class Board{
       }
     }
   }
-  void enPassant(int r,int c){
-              
-    if (pieces[r][c+1].equals("pawn") && pieces[r][c+1].getColor() != pieces[r][c].getColor()){
-      pieces[r-1][c].setAvailable(true);
-    }
-    
-   
-    
-  }
+
   
   
   boolean checkMate(){
