@@ -90,7 +90,6 @@ class Board{
       }
     }
     setUp();
-
   }
  
  void display(){
@@ -128,7 +127,7 @@ class Board{
     if((movecount % 1 == 0 && pieces[r][c].getColor()) || (movecount % 1 == 0.5 && !(pieces[r][c].getColor()))){
       if(pieces[r][c].getType().equals("pawn")){
         availableSquaresPawn(r, c);
-        enPassant(r,c+1);
+        //enPassant(r,c+1);
       } 
       if(pieces[r][c].getType().equals("rook"))
         availableSquaresRook(r, c, pieces);
@@ -187,9 +186,9 @@ class Board{
   void enPassant(int row,int col){
     if (col < 7 && col > 0){
      if ((pieces[row][col-1].getFirstTurnPawn() || pieces[row][col+1].getFirstTurnPawn()) && pieces[row][col].equals("pawn") && (pieces[row][col].getColor() != pieces[row][col-1].getColor())||(pieces[row][col].getColor() != pieces[row][col+1].getColor())){
-       //just neeed to make it so this is the square the opposite color can get to
          //if((movecount % 1 == 0 && pieces2[row][col].getColor()) || (movecount % 1 == 0.5 && !pieces2[row][col].getColor()))
            pieces[row-1][col-1].setAvailable(true);
+           //pieces[row][col-1].setPawn(false);
         }
     }
   }
