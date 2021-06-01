@@ -83,7 +83,16 @@ class Board{
       }
     }
   }
-  
+  void restart(){
+    for(int i = 0; i < 8;i++){
+      for (int j = 0; j < 8; j ++){
+        pieces[i][j] = new Pieces();
+      }
+    }
+    setUp();
+
+  }
+ 
  void display(){
    background(170);
    stroke(0);
@@ -136,7 +145,7 @@ class Board{
         setSelected(true);
       }
     }
-  }
+ }
   
   void availableSquaresPawn(int row, int col){
     if(row < 7 && row > 0){
@@ -178,7 +187,8 @@ class Board{
   void enPassant(int row,int col){
     if (col < 7 && col > 0){
      if ((pieces[row][col-1].getFirstTurnPawn() || pieces[row][col+1].getFirstTurnPawn()) && pieces[row][col].equals("pawn") && (pieces[row][col].getColor() != pieces[row][col-1].getColor())||(pieces[row][col].getColor() != pieces[row][col+1].getColor())){
-            //just neeed to make it so this is the square the opposite color can get to
+       //just neeed to make it so this is the square the opposite color can get to
+         //if((movecount % 1 == 0 && pieces2[row][col].getColor()) || (movecount % 1 == 0.5 && !pieces2[row][col].getColor()))
            pieces[row-1][col-1].setAvailable(true);
         }
     }
@@ -399,7 +409,7 @@ class Board{
     for(int i = 0; i < pieces2.length; i++){
       for(int j = 0; j < pieces2[i].length; j++){
         if (pieces2[i][j].getColor() != pieces[rrow][rcol].getColor()){
-        //if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !pieces2[i][j].getColor())){
+         if((movecount % 1 == 0 && !pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !pieces2[i][j].getColor())){
           if(pieces2[i][j].getType().equals("pawn"))
             attackedSquaresPawn(i, j, pieces2);
           if(pieces2[i][j].getType().equals("rook"))
@@ -410,20 +420,13 @@ class Board{
             availableSquaresKnight(i, j, pieces2);
           if(pieces2[i][j].getType().equals("king")){
             availableSquaresKing(i, j, pieces2);
-          }
-          if(pieces2[i][j].getType().equals("queen"))
+          }if(pieces2[i][j].getType().equals("queen"))
             availableSquaresQueen(i, j, pieces2);
           }
         }
       }
-    if(rcol == 6){ 
-      if(!Checked){
-        println("SAD");
-      }
-      if (!illegalMove(0,7,krow,5)){
-        println("SUPER SAD");
-      }
-      if(!pieces2[krow][5].getAvailable() && !(illegalMove(0,7,krow,5))){
+    }
+      if(!pieces2[krow][kcol].getAvailable() && rcol == 6){
         pieces[krow][6] = pieces[krow][kcol];
         pieces[rrow][5] = pieces[rrow][rcol+1];
         pieces[krow][kcol] = new Pieces();
@@ -433,10 +436,7 @@ class Board{
         pieces[rrow][5].setHasMoved(true);
         movemade = true;
       }
-    }
-    else if(rcol == 2){
-      if(!pieces2[krow][kcol].getAvailable() && !(illegalMove(krow,0,krow,3))){
-        //if (!illegalMove(krow,kcol,rrow,rcol-2)){
+      if(!pieces2[krow][kcol].getAvailable() && rcol == 2){
         pieces[krow][2] = pieces[krow][kcol];
         pieces[rrow][3] = pieces[rrow][rcol-2];
         pieces[krow][kcol] = new Pieces();
@@ -445,10 +445,8 @@ class Board{
         pieces[krow][2].setHasMoved(true);
         pieces[rrow][3].setHasMoved(true);
         movemade = true;
-        //}
       }
-    }
-  //}
+   
 }
   
   
