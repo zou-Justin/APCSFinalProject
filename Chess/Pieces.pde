@@ -21,6 +21,7 @@ class Pieces{
     type = "generic";
     isAvailable = false;
     Selected = false;
+    hasMoved = false;
   }
   
   void setPawn(boolean b){
