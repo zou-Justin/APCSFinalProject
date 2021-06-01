@@ -3,7 +3,7 @@ Board a = new Board();
 void setup(){
   size(700, 700);
   a.setUp();
- 
+  
 }
 void draw(){
   a.display();
@@ -20,6 +20,7 @@ void draw(){
   if (a.canPromote){
     println("Aasd");
     text(""+a.firstText,30,30);
+    
   }
   else{
     a.text = "";
