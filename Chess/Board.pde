@@ -183,15 +183,15 @@ class Board{
       }
     }
   }
-  void enPassant(int row,int col){
-    if (col < 7 && col > 0){
-     if ((pieces[row][col-1].getFirstTurnPawn() || pieces[row][col+1].getFirstTurnPawn()) && pieces[row][col].equals("pawn") && (pieces[row][col].getColor() != pieces[row][col-1].getColor())||(pieces[row][col].getColor() != pieces[row][col+1].getColor())){
-         //if((movecount % 1 == 0 && pieces2[row][col].getColor()) || (movecount % 1 == 0.5 && !pieces2[row][col].getColor()))
-           pieces[row-1][col-1].setAvailable(true);
-           //pieces[row][col-1].setPawn(false);
-        }
-    }
-  }
+  //void enPassant(int row,int col){
+  //  if (col < 7 && col > 0){
+  //   if ((pieces[row][col-1].getFirstTurnPawn() || pieces[row][col+1].getFirstTurnPawn()) && pieces[row][col].equals("pawn") && (pieces[row][col].getColor() != pieces[row][col-1].getColor())||(pieces[row][col].getColor() != pieces[row][col+1].getColor())){
+  //       //if((movecount % 1 == 0 && pieces2[row][col].getColor()) || (movecount % 1 == 0.5 && !pieces2[row][col].getColor()))
+  //         pieces[row-1][col-1].setAvailable(true);
+  //         //pieces[row][col-1].setPawn(false);
+  //      }
+  //  }
+  //}
   
   void availableSquaresRook(int row, int col, Pieces[][] arr){
     for(int i = row + 1; i < 8; i++){
@@ -560,57 +560,57 @@ class Board{
 
   
   
-  boolean checkMate(){
-    for(int k = 0; k < pieces2.length; k++){
-      for(int m = 0; m < pieces2[0].length; m++){
-        if (pieces[k][m].getType().equals("king") && pieces[k][m].getColor()){
-          if (k+1 < 8 && m +1 < 8){
-            if (!illegalMove(k,m,k+1,m+1)){
-                return false;
-              }
-            }
-           else if (k+1 < 8 && m -1 >= 0){
-            if (!illegalMove(k,m,k+1,m-1)){
-                return false;
-              }
-            }
-           else if (k-1 >= 0 && m-1 >= 0){
-            if (!illegalMove(k,m,k-1,m-1)){
-                return false;
-              }
-            }
-           else if (k-1 >= 0 && m+1 < 8){
-            if (!illegalMove(k,m,k-1,m+1)){
-                return false;
-              }
-            }
-           else if (k+1 < 8 ){
-            if (!illegalMove(k,m,k+1,m)){
-                return false;
-              }
-            }
-           else if (k-1 >= 0){
-            if (illegalMove(k,m,k-1,m)){
-                isKingCheckmated = true;
-              }
-            }
-           else if ( m+1 < 8){
-            if (!illegalMove(k,m,k,m+1)){
-                return false;
-              }
-            }
-            else if ( m -1 >= 0){
-            if (!illegalMove(k,m,k,m-1)){
-                return false;
-              }
-            }
-        }
-      }
-    }
-    isKingCheckmated = true;
-    //println(isKingCheckmated);
-    return isKingCheckmated;
-  }
+  //boolean checkMate(){
+  //  for(int k = 0; k < pieces2.length; k++){
+  //    for(int m = 0; m < pieces2[0].length; m++){
+  //      if (pieces[k][m].getType().equals("king") && pieces[k][m].getColor()){
+  //        if (k+1 < 8 && m +1 < 8){
+  //          if (!illegalMove(k,m,k+1,m+1)){
+  //              return false;
+  //            }
+  //          }
+  //         else if (k+1 < 8 && m -1 >= 0){
+  //          if (!illegalMove(k,m,k+1,m-1)){
+  //              return false;
+  //            }
+  //          }
+  //         else if (k-1 >= 0 && m-1 >= 0){
+  //          if (!illegalMove(k,m,k-1,m-1)){
+  //              return false;
+  //            }
+  //          }
+  //         else if (k-1 >= 0 && m+1 < 8){
+  //          if (!illegalMove(k,m,k-1,m+1)){
+  //              return false;
+  //            }
+  //          }
+  //         else if (k+1 < 8 ){
+  //          if (!illegalMove(k,m,k+1,m)){
+  //              return false;
+  //            }
+  //          }
+  //         else if (k-1 >= 0){
+  //          if (illegalMove(k,m,k-1,m)){
+  //              isKingCheckmated = true;
+  //            }
+  //          }
+  //         else if ( m+1 < 8){
+  //          if (!illegalMove(k,m,k,m+1)){
+  //              return false;
+  //            }
+  //          }
+  //          else if ( m -1 >= 0){
+  //          if (!illegalMove(k,m,k,m-1)){
+  //              return false;
+  //            }
+  //          }
+  //      }
+  //    }
+  //  }
+  //  isKingCheckmated = true;
+  //  //println(isKingCheckmated);
+  //  return isKingCheckmated;
+  //}
   
    void Promotion(){
      for(int p = 0; p < pieces.length; p++){
