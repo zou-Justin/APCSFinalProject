@@ -25,6 +25,7 @@ void draw(){
     a.text = "";
     a.firstText = "";
   }
+  rect(290,5,20,20);  
 }
 
 void mousePressed(){
@@ -35,7 +36,11 @@ void mousePressed(){
       a.setSelected(false);
       a.move(mouseX,mouseY);
     }
-  }  
+  }
+
+ // if (mouseButton == LEFT && (mouseX >=270 && mouseX < 310) && (mouseY < 25)){
+   // a.restart();
+  //}
 }
 
 void keyPressed() {
