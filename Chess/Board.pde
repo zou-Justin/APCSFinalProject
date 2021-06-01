@@ -125,7 +125,7 @@ class Board{
     int c = (x - 30) / 80;
     if((movecount % 1 == 0 && pieces[r][c].getColor()) || (movecount % 1 == 0.5 && !(pieces[r][c].getColor()))){
       if(pieces[r][c].getType().equals("pawn")){
-        availableSquaresPawn(r, c);
+        availableSquaresPawn(r, c, pieces);
         //enPassant(r,c+1);
       } 
       if(pieces[r][c].getType().equals("rook"))
@@ -145,38 +145,40 @@ class Board{
     }
  }
   
-  void availableSquaresPawn(int row, int col){
+  void availableSquaresPawn(int row, int col, Pieces[][] arr){
     if(row < 7 && row > 0){
       //white
-      if(pieces[row][col].getColor() == true){
-        if(pieces[row + 1][col].getType().equals("generic")){
-          pieces[row + 1][col].setAvailable(true);
-         if(row == 1 && pieces[row + 2][col].getType().equals("generic")){
-            pieces[row + 2][col].setAvailable(true);
+
+      if(arr[row][col].getColor() == true){
+        if(arr[row + 1][col].getType().equals("generic")){
+          arr[row + 1][col].setAvailable(true);
+         if(row == 1 && arr[row + 2][col].getType().equals("generic")){
+            arr[row + 2][col].setAvailable(true);
+
          }
         }
-        if(col >= 1 && (!(pieces[row + 1][col - 1].getType().equals("generic"))) && !(pieces[row + 1][col - 1].getColor())){
-          pieces[row + 1][col - 1].setAvailable(true);
+        if(col >= 1 && (!(arr[row + 1][col - 1].getType().equals("generic"))) && !(arr[row + 1][col - 1].getColor())){
+          arr[row + 1][col - 1].setAvailable(true);
         }
-        if(col <= 6 && (!(pieces[row + 1][col + 1].getType().equals("generic"))) && !(pieces[row + 1][col + 1].getColor())){
-          pieces[row + 1][col + 1].setAvailable(true);
+        if(col <= 6 && (!(arr[row + 1][col + 1].getType().equals("generic"))) && !(arr[row + 1][col + 1].getColor())){
+          arr[row + 1][col + 1].setAvailable(true);
         }
         
       }
       //black
       else{
-         if(pieces[row - 1][col].getType().equals("generic")){
-          pieces[row - 1][col].setAvailable(true);
-          if(row == 6 && pieces[row - 2][col].getType().equals("generic")){
-            pieces[row - 2][col].setAvailable(true);
+         if(arr[row - 1][col].getType().equals("generic")){
+          arr[row - 1][col].setAvailable(true);
+          if(row == 6 && arr[row - 2][col].getType().equals("generic")){
+            arr[row - 2][col].setAvailable(true);
           }
         }
-        if(col >= 1 && !(pieces[row - 1][col - 1].getType().equals("generic")) && pieces[row - 1][col - 1].getColor()){
-          pieces[row - 1][col - 1].setAvailable(true);
+        if(col >= 1 && !(arr[row - 1][col - 1].getType().equals("generic")) && arr[row - 1][col - 1].getColor()){
+          arr[row - 1][col - 1].setAvailable(true);
 
         }
-        if(col <= 6 && !(pieces[row - 1][col + 1].getType().equals("generic")) && pieces[row - 1][col + 1].getColor()){
-          pieces[row - 1][col + 1].setAvailable(true);
+        if(col <= 6 && !(arr[row - 1][col + 1].getType().equals("generic")) && arr[row - 1][col + 1].getColor()){
+          arr[row - 1][col + 1].setAvailable(true);
         }
       }
     }
@@ -486,31 +488,7 @@ class Board{
     pieces2[frow][fcol] = new Pieces();
     pieces2[trow][tcol].setSelected(false);
     pieces2[trow][tcol].setHasMoved(true);
-    for(int i = 0; i < pieces2.length; i++){
-      for(int j = 0; j < pieces2[i].length; j++){
-        if((movecount % 1 == 0 && !pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && pieces2[i][j].getColor())){
-          if(pieces2[i][j].getType().equals("pawn"))
-            attackedSquaresPawn(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("rook"))
-            availableSquaresRook(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("bishop"))
-            availableSquaresBishop(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("knight"))
-            availableSquaresKnight(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("king"))
-            availableSquaresKing(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("queen"))
-            availableSquaresQueen(i, j, pieces2);
-          }
-        }
-      }
-    for(int k = 0; k < pieces2.length; k++){
-      for(int m = 0; m < pieces2[0].length; m++){
-        if(pieces2[k][m].getAvailable() && pieces2[k][m].getType().equals("king") && ((movecount % 1 == 0 && pieces2[k][m].getColor()) || (movecount % 1 == 0.5 && !pieces2[k][m].getColor())))
-          return true;
-      }
-    }
-    return false;
+    return inCheck();
   }
   
   void move(int x, int y){
@@ -563,60 +541,80 @@ class Board{
         pieces2[n][s] = pieces[n][s];
       }
     }
+    //if(checkMate())
+      //println("checkmate");
   }
 
-  
-  
+  boolean inCheck(){
+    for(int i = 0; i < pieces2.length; i++){
+      for(int j = 0; j < pieces2[i].length; j++){
+        if((movecount % 1 == 0 && !pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && pieces2[i][j].getColor())){
+          if(pieces2[i][j].getType().equals("pawn"))
+            attackedSquaresPawn(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("rook"))
+            availableSquaresRook(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("bishop"))
+            availableSquaresBishop(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("knight"))
+            availableSquaresKnight(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("king"))
+            availableSquaresKing(i, j, pieces2);
+          if(pieces2[i][j].getType().equals("queen"))
+            availableSquaresQueen(i, j, pieces2);
+          }
+        }
+      }
+      for(int k = 0; k < pieces2.length; k++){
+        for(int m = 0; m < pieces2[0].length; m++){
+          if(pieces2[k][m].getAvailable() && pieces2[k][m].getType().equals("king") && ((movecount % 1 == 0 && pieces2[k][m].getColor()) || (movecount % 1 == 0.5 && !pieces2[k][m].getColor())))
+            return true;
+      }
+    }   
+    return false;
+  }
   boolean checkMate(){
-    for(int k = 0; k < pieces2.length; k++){
-      for(int m = 0; m < pieces2[0].length; m++){
-        if (pieces[k][m].getType().equals("king") && pieces[k][m].getColor()){
-          if (k+1 < 8 && m +1 < 8){
-            if (!illegalMove(k,m,k+1,m+1)){
-                return false;
+    if(inCheck()){
+      for(int i = 0; i < pieces2.length; i++){
+        for(int j = 0; j < pieces2[0].length; j++){
+          if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !(pieces2[i][j].getColor()))){
+            if(pieces2[i][j].getType().equals("pawn"))
+              availableSquaresPawn(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("rook"))
+              availableSquaresRook(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("bishop"))
+              availableSquaresBishop(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("knight"))
+              availableSquaresKnight(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("king"))
+              availableSquaresKing(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("queen"))
+              availableSquaresQueen(i, j, pieces2);
+            for(int k = 0; k < pieces2.length; k++){
+              for(int m = 0; m < pieces2[0].length; m++){
+                if(pieces2[k][m].getAvailable() && !illegalMove(i, j, k, m))
+                  return false;
+                pieces2[i][j] = pieces2[k][m];
+                pieces2[j][k] = new Pieces();
               }
             }
-           else if (k+1 < 8 && m -1 >= 0){
-            if (!illegalMove(k,m,k+1,m-1)){
-                return false;
+            for(int n = 0; n < pieces2.length; n++){
+              for(int p = 0; p < pieces2[0].length; p++){
+                pieces2[n][p].setSelected(false);
+                pieces2[n][p].setAvailable(false);
               }
             }
-           else if (k-1 >= 0 && m-1 >= 0){
-            if (!illegalMove(k,m,k-1,m-1)){
-                return false;
-              }
-            }
-           else if (k-1 >= 0 && m+1 < 8){
-            if (!illegalMove(k,m,k-1,m+1)){
-                return false;
-              }
-            }
-           else if (k+1 < 8 ){
-            if (!illegalMove(k,m,k+1,m)){
-                return false;
-              }
-            }
-           else if (k-1 >= 0){
-            if (illegalMove(k,m,k-1,m)){
-                isKingCheckmated = true;
-              }
-            }
-           else if ( m+1 < 8){
-            if (!illegalMove(k,m,k,m+1)){
-                return false;
-              }
-            }
-            else if ( m -1 >= 0){
-            if (!illegalMove(k,m,k,m-1)){
-                return false;
-              }
-            }
+          }
         }
       }
     }
-    isKingCheckmated = true;
-    //println(isKingCheckmated);
-    return isKingCheckmated;
+    if(inCheck())
+      return true;
+    for(int s = 0; s < pieces.length; s++){
+      for(int t = 0; t < pieces[s].length; t++){
+        pieces2[s][t] = pieces[s][t];
+      }
+    }
+    return false;
   }
   
    void Promotion(){

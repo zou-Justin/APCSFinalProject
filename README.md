@@ -45,3 +45,6 @@ Spent a long time working on castling into check;started a bit on checkmate.
 
 Justin 5/31/2021:
 Worked on EnPassant and changed the UML diagram for the new updated version.
+
+Adam 6/1/21:
+Integrated castling and checks so you cannot castle into check. Started doing checkmate.
