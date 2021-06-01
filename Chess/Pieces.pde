@@ -48,7 +48,9 @@ class Pieces{
   void setSelected(boolean b){
     Selected = b;
   }
-  
+   boolean getFirstTurnPawn(){
+    return FirstTurnPawn;
+  }
   boolean getHasMoved(){
     return hasMoved;
   }
