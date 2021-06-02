@@ -502,16 +502,17 @@ class Board{
                castle(i, j, r, c);
            }else{
              if(!illegalMove(i, j, r, c)){
-             pieces[r][c] = pieces[i][j];
-             pieces[i][j] = new Pieces();
-             pieces[r][c].setSelected(false);
-             pieces[r][c].setHasMoved(true);
-             movemade = true;
-             if (pieces[r][c].getType().equals("pawn") && (r == 0 || r == 7)){
-               movecount -= 0.5;
-             }
-             if (pieces[r][c].getType().equals("pawn") && ((r == i + 2) || r== i-2) && c == j){
+               pieces[r][c] = pieces[i][j];
+               pieces[i][j] = new Pieces();
+               pieces[r][c].setSelected(false);
+               pieces[r][c].setHasMoved(true);
+               movemade = true;
+               if (pieces[r][c].getType().equals("pawn") && (r == 0 || r == 7)){
+                 movecount -= 0.5;
+               }
+             else if (pieces[r][c].getType().equals("pawn") && ((r == i + 2) || r== i-2) && c == j){
                pieces[r][c].setPawn(true);
+               Promotion();
               }
               else{
                 pieces[r][c].setPawn(false);
@@ -641,10 +642,6 @@ class Board{
           canPromote = false;
           movecount += 0.5;
         }
-        //else {
-        //  pieces[0][p] = new Pieces(false, "queen");
-        //  canPromote = false;
-        //}
        }
       if(pieces[7][p].getType().equals("pawn")){
         canPromote = true;
