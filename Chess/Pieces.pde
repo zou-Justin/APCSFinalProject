@@ -8,6 +8,7 @@ class Pieces{
   boolean hasMoved;
   boolean FirstTurnPawn;
   boolean marked;
+  boolean enpassant;
   
   public Pieces(boolean w, String t){
     white = w;
@@ -17,6 +18,7 @@ class Pieces{
     hasMoved = false;
     FirstTurnPawn = false;
     marked = false;
+    enpassant = false;
   }
   
   public Pieces(){
@@ -25,6 +27,15 @@ class Pieces{
     Selected = false;
     hasMoved = false;
     marked = false;
+    enpassant = false;
+  }
+  
+  boolean getEnPassant(){
+    return enpassant;
+  }
+  
+  void setEnPassant(boolean b){
+    enpassant = b;
   }
   
   boolean getMarked(){
