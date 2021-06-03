@@ -3,7 +3,6 @@ class Board{
   double movecount;
   Pieces[][] pieces;
   boolean selected;
-  boolean isKingCheckmated;
   Pieces[][] pieces2;
   boolean movemade;
   String text;
@@ -17,14 +16,11 @@ class Board{
     pieces = new Pieces[8][8];
     pieces2 = new Pieces[8][8];
     selected = false;
-    isKingCheckmated = false;
     movemade = false;
     text = "";
     firstText = "";
   }
-  void setChecked(boolean b){
-    isKingCheckmated = b;
-  }
+
   void setSelected(boolean b){
     selected = b;
   }
@@ -525,10 +521,7 @@ class Board{
          }
         }
       } 
-      if(movemade)
-        movecount += 0.5;
     }
-    movemade = false;
     //Eliminating all piece selections and availablities
     for(int k = 0; k < pieces.length; k++){
       for(int m = 0; m < pieces[0].length; m++){
@@ -542,8 +535,16 @@ class Board{
         pieces2[n][s] = pieces[n][s];
       }
     }
-    //if(checkMate())
-      //println("checkmate");
+   if(checkMate())
+      println("checkmate");
+    for(int s = 0; s < pieces.length; s++){
+      for(int t = 0; t < pieces[s].length; t++){
+        pieces2[s][t] = pieces[s][t];
+      }
+    }
+    if(movemade)
+        movecount += 0.5;
+     movemade = false;
   }
 
   boolean inCheck(){
@@ -573,8 +574,19 @@ class Board{
     }   
     return false;
   }
+  
   boolean checkMate(){
+   // double storage = movecount;
+   // movecount += 0.5;
+   boolean checked = false;
     if(inCheck()){
+     checked = true;
+     // movecount = storage;
+      for(int n = 0; n < pieces2.length; n++){
+        for(int p = 0; p < pieces2[0].length; p++){
+            pieces2[n][p].setAvailable(false);
+        }
+      }
       for(int i = 0; i < pieces2.length; i++){
         for(int j = 0; j < pieces2[0].length; j++){
           if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !(pieces2[i][j].getColor()))){
@@ -592,29 +604,34 @@ class Board{
               availableSquaresQueen(i, j, pieces2);
             for(int k = 0; k < pieces2.length; k++){
               for(int m = 0; m < pieces2[0].length; m++){
-                if(pieces2[k][m].getAvailable() && !illegalMove(i, j, k, m))
+                if(pieces2[k][m].getAvailable())
+                  pieces2[k][m].setMarked(true);
+              }
+            }
+            for(int a = 0; a < pieces2.length; a++){
+              for(int b = 0; b < pieces2[0].length; b++){
+                if(pieces2[a][b].getMarked()){
+                  Pieces x = pieces2[a][b];
+                if(!illegalMove(i, j, a, b))
                   return false;
-                pieces2[i][j] = pieces2[k][m];
-                pieces2[j][k] = new Pieces();
+                pieces2[i][j] = pieces2[a][b];
+                pieces2[a][b] = x;
+                }
               }
             }
             for(int n = 0; n < pieces2.length; n++){
               for(int p = 0; p < pieces2[0].length; p++){
-                pieces2[n][p].setSelected(false);
                 pieces2[n][p].setAvailable(false);
+                pieces2[n][p].setMarked(false);
               }
             }
           }
         }
       }
     }
-    if(inCheck())
+    //movecount = storage;
+    if(checked)
       return true;
-    for(int s = 0; s < pieces.length; s++){
-      for(int t = 0; t < pieces[s].length; t++){
-        pieces2[s][t] = pieces[s][t];
-      }
-    }
     return false;
   }
   
