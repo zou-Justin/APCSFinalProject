@@ -19,7 +19,7 @@ void draw(){
   a.Promotion();
   if (a.canPromote){
     println("Aasd");
-    text(""+a.firstText,30,30);
+    text(""+a.firstText,570,20);
   }
   else{
     a.text = "";
