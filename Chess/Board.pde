@@ -251,7 +251,16 @@ class Board{
           str += ", ";
         }
       }
-    }else{
+    }else if(trait.equals("isMarked")){
+      for(int i = arr.length - 1; i >= 0; i--){
+        if(i < arr.length - 1)
+          str += "\n";
+        for(int j = 0; j < arr[0].length; j++){
+          str += arr[i][j].getMarked();
+          str += ", ";
+        }
+      }
+     }else{
       for(int i = arr.length - 1; i >= 0; i--){
         if(i < arr.length - 1)
           str += "\n";
@@ -693,7 +702,6 @@ class Board{
         pieces2[n][s] = pieces[n][s];
       }
     }
-
     if(movemade){
       if(checkMate())
         gameOver = true;
@@ -763,14 +771,16 @@ class Board{
               availableSquaresBishop(i, j, pieces2);
             if(pieces2[i][j].getType().equals("knight"))
               availableSquaresKnight(i, j, pieces2);
-            if(pieces2[i][j].getType().equals("king"))
+            if(pieces2[i][j].getType().equals("king")){
               availableSquaresKing(i, j, pieces2);
+            }
             if(pieces2[i][j].getType().equals("queen"))
               availableSquaresQueen(i, j, pieces2);
             for(int k = 0; k < pieces2.length; k++){
               for(int m = 0; m < pieces2[0].length; m++){
                 if(pieces2[k][m].getAvailable())
                   pieces2[k][m].setMarked(true);
+                  pieces2[k][m].setAvailable(false);
               }
             }
             for(int a = 0; a < pieces2.length; a++){
@@ -783,7 +793,12 @@ class Board{
                 }
                 pieces2[i][j] = pieces2[a][b];
                 pieces2[a][b] = x;
+                for(int c = 0; c < pieces2.length; c++){
+                  for(int d = 0; d < pieces2[0].length; d++){
+                    pieces2[c][d].setAvailable(false);
+                  }
                 }
+               }
               }
             }
             for(int n = 0; n < pieces2.length; n++){
