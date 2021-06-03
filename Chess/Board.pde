@@ -201,6 +201,24 @@ class Board{
       text("Press 'q' for queen, 'n' for knight,", 400, 12);   
       text("'b' for bishop, or 'r' for rook.", 400, 28);
     }
+    fill(0);
+    textSize(30);
+    text("8", 7, 80);
+    text("7", 7, 160);
+    text("6", 7, 240);
+    text("5", 7, 320);
+    text("4", 7, 400);
+    text("3", 7, 480);
+    text("2", 7, 560);
+    text("1", 7, 640);
+    text("a", 60, 695);
+    text("b", 140, 697);
+    text("c", 220, 695);
+    text("d", 300, 697);
+    text("e", 380, 695);
+    text("f", 460, 697);
+    text("g", 540, 693);
+    text("h", 620, 697);
     if(gameOver){
       fill(255);
       rect(40, 270, 600, 80);
