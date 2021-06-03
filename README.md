@@ -54,3 +54,6 @@ Made a button to reset the game and fixed promotion issues with check.
 
 Adam 6/2/21:
 I mostly fixed the checkmate function. Checkmate now works but it messes up castling by not allowing you to castle if your king was ever in check.
+
+Justin 6/2/2021:
+I worked on the Scirpt for the presentation. Made buttons and promotion more presentable and started work on dead pieces on the side as a nice feature to have.
