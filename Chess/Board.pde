@@ -3,13 +3,23 @@ class Board{
   double movecount;
   Pieces[][] pieces;
   boolean selected;
-  boolean isKingCheckmated;
   Pieces[][] pieces2;
   boolean movemade;
   String text;
   String firstText;
   boolean canPromote;
   boolean Checked;
+  int BishopPieces;
+  int PawnPieces;
+  int KnightPieces;
+  int QueenPieces;
+  int RookPieces;
+  int BishopPiecesB;
+  int PawnPiecesB;
+  int KnightPiecesB;
+  int QueenPiecesB;
+  int RookPiecesB;
+  
   
     public Board(){
     size = 700;
@@ -17,17 +27,24 @@ class Board{
     pieces = new Pieces[8][8];
     pieces2 = new Pieces[8][8];
     selected = false;
-    isKingCheckmated = false;
     movemade = false;
     text = "";
     firstText = "";
   }
-  void setChecked(boolean b){
-    isKingCheckmated = b;
-  }
+
   void setSelected(boolean b){
     selected = b;
   }
+  
+  //void CheckPieces(){
+  //  for (int i = 0; i < 8; i ++ ){
+  //    for (int j = 0; j < 8;j++){
+  //      if (pieces[i][j].getType().equals
+        
+        
+  //    }
+  //  }
+  //}
   
   boolean getSelected(){
     return selected;
@@ -81,6 +98,17 @@ class Board{
         pieces2[n][s] = pieces[n][s];
       }
     }
+   BishopPieces = 2;
+   PawnPieces = 8;
+   KnightPieces = 2;
+   QueenPieces = 1;
+   RookPieces = 2;
+   BishopPiecesB = 2;
+   PawnPiecesB = 8;
+   KnightPiecesB = 2;
+   QueenPiecesB = 2;
+   RookPiecesB = 2;
+  
   }
   void restart(){
     for(int i = 0; i < 8;i++){
@@ -154,7 +182,6 @@ class Board{
           arr[row + 1][col].setAvailable(true);
          if(row == 1 && arr[row + 2][col].getType().equals("generic")){
             arr[row + 2][col].setAvailable(true);
-
          }
         }
         if(col >= 1 && (!(arr[row + 1][col - 1].getType().equals("generic"))) && !(arr[row + 1][col - 1].getColor())){
@@ -525,10 +552,7 @@ class Board{
          }
         }
       } 
-      if(movemade)
-        movecount += 0.5;
     }
-    movemade = false;
     //Eliminating all piece selections and availablities
     for(int k = 0; k < pieces.length; k++){
       for(int m = 0; m < pieces[0].length; m++){
@@ -542,8 +566,21 @@ class Board{
         pieces2[n][s] = pieces[n][s];
       }
     }
-    //if(checkMate())
-    //  println("checkmate");
+
+
+    if(movemade){
+      if(checkMate())
+        println("checkmate");
+      //setUp();
+      for(int s = 0; s < pieces.length; s++){
+        for(int t = 0; t < pieces[s].length; t++){
+          pieces2[s][t] = pieces[s][t];
+        }
+      }
+    }
+    if(movemade)
+        movecount += 0.5;
+     movemade = false;
   }
 
   boolean inCheck(){
@@ -573,57 +610,65 @@ class Board{
     }   
     return false;
   }
-  boolean checkMate(){
+  
+   boolean checkMate(){
+   double storage = movecount;
+   movecount += 0.5;
+   boolean checked = false;
     if(inCheck()){
+     checked = true;
+      for(int n = 0; n < pieces2.length; n++){
+        for(int p = 0; p < pieces2[0].length; p++){
+            pieces2[n][p].setAvailable(false);
+        }
+      }
       for(int i = 0; i < pieces2.length; i++){
         for(int j = 0; j < pieces2[0].length; j++){
           if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !(pieces2[i][j].getColor()))){
-            //if(pieces2[i][j].getType().equals("pawn"))
-            //  availableSquaresPawn(i, j, pieces2);
-            //if(pieces2[i][j].getType().equals("rook"))
-            //  availableSquaresRook(i, j, pieces2);
-            //if(pieces2[i][j].getType().equals("bishop"))
-            //  availableSquaresBishop(i, j, pieces2);
-            //if(pieces2[i][j].getType().equals("knight"))
-            //  availableSquaresKnight(i, j, pieces2);
-            //if(pieces2[i][j].getType().equals("king"))
-            //  availableSquaresKing(i, j, pieces2);
-            //if(pieces2[i][j].getType().equals("queen"))
-            //  availableSquaresQueen(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("pawn"))
+              availableSquaresPawn(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("rook"))
+              availableSquaresRook(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("bishop"))
+              availableSquaresBishop(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("knight"))
+              availableSquaresKnight(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("king"))
+              availableSquaresKing(i, j, pieces2);
+            if(pieces2[i][j].getType().equals("queen"))
+              availableSquaresQueen(i, j, pieces2);
             for(int k = 0; k < pieces2.length; k++){
               for(int m = 0; m < pieces2[0].length; m++){
-                if(pieces2[k][m].getAvailable() && !illegalMove(i, j, k, m)){
-                  println("AsSD");
+                if(pieces2[k][m].getAvailable())
+                  pieces2[k][m].setMarked(true);
+              }
+            }
+            for(int a = 0; a < pieces2.length; a++){
+              for(int b = 0; b < pieces2[0].length; b++){
+                if(pieces2[a][b].getMarked()){
+                  Pieces x = pieces2[a][b];
+                if(!illegalMove(i, j, a, b)){
+                  movecount = storage;
                   return false;
                 }
-                pieces2[i][j] = pieces2[k][m];
-                pieces2[i][j] = new Pieces();
-                println("AwSD");
+                pieces2[i][j] = pieces2[a][b];
+                pieces2[a][b] = x;
+                }
               }
             }
             for(int n = 0; n < pieces2.length; n++){
               for(int p = 0; p < pieces2[0].length; p++){
-                pieces2[n][p].setSelected(false);
                 pieces2[n][p].setAvailable(false);
+                pieces2[n][p].setMarked(false);
               }
             }
           }
         }
       }
-      println("ASD");
+    }
+    movecount = storage;
+    if(checked)
       return true;
-    }
-    //if(inCheck()){
-    //  return true;
-    //  println("test2");
-    //}
-    for(int s = 0; s < pieces.length; s++){
-      for(int t = 0; t < pieces[s].length; t++){
-        pieces2[s][t] = pieces[s][t];
-        println("2");
-      }
-    }
-    println("ASD");
     return false;
   }
   

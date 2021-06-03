@@ -20,13 +20,14 @@ void draw(){
   if (a.canPromote){
     println("Aasd");
     text(""+a.firstText,30,30);
-    
   }
   else{
     a.text = "";
     a.firstText = "";
   }
-  rect(290,5,20,20);  
+  rect(290,5,90,20); 
+  fill(100);
+  text("restart",300,23);
 }
 
 void mousePressed(){
@@ -38,10 +39,9 @@ void mousePressed(){
       a.move(mouseX,mouseY);
     }
   }
-
- // if (mouseButton == LEFT && (mouseX >=270 && mouseX < 310) && (mouseY < 25)){
-   // a.restart();
-  //}
+  if (mouseButton == LEFT && (mouseX >=200 && mouseX < 380) && (mouseY < 25)){
+    a.restart();
+  }
 }
 
 void keyPressed() {
@@ -51,4 +51,4 @@ void keyPressed() {
   else{
     a.firstText = a.firstText + key; 
   }
-  }
+ }

@@ -51,3 +51,6 @@ Integrated castling and checks so you cannot castle into check. Started doing ch
 
 Justin 6/1/2021:
 Made a button to reset the game and fixed promotion issues with check.
+
+Adam 6/2/21:
+I mostly fixed the checkmate function. Checkmate now works but it messes up castling by not allowing you to castle if your king was ever in check.
