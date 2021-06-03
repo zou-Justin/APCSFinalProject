@@ -454,7 +454,7 @@ class Board{
         }
       }
    }
-   
+  
   void availableSquaresQueen(int r, int c, Pieces[][] arr){
     availableSquaresRook(r, c, arr);
     availableSquaresBishop(r, c, arr);
@@ -507,12 +507,12 @@ class Board{
                pieces[r][c].setSelected(false);
                pieces[r][c].setHasMoved(true);
                movemade = true;
-               if (pieces[r][c].getType().equals("pawn") && (r == 0 || r == 7)){
+               if (pieces[r][c].getType().equals("pawn") && (r == 0 || r == 7)){ 
                  movecount -= 0.5;
                }
              else if (pieces[r][c].getType().equals("pawn") && ((r == i + 2) || r== i-2) && c == j){
                pieces[r][c].setPawn(true);
-               Promotion();
+              
               }
               else{
                 pieces[r][c].setPawn(false);
@@ -543,7 +543,7 @@ class Board{
       }
     }
     //if(checkMate())
-      //println("checkmate");
+    //  println("checkmate");
   }
 
   boolean inCheck(){
@@ -578,24 +578,27 @@ class Board{
       for(int i = 0; i < pieces2.length; i++){
         for(int j = 0; j < pieces2[0].length; j++){
           if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !(pieces2[i][j].getColor()))){
-            if(pieces2[i][j].getType().equals("pawn"))
-              availableSquaresPawn(i, j, pieces2);
-            if(pieces2[i][j].getType().equals("rook"))
-              availableSquaresRook(i, j, pieces2);
-            if(pieces2[i][j].getType().equals("bishop"))
-              availableSquaresBishop(i, j, pieces2);
-            if(pieces2[i][j].getType().equals("knight"))
-              availableSquaresKnight(i, j, pieces2);
-            if(pieces2[i][j].getType().equals("king"))
-              availableSquaresKing(i, j, pieces2);
-            if(pieces2[i][j].getType().equals("queen"))
-              availableSquaresQueen(i, j, pieces2);
+            //if(pieces2[i][j].getType().equals("pawn"))
+            //  availableSquaresPawn(i, j, pieces2);
+            //if(pieces2[i][j].getType().equals("rook"))
+            //  availableSquaresRook(i, j, pieces2);
+            //if(pieces2[i][j].getType().equals("bishop"))
+            //  availableSquaresBishop(i, j, pieces2);
+            //if(pieces2[i][j].getType().equals("knight"))
+            //  availableSquaresKnight(i, j, pieces2);
+            //if(pieces2[i][j].getType().equals("king"))
+            //  availableSquaresKing(i, j, pieces2);
+            //if(pieces2[i][j].getType().equals("queen"))
+            //  availableSquaresQueen(i, j, pieces2);
             for(int k = 0; k < pieces2.length; k++){
               for(int m = 0; m < pieces2[0].length; m++){
-                if(pieces2[k][m].getAvailable() && !illegalMove(i, j, k, m))
+                if(pieces2[k][m].getAvailable() && !illegalMove(i, j, k, m)){
+                  println("AsSD");
                   return false;
+                }
                 pieces2[i][j] = pieces2[k][m];
-                pieces2[j][k] = new Pieces();
+                pieces2[i][j] = new Pieces();
+                println("AwSD");
               }
             }
             for(int n = 0; n < pieces2.length; n++){
@@ -607,14 +610,20 @@ class Board{
           }
         }
       }
-    }
-    if(inCheck())
+      println("ASD");
       return true;
+    }
+    //if(inCheck()){
+    //  return true;
+    //  println("test2");
+    //}
     for(int s = 0; s < pieces.length; s++){
       for(int t = 0; t < pieces[s].length; t++){
         pieces2[s][t] = pieces[s][t];
+        println("2");
       }
     }
+    println("ASD");
     return false;
   }
   
@@ -626,21 +635,29 @@ class Board{
           pieces[0][p] = new Pieces(false, "queen");
           canPromote = false;
           movecount += 0.5;
+          pieces[0][p].setSelected(true);
+          move(0,p);
         }
         else if (text.equals("bishop")){
           pieces[0][p] = new Pieces(false, "bishop");
           canPromote = false;
           movecount += 0.5;
+          pieces[0][p].setSelected(true);
+          move(0,p);
         }
         else if (text.equals("knight")){
           pieces[0][p] = new Pieces(false, "knight");
           canPromote = false;
           movecount += 0.5;
+           pieces[0][p].setSelected(true);
+           move(0,p);
         }
         else if (text.equals("rook")){
           pieces[0][p] = new Pieces(false, "rook");
           canPromote = false;
           movecount += 0.5;
+          pieces[0][p].setSelected(true);
+          move(0,p);
         }
        }
       if(pieces[7][p].getType().equals("pawn")){
@@ -648,22 +665,30 @@ class Board{
          if (text.equals("queen")){
           pieces[7][p] = new Pieces(true, "queen");
           canPromote = false;
+          pieces[7][p].setSelected(true);
+          move(7,p);
           movecount += 0.5;
         }
         else if (text.equals("bishop")){
           pieces[7][p] = new Pieces(true, "bishop");
           canPromote = false;
-          movecount += 0.5;
+         pieces[7][p].setSelected(true);
+         move(7,p);
+         movecount += 0.5;
         }
         else if (text.equals("knight")){
           pieces[7][p] = new Pieces(true, "knight");
           canPromote = false;
-          movecount += 0.5;
+           pieces[7][p].setSelected(true);
+           move(7,p);
+           movecount += 0.5;
         }
         else if (text.equals("rook")){
           pieces[7][p] = new Pieces(true, "rook");
           canPromote = false;
-          movecount += 0.5;
+           pieces[7][p].setSelected(true);
+           move(7,p);
+           movecount += 0.5;
         }
         //else {
         //  pieces[7][p] = new Pieces(true, "queen");
