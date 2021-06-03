@@ -151,8 +151,8 @@ class Board{
   
   }
   void restart(){
-    for(int i = 0; i < 8;i++){
-      for (int j = 0; j < 8; j ++){
+    for(int i = 0; i < 8; i++){
+      for (int j = 0; j < 8; j++){
         pieces[i][j] = new Pieces();
       }
     }
@@ -186,7 +186,47 @@ class Board{
         }
       }
     }
+    fill(100);
+    stroke(0);
+    rect(290,5,90,20); 
+    fill(255);
+    text("Restart",300,23);
   }
+  
+  String makeString(String trait, Pieces[][] arr){
+    String str = "";
+    if(trait.equals("hasMoved")){
+      for(int i = arr.length - 1; i >= 0; i--){
+        if(i < arr.length - 1)
+          str += "\n";
+        for(int j = 0; j < arr[0].length; j++){
+          str += arr[i][j].getHasMoved();
+          str += ", ";
+        }
+      }
+    }else if(trait.equals("isAvailable")){
+      for(int i = arr.length - 1; i >= 0; i--){
+        if(i < arr.length - 1)
+          str += "\n";
+        for(int j = 0; j < arr[0].length; j++){
+          str += arr[i][j].getAvailable();
+          str += ", ";
+        }
+      }
+    }else{
+      for(int i = arr.length - 1; i >= 0; i--){
+        if(i < arr.length - 1)
+          str += "\n";
+        for(int j = 0; j < arr[0].length; j++){
+          str += arr[i][j].getColor() + " " + arr[i][j].getType();
+          str += ", ";
+        }
+      }
+    }
+    str += "\n";
+    return str;
+  }
+  
   
   void availableSquares(int x, int y){
     int r = 7 - ((y - 30) / 80);
@@ -503,8 +543,8 @@ class Board{
           pieces[krow][kcol] = new Pieces();
           pieces[rrow][rcol+1] = new Pieces();
           pieces[krow][6].setSelected(false);
-          pieces[krow][6].setHasMoved(true);
-          pieces[rrow][5].setHasMoved(true);
+          //pieces[krow][6].setHasMoved(true);
+          //pieces[rrow][5].setHasMoved(true);
           movemade = true;
         }
       }
@@ -515,8 +555,8 @@ class Board{
           pieces[krow][kcol] = new Pieces();
           pieces[rrow][rcol-2] = new Pieces();
           pieces[krow][2].setSelected(false);
-          pieces[krow][2].setHasMoved(true);
-          pieces[rrow][3].setHasMoved(true);
+          //pieces[krow][2].setHasMoved(true);
+          //pieces[rrow][3].setHasMoved(true);
           movemade = true;
         }
       }
@@ -554,7 +594,7 @@ class Board{
     pieces2[trow][tcol] = pieces2[frow][fcol];
     pieces2[frow][fcol] = new Pieces();
     pieces2[trow][tcol].setSelected(false);
-    pieces2[trow][tcol].setHasMoved(true);
+    //pieces2[trow][tcol].setHasMoved(true);
     return inCheck();
   }
   
@@ -572,7 +612,7 @@ class Board{
                pieces[r][c] = pieces[i][j];
                pieces[i][j] = new Pieces();
                pieces[r][c].setSelected(false);
-               pieces[r][c].setHasMoved(true);
+               //pieces[r][c].setHasMoved(true);
                movemade = true;
                if (pieces[r][c].getType().equals("pawn") && (r == 0 || r == 7)){ 
                  movecount -= 0.5;
@@ -598,6 +638,18 @@ class Board{
       for(int m = 0; m < pieces[0].length; m++){
         pieces[k][m].setSelected(false);
         pieces[k][m].setAvailable(false);
+        if(pieces[k][m].getType().equals("king") && !pieces[k][m].getHasMoved()){
+          if(pieces[k][m].getColor() && (k != 0 || m != 4))
+            pieces[k][m].setHasMoved(true);
+          if(!pieces[k][m].getColor() && (k != 7 || m != 4))
+            pieces[k][m].setHasMoved(true);
+        }
+        if(pieces[k][m].getType().equals("rook") && !pieces[k][m].getHasMoved()){
+          if(pieces[k][m].getColor() && (k != 0 || (m != 0 && m != 7)))
+            pieces[k][m].setHasMoved(true);
+          if(!pieces[k][m].getColor() && (k != 7 || (m != 0 && m != 7)))
+            pieces[k][m].setHasMoved(true);
+        }
       }
     }
     //Copying over all of the pieces to the test array
@@ -607,16 +659,24 @@ class Board{
       }
     }
 
-
+    //println(makeString("isAvailable", pieces));
+    
     if(movemade){
       if(checkMate())
         println("checkmate");
       //setUp();
+      for(int n = 0; n < pieces.length; n++){
+        for(int p = 0; p < pieces[0].length; p++){
+            pieces[n][p].setAvailable(false);
+        }
+      }
       for(int s = 0; s < pieces.length; s++){
         for(int t = 0; t < pieces[s].length; t++){
           pieces2[s][t] = pieces[s][t];
         }
       }
+      //println(makeString("hasMoved", pieces));
+      //println(makeString("isAvailable", pieces));
     }
     if(movemade)
         movecount += 0.5;

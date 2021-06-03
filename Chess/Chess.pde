@@ -25,9 +25,6 @@ void draw(){
     a.text = "";
     a.firstText = "";
   }
-  rect(290,5,90,20); 
-  fill(100);
-  text("restart",300,23);
   a.CheckPieces();
 }
 
