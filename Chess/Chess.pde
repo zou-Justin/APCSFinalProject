@@ -16,15 +16,6 @@ void draw(){
     fill(0);
     text("Black to move",20,20);
   }
- // a.Promotion();
-  //if (a.canPromote){
-    //println("Aasd");
-    //text(""+a.firstText,570,20);
-  //}
-  else{
-    a.text = "";
-    a.firstText = "";
-  }
   a.CheckPieces();
 }
 
@@ -44,22 +35,14 @@ void mousePressed(){
 
 void keyPressed() {
   if(key == 'q' && a.getPromote())
-    a.Promotion2("queen");
+    a.Promotion("queen");
   else if(key == 'n' && a.getPromote())
-    a.Promotion2("knight");
+    a.Promotion("knight");
   else if(key == 'b' && a.getPromote())
-    a.Promotion2("bishop");
+    a.Promotion("bishop");
   else if(key == 'r' && a.getPromote())
-    a.Promotion2("rook");
+    a.Promotion("rook");
   else
-    a.Promotion2("queen");
+    a.Promotion("queen");
+}
     
-    
-    
-  //if (key == '\n'){
-   // a.text = a.firstText;
-  }
-  //else{
-    //a.firstText = a.firstText + key; 
-  //}
- //}
