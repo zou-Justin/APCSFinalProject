@@ -7,9 +7,9 @@ class Board{
   boolean movemade;
   String text;
   String firstText;
-  boolean canPromote;
   boolean Checked;
   PImage img;
+  boolean canPromote;
   int BishopPieces;
   int PawnPieces;
   int KnightPieces;
@@ -22,7 +22,7 @@ class Board{
   int RookPiecesB;
   
   
-    public Board(){
+   public Board(){
     size = 700;
     movecount = 0.0;
     pieces = new Pieces[8][8];
@@ -36,7 +36,6 @@ class Board{
   void setSelected(boolean b){
     selected = b;
   }
-  
   void CheckPieces(){
    BishopPieces = 0;
    PawnPieces = 0;
@@ -92,7 +91,6 @@ class Board{
         }
       }
     }
-   
   }
   
   boolean getSelected(){

@@ -16,15 +16,15 @@ void draw(){
     fill(0);
     text("Black to move",20,20);
   }
-  a.Promotion();
-  if (a.canPromote){
-    println("Aasd");
-    text(""+a.firstText,570,20);
-  }
-  else{
-    a.text = "";
-    a.firstText = "";
-  }
+  //a.Promotion();
+  //if (a.canPromote){
+  //  println("Aasd");
+  //  text(""+a.firstText,570,20);
+  //}
+  //else{
+  //  a.text = "";
+  //  a.firstText = "";
+  //}
   rect(290,5,90,20); 
   fill(100);
   text("restart",300,23);
