@@ -9,6 +9,7 @@ class Board{
   String firstText;
   boolean canPromote;
   boolean Checked;
+  boolean gameOver;
   PImage img;
   int BishopPieces;
   int PawnPieces;
@@ -101,6 +102,9 @@ class Board{
   
   void setUp(){
     movecount = 0.0;
+    gameOver = false;
+    selected = false;
+    Checked = false;
     spawnPieces();
   }
   
@@ -191,6 +195,16 @@ class Board{
     rect(290,5,90,20); 
     fill(255);
     text("Restart",300,23);
+    if(gameOver){
+      fill(255);
+      rect(40, 270, 600, 80);
+      fill(0, 0, 100);
+      textSize(100);
+      if(movecount % 1 == 0.5)
+        text("WHITE WINS", 50, 350);
+      if(movecount % 1 == 0)
+        text("BLACK WINS", 50, 350);
+    }
   }
   
   String makeString(String trait, Pieces[][] arr){
@@ -663,8 +677,7 @@ class Board{
     
     if(movemade){
       if(checkMate())
-        println("checkmate");
-      //setUp();
+        gameOver = true;
       for(int n = 0; n < pieces.length; n++){
         for(int p = 0; p < pieces[0].length; p++){
             pieces[n][p].setAvailable(false);
