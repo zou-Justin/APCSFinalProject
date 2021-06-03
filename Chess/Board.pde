@@ -8,6 +8,7 @@ class Board{
   String text;
   String firstText;
   boolean canPromote;
+  boolean promotion;
   boolean Checked;
   boolean gameOver;
   PImage img;
@@ -32,6 +33,7 @@ class Board{
     movemade = false;
     text = "";
     firstText = "";
+    promotion = false;
   }
 
   void setSelected(boolean b){
@@ -100,11 +102,16 @@ class Board{
     return selected;
   }
   
+  boolean getPromote(){
+    return promotion;
+  }
+  
   void setUp(){
     movecount = 0.0;
     gameOver = false;
     selected = false;
     Checked = false;
+    promotion = false;
     spawnPieces();
   }
   
@@ -195,6 +202,12 @@ class Board{
     rect(290,5,90,20); 
     fill(255);
     text("Restart",300,23);
+    if(promotion){
+      textSize(15);
+      fill(0);
+      text("Press 'q' for queen, 'n' for knight,", 400, 12);   
+      text("'b' for bishop, or 'r' for rook.", 400, 28);
+    }
     if(gameOver){
       fill(255);
       rect(40, 270, 600, 80);
@@ -615,7 +628,7 @@ class Board{
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
-    if(pieces[r][c].getAvailable()){
+    if((r >= 0 && r <= 7) && (c >= 0 && c <= 7) && pieces[r][c].getAvailable()){
       for (int i = 0; i < pieces.length; i++){
         for (int j = 0; j < pieces[0].length; j++){
          if(pieces[i][j].getSelected()){
@@ -628,8 +641,9 @@ class Board{
                pieces[r][c].setSelected(false);
                //pieces[r][c].setHasMoved(true);
                movemade = true;
-               if (pieces[r][c].getType().equals("pawn") && (r == 0 || r == 7)){ 
-                 movecount -= 0.5;
+               if(pieces[r][c].getType().equals("pawn") && (r == 0 || r == 7)){ 
+                 //movecount -= 0.5;
+                 promotion = true;
                }
              else if (pieces[r][c].getType().equals("pawn") && ((r == i + 2) || r== i-2) && c == j){
                pieces[r][c].setPawn(true);
@@ -673,8 +687,6 @@ class Board{
       }
     }
 
-    //println(makeString("isAvailable", pieces));
-    
     if(movemade){
       if(checkMate())
         gameOver = true;
@@ -688,8 +700,6 @@ class Board{
           pieces2[s][t] = pieces[s][t];
         }
       }
-      //println(makeString("hasMoved", pieces));
-      //println(makeString("isAvailable", pieces));
     }
     if(movemade)
         movecount += 0.5;
@@ -725,11 +735,11 @@ class Board{
   }
   
    boolean checkMate(){
-   double storage = movecount;
-   movecount += 0.5;
-   boolean checked = false;
-    if(inCheck()){
-     checked = true;
+     double storage = movecount;
+     movecount += 0.5;
+     boolean checked = false;
+     if(inCheck()){
+      checked = true;
       for(int n = 0; n < pieces2.length; n++){
         for(int p = 0; p < pieces2[0].length; p++){
             pieces2[n][p].setAvailable(false);
@@ -784,6 +794,22 @@ class Board{
       return true;
     return false;
   }
+  
+  void Promotion2(String type){
+    for(int i = 0; i < pieces.length; i++){
+        if(pieces[0][i].getType().equals("pawn"))
+          pieces[0][i] = new Pieces(false, type);
+        if(pieces[7][i].getType().equals("pawn"))
+          pieces[7][i] = new Pieces(true, type);
+    }
+    promotion = false;
+    movemade = true;
+    move(-1000, 1000);
+    movecount -= 0.5;
+  }
+  
+  
+  
   
    void Promotion(){
      for(int p = 0; p < pieces.length; p++){

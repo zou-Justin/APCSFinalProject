@@ -16,11 +16,11 @@ void draw(){
     fill(0);
     text("Black to move",20,20);
   }
-  a.Promotion();
-  if (a.canPromote){
-    println("Aasd");
-    text(""+a.firstText,570,20);
-  }
+ // a.Promotion();
+  //if (a.canPromote){
+    //println("Aasd");
+    //text(""+a.firstText,570,20);
+  //}
   else{
     a.text = "";
     a.firstText = "";
@@ -29,7 +29,7 @@ void draw(){
 }
 
 void mousePressed(){
-  if(mouseButton == LEFT && (mouseX >= 30 && mouseX < 670) && (mouseY >= 30 && mouseY < 670)){
+  if(!a.promotion && mouseButton == LEFT && (mouseX >= 30 && mouseX < 670) && (mouseY >= 30 && mouseY < 670)){
     if(a.getSelected() == false){
       a.availableSquares(mouseX, mouseY);
     }else if (a.getSelected()){
@@ -43,10 +43,23 @@ void mousePressed(){
 }
 
 void keyPressed() {
-  if (key == '\n'){
-    a.text = a.firstText;
+  if(key == 'q' && a.getPromote())
+    a.Promotion2("queen");
+  else if(key == 'n' && a.getPromote())
+    a.Promotion2("knight");
+  else if(key == 'b' && a.getPromote())
+    a.Promotion2("bishop");
+  else if(key == 'r' && a.getPromote())
+    a.Promotion2("rook");
+  else
+    a.Promotion2("queen");
+    
+    
+    
+  //if (key == '\n'){
+   // a.text = a.firstText;
   }
-  else{
-    a.firstText = a.firstText + key; 
-  }
- }
+  //else{
+    //a.firstText = a.firstText + key; 
+  //}
+ //}
