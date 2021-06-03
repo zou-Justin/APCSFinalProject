@@ -535,11 +535,14 @@ class Board{
         pieces2[n][s] = pieces[n][s];
       }
     }
-   if(checkMate())
-      println("checkmate");
-    for(int s = 0; s < pieces.length; s++){
-      for(int t = 0; t < pieces[s].length; t++){
-        pieces2[s][t] = pieces[s][t];
+    if(movemade){
+      //if(checkMate())
+        //println("checkmate");
+      //setUp();
+      for(int s = 0; s < pieces.length; s++){
+        for(int t = 0; t < pieces[s].length; t++){
+          pieces2[s][t] = pieces[s][t];
+        }
       }
     }
     if(movemade)
@@ -576,12 +579,11 @@ class Board{
   }
   
   boolean checkMate(){
-   // double storage = movecount;
-   // movecount += 0.5;
+   double storage = movecount;
+   movecount += 0.5;
    boolean checked = false;
     if(inCheck()){
      checked = true;
-     // movecount = storage;
       for(int n = 0; n < pieces2.length; n++){
         for(int p = 0; p < pieces2[0].length; p++){
             pieces2[n][p].setAvailable(false);
@@ -612,8 +614,10 @@ class Board{
               for(int b = 0; b < pieces2[0].length; b++){
                 if(pieces2[a][b].getMarked()){
                   Pieces x = pieces2[a][b];
-                if(!illegalMove(i, j, a, b))
+                if(!illegalMove(i, j, a, b)){
+                  movecount = storage;
                   return false;
+                }
                 pieces2[i][j] = pieces2[a][b];
                 pieces2[a][b] = x;
                 }
@@ -629,7 +633,7 @@ class Board{
         }
       }
     }
-    //movecount = storage;
+    movecount = storage;
     if(checked)
       return true;
     return false;
