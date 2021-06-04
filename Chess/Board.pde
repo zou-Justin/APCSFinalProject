@@ -7,17 +7,17 @@ class Board{
   boolean movemade;
   boolean promotion;
   boolean gameOver;
-  PImage img;
-  int BishopPieces;
-  int PawnPieces;
-  int KnightPieces;
-  int QueenPieces;
-  int RookPieces;
-  int BishopPiecesB;
-  int PawnPiecesB;
-  int KnightPiecesB;
-  int QueenPiecesB;
-  int RookPiecesB;
+  //PImage img;
+  //int BishopPieces;
+  //int PawnPieces;
+  //int KnightPieces;
+  //int QueenPieces;
+  //int RookPieces;
+  //int BishopPiecesB;
+  //int PawnPiecesB;
+  //int KnightPiecesB;
+  //int QueenPiecesB;
+  //int RookPiecesB;
   
   
     public Board(){
@@ -34,63 +34,63 @@ class Board{
     selected = b;
   }
   
-  void CheckPieces(){
-   BishopPieces = 0;
-   PawnPieces = 0;
-   KnightPieces = 0;
-   QueenPieces = 0;
-   RookPieces = 0;
-   BishopPiecesB = 0;
-   PawnPiecesB = 0;
-   KnightPiecesB = 0;
-   QueenPiecesB = 0;
-   RookPiecesB = 0;
-    for (int i = 0; i < 8; i ++ ){
-      for (int j = 0; j < 8;j++){
-       if (pieces[i][j].getColor()){
-        if (pieces[i][j].getType().equals("bishop")){
-          BishopPieces++;
-        }
-        if (pieces[i][j].getType().equals("rook")){
-          RookPieces++;
-        }
-        if (pieces[i][j].getType().equals("knight")){
-          KnightPieces++;
-        }
-        if (pieces[i][j].getType().equals("queen")){
-          QueenPieces++;
-        }
-       }
-        if (!pieces[i][j].getColor()){
-          if (pieces[i][j].getType().equals("bishop")){
-            BishopPiecesB++;
-          }
-          if (pieces[i][j].getType().equals("rook")){
-            RookPiecesB++;
-          }
-          if (pieces[i][j].getType().equals("knight")){
-            KnightPiecesB++;
-          }
-          if (pieces[i][j].getType().equals("queen")){
-            QueenPiecesB++;
-          }
-        }
-      }
-    }
-  }
+  //void CheckPieces(){
+  // //BishopPieces = 0;
+  // //PawnPieces = 0;
+  // //KnightPieces = 0;
+  // //QueenPieces = 0;
+  // //RookPieces = 0;
+  // //BishopPiecesB = 0;
+  // //PawnPiecesB = 0;
+  // //KnightPiecesB = 0;
+  // //QueenPiecesB = 0;
+  // //RookPiecesB = 0;
+  //  for (int i = 0; i < 8; i ++ ){
+  //    for (int j = 0; j < 8;j++){
+  //     if (pieces[i][j].getColor()){
+  //      if (pieces[i][j].getType().equals("bishop")){
+  //        BishopPieces++;
+  //      }
+  //      if (pieces[i][j].getType().equals("rook")){
+  //        RookPieces++;
+  //      }
+  //      if (pieces[i][j].getType().equals("knight")){
+  //        KnightPieces++;
+  //      }
+  //      if (pieces[i][j].getType().equals("queen")){
+  //        QueenPieces++;
+  //      }
+  //     }
+  //      if (!pieces[i][j].getColor()){
+  //        if (pieces[i][j].getType().equals("bishop")){
+  //          BishopPiecesB++;
+  //        }
+  //        if (pieces[i][j].getType().equals("rook")){
+  //          RookPiecesB++;
+  //        }
+  //        if (pieces[i][j].getType().equals("knight")){
+  //          KnightPiecesB++;
+  //        }
+  //        if (pieces[i][j].getType().equals("queen")){
+  //          QueenPiecesB++;
+  //        }
+  //      }
+  //    }
+  //  }
+  //}
   
-  void showOnSide(){
-    for (int k = 0; k < 8; k++){
-      for (int p = 0; p < 8;p++){
-        if (BishopPieces < 2){
-          if (pieces[k][p].getType().equals("bishop")){
-            image(pieces[k][p].getImage(),700, 700,10,10);
-          }
-        }
-      }
-    }
+  //void showOnSide(){
+  //  for (int k = 0; k < 8; k++){
+  //    for (int p = 0; p < 8;p++){
+  //      if (BishopPieces < 2){
+  //        if (pieces[k][p].getType().equals("bishop")){
+  //          image(pieces[k][p].getImage(),700, 700,10,10);
+  //        }
+  //      }
+  //    }
+  //  }
    
-  }
+  //}
   
   boolean getSelected(){
     return selected;

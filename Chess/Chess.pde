@@ -16,7 +16,7 @@ void draw(){
     fill(0);
     text("Black to move",20,20);
   }
-  a.CheckPieces();
+  //a.CheckPieces();
 }
 
 void mousePressed(){
