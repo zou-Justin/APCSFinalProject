@@ -639,8 +639,39 @@ class Board{
   }
   void displayDead(){
     for (int i = 0 ; i < dead.size();i++){
+      if (dead.get(i).getColor()){
       if (dead.get(i).getType().equals("pawn")){
-        image(dead.get(i).getImage(),200, 200,100,100);
+        image(dead.get(i).getImage(),670, 660,20,20);
+        }
+      if (dead.get(i).getType().equals("queen")){
+        image(dead.get(i).getImage(),670, 640,20,20);
+        }
+      if (dead.get(i).getType().equals("rook")){
+        image(dead.get(i).getImage(),670, 620,20,20);
+        }
+      if (dead.get(i).getType().equals("knight")){
+        image(dead.get(i).getImage(),670, 600,20,20);
+        }
+      if (dead.get(i).getType().equals("bishop")){
+        image(dead.get(i).getImage(),670, 580,20,20);
+        }
+      }
+     if (!dead.get(i).getColor()){
+      if (dead.get(i).getType().equals("pawn")){
+        image(dead.get(i).getImage(),670,30,20,20);
+        }
+      if (dead.get(i).getType().equals("queen")){
+        image(dead.get(i).getImage(),670,50,20,20);
+        }
+      if (dead.get(i).getType().equals("rook")){
+        image(dead.get(i).getImage(),670,70,20,20);
+        }
+      if (dead.get(i).getType().equals("knight")){
+        image(dead.get(i).getImage(),670,90,20,20);
+        }
+      if (dead.get(i).getType().equals("bishop")){
+        image(dead.get(i).getImage(),670,110,20,20);
+        }
       }
     }
   }
