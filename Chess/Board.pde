@@ -637,7 +637,13 @@ class Board{
     pieces2[trow][tcol].setSelected(false);
     return inCheck();
   }
-  
+  void displayDead(){
+    for (int i = 0 ; i < dead.size();i++){
+      if (dead.get(i).getType().equals("pawn")){
+        image(dead.get(i).getImage(),200, 200,100,100);
+      }
+    }
+  }
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
