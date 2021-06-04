@@ -8,17 +8,6 @@ class Board{
   boolean promotion;
   boolean gameOver;
   ArrayList<Pieces> dead;
-  //PImage img;
-  //int BishopPieces;
-  //int PawnPieces;
-  //int KnightPieces;
-  //int QueenPieces;
-  //int RookPieces;
-  //int BishopPiecesB;
-  //int PawnPiecesB;
-  //int KnightPiecesB;
-  //int QueenPiecesB;
-  //int RookPiecesB;
   
   
    public Board(){
@@ -35,65 +24,6 @@ class Board{
   void setSelected(boolean b){
     selected = b;
   }
-  
-  //void CheckPieces(){
-  // //BishopPieces = 0;
-  // //PawnPieces = 0;
-  // //KnightPieces = 0;
-  // //QueenPieces = 0;
-  // //RookPieces = 0;
-  // //BishopPiecesB = 0;
-  // //PawnPiecesB = 0;
-  // //KnightPiecesB = 0;
-  // //QueenPiecesB = 0;
-  // //RookPiecesB = 0;
-  //  for (int i = 0; i < 8; i ++ ){
-  //    for (int j = 0; j < 8;j++){
-  //     if (pieces[i][j].getColor()){
-  //      if (pieces[i][j].getType().equals("bishop")){
-  //        BishopPieces++;
-  //      }
-  //      if (pieces[i][j].getType().equals("rook")){
-  //        RookPieces++;
-  //      }
-  //      if (pieces[i][j].getType().equals("knight")){
-  //        KnightPieces++;
-  //      }
-  //      if (pieces[i][j].getType().equals("queen")){
-  //        QueenPieces++;
-  //      }
-  //     }
-  //      if (!pieces[i][j].getColor()){
-  //        if (pieces[i][j].getType().equals("bishop")){
-  //          BishopPiecesB++;
-  //        }
-  //        if (pieces[i][j].getType().equals("rook")){
-  //          RookPiecesB++;
-  //        }
-  //        if (pieces[i][j].getType().equals("knight")){
-  //          KnightPiecesB++;
-  //        }
-  //        if (pieces[i][j].getType().equals("queen")){
-  //          QueenPiecesB++;
-  //        }
-  //      }
-  //    }
-  //  }
-  //}
-  
-  //void showOnSide(){
-  //  for (int k = 0; k < 8; k++){
-  //    for (int p = 0; p < 8;p++){
-  //      if (BishopPieces < 2){
-  //        if (pieces[k][p].getType().equals("bishop")){
-  //          image(pieces[k][p].getImage(),700, 700,10,10);
-  //        }
-  //      }
-  //    }
-  //  }
-   
-  //}
-  
   boolean getSelected(){
     return selected;
   }
@@ -196,6 +126,7 @@ class Board{
     stroke(0);
     rect(290,5,90,20); 
     fill(255);
+    textSize(15);
     text("Restart",300,23);
     if(promotion){
       textSize(15);
@@ -637,40 +568,53 @@ class Board{
     pieces2[trow][tcol].setSelected(false);
     return inCheck();
   }
+  
   void displayDead(){
     for (int i = 0 ; i < dead.size();i++){
       if (dead.get(i).getColor()){
       if (dead.get(i).getType().equals("pawn")){
         image(dead.get(i).getImage(),670, 660,20,20);
-        }
+        //println(dead.get(i).PieceCounter);
+        textSize(10);
+        text(""+dead.get(i).PieceCounter,690,690);
+       }
+       
       if (dead.get(i).getType().equals("queen")){
         image(dead.get(i).getImage(),670, 640,20,20);
+        text(""+dead.get(i).PieceCounter,670,660);
         }
       if (dead.get(i).getType().equals("rook")){
         image(dead.get(i).getImage(),670, 620,20,20);
+        text(""+dead.get(i).PieceCounter,670,660);
         }
       if (dead.get(i).getType().equals("knight")){
         image(dead.get(i).getImage(),670, 600,20,20);
+        text(""+dead.get(i).PieceCounter,670,660);
         }
       if (dead.get(i).getType().equals("bishop")){
         image(dead.get(i).getImage(),670, 580,20,20);
+        text(""+dead.get(i).PieceCounter,670,660);
         }
       }
      if (!dead.get(i).getColor()){
       if (dead.get(i).getType().equals("pawn")){
         image(dead.get(i).getImage(),670,30,20,20);
+        text(""+dead.get(i).PieceCounter,670,660);
         }
       if (dead.get(i).getType().equals("queen")){
         image(dead.get(i).getImage(),670,50,20,20);
+        text(""+dead.get(i).PieceCounter,670,660);
         }
       if (dead.get(i).getType().equals("rook")){
         image(dead.get(i).getImage(),670,70,20,20);
+        text(""+dead.get(i).PieceCounter,670,660);
         }
       if (dead.get(i).getType().equals("knight")){
         image(dead.get(i).getImage(),670,90,20,20);
         }
       if (dead.get(i).getType().equals("bishop")){
         image(dead.get(i).getImage(),670,110,20,20);
+        text(""+dead.get(i).PieceCounter,670,660);
         }
       }
     }
@@ -693,6 +637,11 @@ class Board{
              if(!illegalMove(i, j, r, c)){
                if (!pieces[r][c].getType().equals("generic")){
                  dead.add(pieces[r][c]);
+                 for (int q = 0;  q < dead.size();q++){
+                   if (dead.get(q).getType().equals(pieces[r][c].getType()) && dead.get(q).getColor() == pieces[r][c].getColor()){
+                     dead.get(q).PieceCounter+= 1;
+                   }
+                 }
                }
                pieces[r][c] = pieces[i][j];
                pieces[i][j] = new Pieces();
