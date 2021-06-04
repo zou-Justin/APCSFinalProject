@@ -16,7 +16,8 @@ void draw(){
     fill(0);
     text("Black to move",20,20);
   }
-  println(a.dead.size());
+  //println(a.dead.size());
+  fill(0);
   a.displayDead();
   //a.CheckPieces();
 }
