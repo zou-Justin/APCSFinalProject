@@ -7,6 +7,7 @@ class Board{
   boolean movemade;
   boolean promotion;
   boolean gameOver;
+  ArrayList<Pieces> dead;
   //PImage img;
   //int BishopPieces;
   //int PawnPieces;
@@ -20,10 +21,11 @@ class Board{
   //int RookPiecesB;
   
   
-    public Board(){
+   public Board(){
     size = 700;
     movecount = 0.0;
     pieces = new Pieces[8][8];
+    dead = new ArrayList<Pieces>();
     pieces2 = new Pieces[8][8];
     selected = false;
     movemade = false;
@@ -652,6 +654,9 @@ class Board{
                }
            }else{
              if(!illegalMove(i, j, r, c)){
+               if (!pieces[r][c].getType().equals("generic")){
+                 dead.add(pieces[r][c]);
+               }
                pieces[r][c] = pieces[i][j];
                pieces[i][j] = new Pieces();
                pieces[r][c].setSelected(false);
@@ -671,6 +676,7 @@ class Board{
               if(pieces[r][c].getType().equals("pawn") && (r == i + 2 || r == i - 2) && c == j){
                    pieces[r][c].setEnPassant(true);
                }
+              
              }
            }   
          }
