@@ -57,3 +57,6 @@ I mostly fixed the checkmate function. Checkmate now works but it messes up cast
 
 Justin 6/2/2021:
 I worked on the Scirpt for the presentation. Made buttons and promotion more presentable and started work on dead pieces on the side as a nice feature to have.
+
+Adam 6/3/21
+I worked on checkmate and it seems to always work now. I changed the way promotion worked so it would be more intuitive for users and cannot be broken by bad user action. I implemented en passant. I added notation coordinates to the sides of the board.
