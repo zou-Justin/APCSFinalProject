@@ -63,3 +63,6 @@ I worked on checkmate and it seems to always work now. I changed the way promoti
 
 Justin 6/3/21
 I worked on displaying dead pieces on the side of the board, updated the UML, and tested the game.
+
+Adam 6/5/21:
+I closed a loophole in checkmate where it sometimes wouldn't be triggered. I cleaned up displaying dead pieces for white. I added stalemate to the game.
