@@ -38,6 +38,7 @@ class Board{
     selected = false;
     promotion = false;
     spawnPieces();
+    dead.clear();
   }
   
    int getSize(){
@@ -126,7 +127,7 @@ class Board{
     stroke(0);
     rect(290,5,90,20); 
     fill(255);
-    textSize(15);
+    textSize(20);
     text("Restart",300,23);
     if(promotion){
       textSize(15);
@@ -166,38 +167,37 @@ class Board{
     
   }
   void displayDead(){
-    for (int i = 0 ; i < dead.size();i++){
-      
+    textSize(10);
+    for (int i = 0 ; i < dead.size();i++){     
       if (dead.get(i).getColor()){
       if (dead.get(i).getType().equals("pawn")){
-        image(dead.get(i).getImage(),670, 660,20,20);
-        if (dead.get(i).PieceCounter >1){
-        textSize(10);
-        text(""+dead.get(i).PieceCounter,690,690);
+        image(dead.get(i).getImage(), 667, 635, 30, 30);
+        if (dead.get(i).PieceCounter > 1){
+        text(""+dead.get(i).PieceCounter, 693, 670);
         }
        }
-      if (dead.get(i).getType().equals("queen")){
-        image(dead.get(i).getImage(),670, 640,20,20);
-        if (dead.get(i).PieceCounter >1){
-        text(""+dead.get(i).PieceCounter,670,660);
-        }
-        }
-      if (dead.get(i).getType().equals("rook")){
-        image(dead.get(i).getImage(),670, 620,20,20);
-        if (dead.get(i).PieceCounter >1){
-        text(""+dead.get(i).PieceCounter,670,660);
-        }
-        }
       if (dead.get(i).getType().equals("knight")){
-        image(dead.get(i).getImage(),670, 600,20,20);
-        if (dead.get(i).PieceCounter >1){
-        text(""+dead.get(i).PieceCounter,670,660);
+        image(dead.get(i).getImage(), 667, 600, 30, 30);
+        if (dead.get(i).PieceCounter > 1){
+          text(""+dead.get(i).PieceCounter, 693, 635);
+         }
+      }
+        if (dead.get(i).getType().equals("bishop")){
+        image(dead.get(i).getImage(), 667, 565, 30, 30);
+          if (dead.get(i).PieceCounter > 1){
+          text(""+dead.get(i).PieceCounter, 693, 600);
+          }
         }
+        if (dead.get(i).getType().equals("rook")){
+        image(dead.get(i).getImage(), 667, 530, 30, 30);
+          if (dead.get(i).PieceCounter > 1){
+            text(""+dead.get(i).PieceCounter, 694, 565);
+          }
         }
-      if (dead.get(i).getType().equals("bishop")){
-        image(dead.get(i).getImage(),670, 580,20,20);
-        if (dead.get(i).PieceCounter >1){
-          text(""+dead.get(i).PieceCounter,670,660);
+        if (dead.get(i).getType().equals("queen")){
+          image(dead.get(i).getImage(), 669, 495, 30, 30);
+          if (dead.get(i).PieceCounter > 1){
+            text(""+dead.get(i).PieceCounter, 693, 530);
           }
         }
       }
@@ -680,10 +680,13 @@ class Board{
                if(pieces[r][c].getType().equals("pawn") && (r == 0 || r == 7)){ 
                  promotion = true;
                }
-              else if(pieces[r][c].getType().equals("pawn") && pieces[r][c].getColor() && pieces[r - 1][c].getEnPassant())
+              else if(pieces[r][c].getType().equals("pawn") && pieces[r][c].getColor() && pieces[r - 1][c].getEnPassant()){
+                Dead(pieces[r - 1][c]);
                 pieces[r - 1][c] = new Pieces();
-              else if(pieces[r][c].getType().equals("pawn") && !pieces[r][c].getColor() && pieces[r + 1][c].getEnPassant())
+              }else if(pieces[r][c].getType().equals("pawn") && !pieces[r][c].getColor() && pieces[r + 1][c].getEnPassant()){
+                Dead(pieces[r + 1][c]);
                 pieces[r + 1][c] = new Pieces();
+             }
               for(int k = 0; k < pieces.length; k++){
                 for(int m = 0; m < pieces[0].length; m++){
                   pieces[k][m].setEnPassant(false);
