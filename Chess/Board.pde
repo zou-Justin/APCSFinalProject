@@ -235,21 +235,21 @@ class Board{
         image(dead.get(i).getImage(),670,70,20,20);
          if (dead.get(i).PieceCounter >1){
            textSize(10);
-           text(""+dead.get(i).PieceCounter,670,95);
+           text(""+dead.get(i).PieceCounter,690,95);
          }
         }
       if (dead.get(i).getType().equals("knight")){
         image(dead.get(i).getImage(),670,90,20,20);
         if (dead.get(i).PieceCounter >1){
           textSize(10);
-          text(""+dead.get(i).PieceCounter,670,115);
+          text(""+dead.get(i).PieceCounter,690,115);
           }
         }
       if (dead.get(i).getType().equals("bishop")){
         image(dead.get(i).getImage(),670,110,20,20);
         if (dead.get(i).PieceCounter >1){
           textSize(10);
-           text(""+dead.get(i).PieceCounter,670,135);
+           text(""+dead.get(i).PieceCounter,690,135);
           }
         }
       }
