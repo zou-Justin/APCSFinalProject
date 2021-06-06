@@ -18,7 +18,7 @@ void draw(){
   }
   //println(a.dead.size());
   fill(0);
-  a.displayDead();
+  //a.displayDead();
   //a.CheckPieces();
 }
 

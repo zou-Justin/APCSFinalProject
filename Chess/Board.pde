@@ -179,24 +179,28 @@ class Board{
       if (dead.get(i).getType().equals("queen")){
         image(dead.get(i).getImage(),670, 640,20,20);
         if (dead.get(i).PieceCounter >1){
+        textSize(10);
         text(""+dead.get(i).PieceCounter,670,660);
         }
         }
       if (dead.get(i).getType().equals("rook")){
         image(dead.get(i).getImage(),670, 620,20,20);
         if (dead.get(i).PieceCounter >1){
+        textSize(10);        
         text(""+dead.get(i).PieceCounter,670,660);
         }
         }
       if (dead.get(i).getType().equals("knight")){
         image(dead.get(i).getImage(),670, 600,20,20);
         if (dead.get(i).PieceCounter >1){
+        textSize(10);          
         text(""+dead.get(i).PieceCounter,670,660);
         }
         }
       if (dead.get(i).getType().equals("bishop")){
         image(dead.get(i).getImage(),670, 580,20,20);
         if (dead.get(i).PieceCounter >1){
+          textSize(10);          
           text(""+dead.get(i).PieceCounter,670,660);
           }
         }
@@ -205,30 +209,35 @@ class Board{
       if (dead.get(i).getType().equals("pawn")){
         image(dead.get(i).getImage(),670,30,20,20);
         if (dead.get(i).PieceCounter >1){
+          textSize(10);          
           text(""+dead.get(i).PieceCounter,670,660);
           }
         }
       if (dead.get(i).getType().equals("queen")){
         image(dead.get(i).getImage(),670,50,20,20);
         if (dead.get(i).PieceCounter >1){
+          textSize(10);          
           text(""+dead.get(i).PieceCounter,670,660);
           }
         }
       if (dead.get(i).getType().equals("rook")){
         image(dead.get(i).getImage(),670,70,20,20);
          if (dead.get(i).PieceCounter >1){
+           textSize(10);
            text(""+dead.get(i).PieceCounter,670,660);
          }
         }
       if (dead.get(i).getType().equals("knight")){
         if (dead.get(i).PieceCounter >1){
+          textSize(10);
           image(dead.get(i).getImage(),670,90,20,20);
           }
         }
       if (dead.get(i).getType().equals("bishop")){
         image(dead.get(i).getImage(),670,110,20,20);
         if (dead.get(i).PieceCounter >1){
-        text(""+dead.get(i).PieceCounter,670,660);
+          textSize(10);
+           text(""+dead.get(i).PieceCounter,670,660);
           }
         }
       }
