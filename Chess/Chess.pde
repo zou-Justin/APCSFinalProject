@@ -8,6 +8,7 @@ void setup(){
 void draw(){
   a.display();
   textSize(20);
+  a.Time = millis() / 1000;
   if(a.movecount % 1 == 0){
     fill(255);
     text("White to move",20,20);
@@ -18,6 +19,7 @@ void draw(){
   }
   //println(a.dead.size());
   fill(0);
+  text(""+a.Time,600,20);
   //a.displayDead();
   //a.CheckPieces();
 

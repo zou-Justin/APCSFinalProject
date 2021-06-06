@@ -9,6 +9,7 @@ class Board{
   boolean gameOver;
   boolean stalemate;
   ArrayList<Pieces> dead;
+  int Time;
   
   
    public Board(){
@@ -21,6 +22,7 @@ class Board{
     movemade = false;
     promotion = false;
     stalemate = false;
+    Time = 0;
   }
 
   void setSelected(boolean b){
@@ -97,6 +99,7 @@ class Board{
       }
     }
     setUp();
+    Time = -10;
   }
  
  void display(){
@@ -157,6 +160,7 @@ class Board{
     text("g", 540, 693);
     text("h", 620, 697);
     displayDead();
+    
     if(gameOver){
       fill(255);
       rect(40, 270, 600, 80);
