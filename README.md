@@ -69,3 +69,6 @@ I finished having numbers displayed next to the pawns while working with Adam.
 
 Adam 6/5/21:
 I closed a loophole in checkmate where it sometimes wouldn't be triggered. I cleaned up displaying dead pieces for white. I added stalemate to the game.
+
+Justin 6/5/2021
+I finish position of dead pieces for black and added a small timer that only shows the time.
