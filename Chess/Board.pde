@@ -181,32 +181,32 @@ class Board{
     for (int i = 0 ; i < dead.size();i++){     
       if (dead.get(i).getColor()){
       if (dead.get(i).getType().equals("pawn")){
-        image(dead.get(i).getImage(), 667, 635, 30, 30);
+        image(dead.get(i).getImage(), 667, 635, 20, 20);
         if (dead.get(i).PieceCounter > 1){
-        text(""+dead.get(i).PieceCounter, 693, 670);
+          text(""+dead.get(i).PieceCounter, 693, 670);
         }
        }
-      if (dead.get(i).getType().equals("knight")){
-        image(dead.get(i).getImage(), 667, 600, 30, 30);
+      else if (dead.get(i).getType().equals("knight")){
+        image(dead.get(i).getImage(), 667, 600, 20, 20);
         if (dead.get(i).PieceCounter > 1){
           text(""+dead.get(i).PieceCounter, 693, 635);
          }
       }
-        if (dead.get(i).getType().equals("bishop")){
-        image(dead.get(i).getImage(), 667, 565, 30, 30);
+      else  if (dead.get(i).getType().equals("bishop")){
+        image(dead.get(i).getImage(), 667, 565, 20, 20);
           if (dead.get(i).PieceCounter > 1){
           text(""+dead.get(i).PieceCounter, 693, 600);
           }
         }
-        if (dead.get(i).getType().equals("rook")){
-        image(dead.get(i).getImage(), 667, 530, 30, 30);
+      else  if (dead.get(i).getType().equals("rook")){
+        image(dead.get(i).getImage(), 667, 530, 20, 20);
           if (dead.get(i).PieceCounter > 1){
             text(""+dead.get(i).PieceCounter, 694, 565);
           }
         }
 
-        if (dead.get(i).getType().equals("queen")){
-          image(dead.get(i).getImage(), 669, 495, 30, 30);
+       else if (dead.get(i).getType().equals("queen")){
+          image(dead.get(i).getImage(), 669, 495, 20, 20);
           if (dead.get(i).PieceCounter > 1){
             text(""+dead.get(i).PieceCounter, 693, 530);
           }
@@ -217,34 +217,35 @@ class Board{
         image(dead.get(i).getImage(),670,30,20,20);
         if (dead.get(i).PieceCounter >1){
           textSize(10);          
-          text(""+dead.get(i).PieceCounter,670,660);
+          text(""+dead.get(i).PieceCounter,690,55);
           }
         }
       if (dead.get(i).getType().equals("queen")){
         image(dead.get(i).getImage(),670,50,20,20);
         if (dead.get(i).PieceCounter >1){
           textSize(10);          
-          text(""+dead.get(i).PieceCounter,670,660);
+          text(""+dead.get(i).PieceCounter,690,75);
           }
         }
       if (dead.get(i).getType().equals("rook")){
         image(dead.get(i).getImage(),670,70,20,20);
          if (dead.get(i).PieceCounter >1){
            textSize(10);
-           text(""+dead.get(i).PieceCounter,670,660);
+           text(""+dead.get(i).PieceCounter,670,95);
          }
         }
       if (dead.get(i).getType().equals("knight")){
+        image(dead.get(i).getImage(),670,90,20,20);
         if (dead.get(i).PieceCounter >1){
           textSize(10);
-          image(dead.get(i).getImage(),670,90,20,20);
+          text(""+dead.get(i).PieceCounter,670,115);
           }
         }
       if (dead.get(i).getType().equals("bishop")){
         image(dead.get(i).getImage(),670,110,20,20);
         if (dead.get(i).PieceCounter >1){
           textSize(10);
-           text(""+dead.get(i).PieceCounter,670,660);
+           text(""+dead.get(i).PieceCounter,670,135);
           }
         }
       }
