@@ -72,3 +72,6 @@ I closed a loophole in checkmate where it sometimes wouldn't be triggered. I cle
 
 Justin 6/5/2021
 I finish position of dead pieces for black and added a small timer that only shows the time.
+
+Adam 6/6/21:
+I made the positioning of the dead pieces nicer
