@@ -20,6 +20,7 @@ void draw(){
   fill(0);
   //a.displayDead();
   //a.CheckPieces();
+
 }
 
 void mousePressed(){
