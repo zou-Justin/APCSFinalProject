@@ -669,26 +669,25 @@ class Board{
      
     
   }
-  //void showMoves(){
-  //   for (int i = 0; i < pieces.length; i++){
-  //      for (int j = 0; j < pieces[0].length; j++){
-  //       if(pieces[i][j].getSelected()){   
-  //    for (int a = 0; a < 8;a++){
-  //           for (int b = 0; b < 8;b++){
-  //             if (pieces[a][b].getAvailable()){
-  //               int c = ((b+30) * 80) + 7;
-  //               int d = (a+30) * 80;
-  //               textSize(300);
-  //               rect(c,d,80,80);
-  //               println("hello");
-  //             }
-               
-  //           }
-  //         }
-  //       }
-  //      }
-  //   }
-  //}
+  void showMoves(){
+     for (int i = 0; i < pieces.length; i++){
+        for (int j = 0; j < pieces[0].length; j++){
+         if(pieces[i][j].getSelected()){   
+           for (int a = 0; a <pieces.length;a++){
+             for (int b = 0;b < pieces[0].length;b++){
+               if (pieces[a][b].getAvailable()){
+                 println(a + "A");
+                 println(b + "B");
+                 int c = (670-((a+1)*80));
+                 int d = (670-((b+1)*80));
+                 rect(c,d,30,30);
+               }  
+             }
+           }
+         }
+       }
+     }
+  }
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
