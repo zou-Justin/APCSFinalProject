@@ -178,7 +178,7 @@ class Board{
       textSize(100);
       text("STALEMATE", 50, 350);
     }
-    
+    showMoves();
   }
   void displayDead(){
     textSize(10);
@@ -675,6 +675,26 @@ class Board{
      
     
   }
+  //void showMoves(){
+  //   for (int i = 0; i < pieces.length; i++){
+  //      for (int j = 0; j < pieces[0].length; j++){
+  //       if(pieces[i][j].getSelected()){   
+  //    for (int a = 0; a < 8;a++){
+  //           for (int b = 0; b < 8;b++){
+  //             if (pieces[a][b].getAvailable()){
+  //               int c = ((b+30) * 80) + 7;
+  //               int d = (a+30) * 80;
+  //               textSize(300);
+  //               rect(c,d,80,80);
+  //               println("hello");
+  //             }
+               
+  //           }
+  //         }
+  //       }
+  //      }
+  //   }
+  //}
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
@@ -682,6 +702,7 @@ class Board{
       for (int i = 0; i < pieces.length; i++){
         for (int j = 0; j < pieces[0].length; j++){
          if(pieces[i][j].getSelected()){
+           
            if(pieces[i][j].getType().equals("king") && r == i && ((c == j - 2) || (c == j + 2))){
                castle(i, j, r, c);
                for(int k = 0; k < pieces.length; k++){
