@@ -81,3 +81,6 @@ Made timer look better and started a bit of work on showing moves when you selec
 
 Justin 6/7/2021
 Made it so you can see all the available squares when selecting a piece.
+
+Adam 6/7/21
+Made an outline for the presentaion.
