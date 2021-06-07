@@ -678,9 +678,9 @@ class Board{
                if (pieces[a][b].getAvailable()){
                  println(a + "A");
                  println(b + "B");
-                 int c = (670-((a+1)*80));
-                 int d = (670-((b+1)*80));
-                 rect(c,d,30,30);
+                 int c = (((a)*80));
+                 int d = (670-((b)*80));
+                 rect(d,c,30,30);
                }  
              }
            }
