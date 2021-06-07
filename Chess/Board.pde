@@ -185,32 +185,32 @@ class Board{
     for (int i = 0 ; i < dead.size();i++){     
       if (dead.get(i).getColor()){
       if (dead.get(i).getType().equals("pawn")){
-        image(dead.get(i).getImage(), 667, 635, 20, 20);
+        image(dead.get(i).getImage(), 667, 635, 30, 30);
         if (dead.get(i).PieceCounter > 1){
           text(""+dead.get(i).PieceCounter, 693, 670);
         }
        }
       else if (dead.get(i).getType().equals("knight")){
-        image(dead.get(i).getImage(), 667, 600, 20, 20);
+        image(dead.get(i).getImage(), 667, 600, 30, 30);
         if (dead.get(i).PieceCounter > 1){
           text(""+dead.get(i).PieceCounter, 693, 635);
          }
       }
       else  if (dead.get(i).getType().equals("bishop")){
-        image(dead.get(i).getImage(), 667, 565, 20, 20);
+        image(dead.get(i).getImage(), 667, 565, 30, 30);
           if (dead.get(i).PieceCounter > 1){
           text(""+dead.get(i).PieceCounter, 693, 600);
           }
         }
       else  if (dead.get(i).getType().equals("rook")){
-        image(dead.get(i).getImage(), 667, 530, 20, 20);
+        image(dead.get(i).getImage(), 667, 530, 30, 30);
           if (dead.get(i).PieceCounter > 1){
             text(""+dead.get(i).PieceCounter, 694, 565);
           }
         }
 
        else if (dead.get(i).getType().equals("queen")){
-          image(dead.get(i).getImage(), 669, 495, 20, 20);
+          image(dead.get(i).getImage(), 669, 495, 30, 30);
           if (dead.get(i).PieceCounter > 1){
             text(""+dead.get(i).PieceCounter, 693, 530);
           }
@@ -218,43 +218,37 @@ class Board{
       }
      if (!dead.get(i).getColor()){
       if (dead.get(i).getType().equals("pawn")){
-        image(dead.get(i).getImage(),670,30,20,20);
-        if (dead.get(i).PieceCounter >1){
-          textSize(10);          
-          text(""+dead.get(i).PieceCounter,690,55);
+        image(dead.get(i).getImage(), 667, 35, 30, 30);
+        if (dead.get(i).PieceCounter > 1){          
+          text(""+dead.get(i).PieceCounter, 693, 70);
           }
-        }
-      if (dead.get(i).getType().equals("queen")){
-        image(dead.get(i).getImage(),670,50,20,20);
-        if (dead.get(i).PieceCounter >1){
-          textSize(10);          
-          text(""+dead.get(i).PieceCounter,690,75);
-          }
-        }
-      if (dead.get(i).getType().equals("rook")){
-        image(dead.get(i).getImage(),670,70,20,20);
-         if (dead.get(i).PieceCounter >1){
-           textSize(10);
-           text(""+dead.get(i).PieceCounter,690,95);
-         }
         }
       if (dead.get(i).getType().equals("knight")){
-        image(dead.get(i).getImage(),670,90,20,20);
-        if (dead.get(i).PieceCounter >1){
-          textSize(10);
-          text(""+dead.get(i).PieceCounter,690,115);
+        image(dead.get(i).getImage(), 667, 70, 30, 30);
+        if (dead.get(i).PieceCounter > 1){
+          text(""+dead.get(i).PieceCounter, 693, 105);
           }
         }
       if (dead.get(i).getType().equals("bishop")){
-        image(dead.get(i).getImage(),670,110,20,20);
-        if (dead.get(i).PieceCounter >1){
-          textSize(10);
-           text(""+dead.get(i).PieceCounter,690,135);
+        image(dead.get(i).getImage(), 667, 105, 30, 30);
+        if (dead.get(i).PieceCounter > 1){
+           text(""+dead.get(i).PieceCounter, 693, 140);
+          }
+        }
+       if (dead.get(i).getType().equals("rook")){
+        image(dead.get(i).getImage(), 667, 140, 30, 30);
+         if (dead.get(i).PieceCounter > 1){
+           text(""+dead.get(i).PieceCounter, 694, 175);
+         }
+        }
+      if (dead.get(i).getType().equals("queen")){
+        image(dead.get(i).getImage(), 667, 175, 30, 30);
+        if (dead.get(i).PieceCounter > 1){       
+          text(""+dead.get(i).PieceCounter, 694, 210);
           }
         }
       }
-    }
-    
+    }  
   }
   String makeString(String trait, Pieces[][] arr){
     String str = "";
@@ -830,7 +824,7 @@ class Board{
         pieces2[n][p].setAvailable(false);
       }
      }
-     println(makeString("", pieces2));
+     //println(makeString("", pieces2));
       for(int i = 0; i < pieces2.length; i++){
         for(int j = 0; j < pieces2[0].length; j++){
           if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !(pieces2[i][j].getColor()))){
