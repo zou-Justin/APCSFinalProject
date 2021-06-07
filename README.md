@@ -75,3 +75,6 @@ I finish position of dead pieces for black and added a small timer that only sho
 
 Adam 6/6/21:
 I made the positioning of the dead pieces nicer
+
+Justin 6/6/2021
+Made timer look better and started a bit of work on showing moves when you select a piece
