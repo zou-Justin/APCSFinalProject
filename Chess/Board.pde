@@ -670,7 +670,7 @@ class Board{
     
   }
   void showMoves(){
-     for (int i = 0; i < pieces.length; i++){
+      for (int i = 0; i < pieces.length; i++){
         for (int j = 0; j < pieces[0].length; j++){
          if(pieces[i][j].getSelected()){   
            for (int a = 0; a <pieces.length;a++){
