@@ -78,3 +78,9 @@ I made the positioning of the dead pieces nicer
 
 Justin 6/6/2021
 Made timer look better and started a bit of work on showing moves when you select a piece
+
+Justin 6/7/2021
+Made it so you can see all the available squares when selecting a piece.
+
+Adam 6/7/21
+Made an outline for the presentaion. Finished making possible moves available. Fixed a small bug in en passant.
