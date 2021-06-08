@@ -99,7 +99,7 @@ class Board{
       }
     }
     setUp();
-    Time = -10;
+    //Time = -10;
   }
  
  void display(){
@@ -180,6 +180,7 @@ class Board{
       text("STALEMATE", 50, 350);
     }
   }
+  
   void displayDead(){
     textSize(10);
     for (int i = 0 ; i < dead.size();i++){     
@@ -695,8 +696,8 @@ class Board{
       for (int b = 0; b < pieces[0].length; b++){
          if (pieces[a][b].getAvailable()){
                  stroke(14, 129, 4);
-                 fill(14, 129, 4);
-                 circle(70 + (b * 80), 631 - (a * 80), 40);
+                 fill(14, 129, 4, 20);
+                 circle(70 + (b * 80), 631 - (a * 80), 20);
           }  
        }
      }
