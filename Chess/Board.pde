@@ -691,23 +691,6 @@ class Board{
   }
   
   void showMoves(){
-<<<<<<< HEAD
-      for (int i = 0; i < pieces.length; i++){
-        for (int j = 0; j < pieces[0].length; j++){
-         if(pieces[i][j].getSelected()){   
-           for (int a = 0; a <pieces.length;a++){
-             for (int b = 0;b < pieces[0].length;b++){
-               if (pieces[a][b].getAvailable()){
-                 println(a + "A");
-                 println(b + "B");
-                 int c = (((a)*80));
-                 int d = (670-((b)*80));
-                 rect(d,c,30,30);
-               }  
-             }
-           }
-         }
-=======
     for (int a = 0; a < pieces.length; a++){
       for (int b = 0; b < pieces[0].length; b++){
          if (pieces[a][b].getAvailable()){
@@ -715,7 +698,6 @@ class Board{
                  fill(14, 129, 4);
                  circle(70 + (b * 80), 631 - (a * 80), 40);
           }  
->>>>>>> refs/remotes/origin/main
        }
      }
   }
