@@ -22,7 +22,7 @@ class Board{
     movemade = false;
     promotion = false;
     stalemate = false;
-    Time = 0;
+    Time = 600;
   }
 
   void setSelected(boolean b){
@@ -98,8 +98,8 @@ class Board{
         pieces[i][j] = new Pieces();
       }
     }
+    //Time -= 10;
     setUp();
-    //Time = -10;
   }
  
  void display(){
@@ -161,7 +161,24 @@ class Board{
     text("g", 540, 693);
     text("h", 620, 697);
     displayDead();
+    //int minute = 0;
+    //String zero = "";
+    //int start = millis() / 1000;
     
+    //if (Time > 60){
+    //  Time -= 60;
+    //  minute+=1;
+    //  //println("a");
+    //}
+    //if (Time < 10){
+    //  zero = "0";
+    //}
+    //else{
+    //  zero = "";
+    //}
+ 
+    //Time -= (start);
+    //text(minute +":"+ zero + Time,600,20);
     if(gameOver){
       fill(255);
       rect(40, 270, 600, 80);
