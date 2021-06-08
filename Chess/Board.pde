@@ -315,9 +315,11 @@ class Board{
     //    for(int j = 0; j < pieces[0].length; j++){
     //      if(pieces[i][j].getAvailable()){
     //        Pieces z = pieces2[i][j];
+    //        println(makeString("isAvailable", pieces));
     //        if(illegalMove(r, c, i, j)){
     //           pieces[i][j].setAvailable(false);
     //        }
+    //        println(makeString("isAvailable", pieces));
     //        pieces2[r][c] = pieces2[i][j];
     //        pieces2[i][j] = z;
     //        for(int a = 0; a < pieces2.length; a++){
@@ -325,7 +327,8 @@ class Board{
     //             pieces2[a][b].setAvailable(false);
     //           }
     //        }
-    //      }  
+    //        println(makeString("isAvailable", pieces));
+    //      }      
     //    }
     //  }    
       if(!pieces[r][c].getType().equals("generic")){
