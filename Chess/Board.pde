@@ -354,11 +354,11 @@ class Board{
         if(col <= 6 && !(arr[row - 1][col + 1].getType().equals("generic")) && arr[row - 1][col + 1].getColor()){
           arr[row - 1][col + 1].setAvailable(true);
         }
-      }
       if(col > 0 && arr[row][col - 1].getEnPassant())
           arr[row - 1][col - 1].setAvailable(true);
         else if(col < 7 && arr[row][col + 1].getEnPassant())
           arr[row - 1][col + 1].setAvailable(true);
+      }
     }
   }
   
@@ -669,29 +669,19 @@ class Board{
      
     
   }
+  
   void showMoves(){
-     //for (int i = 0; i < pieces.length; i++){
-       // for (int j = 0; j < pieces[0].length; j++){
-         //if(pieces[i][j].getSelected()){   
-           for (int a = 0; a < pieces.length; a++){
-             for (int b = 0; b < pieces[0].length; b++){
-               if (pieces[a][b].getAvailable()){
-                 println(a + "A");
-                 println(b + "B");
-                 //int c = (((a)*80));
-                 //int d = (670-((b)*80));
-                 //noFill();
+    for (int a = 0; a < pieces.length; a++){
+      for (int b = 0; b < pieces[0].length; b++){
+         if (pieces[a][b].getAvailable()){
                  stroke(14, 129, 4);
                  fill(14, 129, 4);
                  circle(70 + (b * 80), 631 - (a * 80), 40);
-                 //rect(37 + (j * 80), 600 - (i * 80), 65,65);
-               }  
-             }
-           }
-        // }
-      // }
-    // }
+          }  
+       }
+     }
   }
+  
   void move(int x, int y){
     int r = 7 - ((y - 30) / 80);
     int c = (x - 30) / 80;
