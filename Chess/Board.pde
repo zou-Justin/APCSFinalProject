@@ -311,6 +311,23 @@ class Board{
         availableSquaresKing(r, c, pieces);
       if(pieces[r][c].getType().equals("queen"))
         availableSquaresQueen(r, c, pieces);
+    // for(int i = 0; i < pieces.length; i++){
+    //    for(int j = 0; j < pieces[0].length; j++){
+    //      if(pieces[i][j].getAvailable()){
+    //        Pieces z = pieces2[i][j];
+    //        if(illegalMove(r, c, i, j)){
+    //           pieces[i][j].setAvailable(false);
+    //        }
+    //        pieces2[r][c] = pieces2[i][j];
+    //        pieces2[i][j] = z;
+    //        for(int a = 0; a < pieces2.length; a++){
+    //           for(int b = 0; b < pieces2[0].length; b++){
+    //             pieces2[a][b].setAvailable(false);
+    //           }
+    //        }
+    //      }  
+    //    }
+    //  }    
       if(!pieces[r][c].getType().equals("generic")){
         pieces[r][c].setSelected(true);
         setSelected(true);
@@ -688,8 +705,7 @@ class Board{
     if((r >= 0 && r <= 7) && (c >= 0 && c <= 7) && pieces[r][c].getAvailable()){
       for (int i = 0; i < pieces.length; i++){
         for (int j = 0; j < pieces[0].length; j++){
-         if(pieces[i][j].getSelected()){
-           
+         if(pieces[i][j].getSelected()){          
            if(pieces[i][j].getType().equals("king") && r == i && ((c == j - 2) || (c == j + 2))){
                castle(i, j, r, c);
                for(int k = 0; k < pieces.length; k++){
