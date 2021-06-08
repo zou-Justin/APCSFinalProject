@@ -1,5 +1,6 @@
 Board a = new Board();
 ArrayList<Board> positions = new ArrayList<Board>();
+int currentPosition = 0;
 
 void setup(){
   size(700, 700);
@@ -9,7 +10,18 @@ void setup(){
 
 Board copy(Board b){
  Board x = new Board(b.getSize(), b.getMoveCount(), b.getPieces(), b.getPieces2(), b.getDead(), b.getTime());
-  return x;
+ for(int i = 0; i < x.pieces.length; i++){
+   for(int j = 0; j < x.pieces.length; j++){
+      x.pieces[i][j].setAvailable(false);
+      x.pieces[i][j].setSelected(false);
+   }
+ }
+ for(int i = 0; i < x.pieces2.length; i++){
+   for(int j = 0; j < x.pieces2.length; j++){
+     x.pieces2[i][j] = x.pieces[i][j];
+   }
+ }
+ return x;
 }
 
 String positionsToString(){
@@ -26,6 +38,7 @@ void draw(){
   if(a.getCopyBoard()){
     positions.add(copy(a));
     a.setCopyBoard(false);
+    currentPosition += 1;
     //println(positionsToString());
   }
   textSize(20);
@@ -69,6 +82,8 @@ void mousePressed(){
     }
   }
   if (mouseButton == LEFT && (mouseX >= 290 && mouseX < 380) && (mouseY < 25)){
+    positions = new ArrayList<Board>();
+    currentPosition = 0;
     a.restart();
   }
 }
@@ -85,7 +100,10 @@ void keyPressed() {
   else if(a.getPromote())
     a.Promotion("queen");
   else if(keyCode == LEFT){
-    println(a);
-    //a = positions.get(positions.size() - 1);
+    if(currentPosition > 0){
+      currentPosition -= 1;
+      a = positions.get(currentPosition);
+    }
+    println(a.makeString("isAvailable", a.pieces));
   }
 }

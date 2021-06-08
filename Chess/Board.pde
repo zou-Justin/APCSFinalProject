@@ -39,6 +39,12 @@ class Board{
     promotion = false;
     stalemate = false;
     copyBoard = false;
+    for(int i = 0; i < pieces.length; i++){
+      for(int j = 0; j < pieces[i].length; j++){
+        pieces[i][j].setAvailable(false);
+        pieces2[i][j] = pieces[i][j];
+      }
+    }
   }
 
   void setSelected(boolean b){
