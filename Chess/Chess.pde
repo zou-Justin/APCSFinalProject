@@ -1,12 +1,33 @@
 Board a = new Board();
+ArrayList<Board> positions = new ArrayList<Board>();
 
 void setup(){
   size(700, 700);
   a.setUp();
-  
+  positions.add(copy(a));
 }
+
+Board copy(Board b){
+ Board x = new Board(b.getSize(), b.getMoveCount(), b.getPieces(), b.getPieces2(), b.getDead(), b.getTime());
+  return x;
+}
+
+String positionsToString(){
+  String str = "";
+  for(int i = 0; i < positions.size(); i++){
+    str = str + positions.get(i).getMoveCount() + ", ";
+  }
+  return str;
+}
+
+
 void draw(){
   a.display();
+  if(a.getCopyBoard()){
+    positions.add(copy(a));
+    a.setCopyBoard(false);
+    //println(positionsToString());
+  }
   textSize(20);
   int minute = 0;
   String zero = "";
@@ -47,7 +68,7 @@ void mousePressed(){
       a.move(mouseX,mouseY);
     }
   }
-  if (mouseButton == LEFT && (mouseX >=200 && mouseX < 380) && (mouseY < 25)){
+  if (mouseButton == LEFT && (mouseX >= 290 && mouseX < 380) && (mouseY < 25)){
     a.restart();
   }
 }
@@ -61,6 +82,10 @@ void keyPressed() {
     a.Promotion("bishop");
   else if(key == 'r' && a.getPromote())
     a.Promotion("rook");
-  else
+  else if(a.getPromote())
     a.Promotion("queen");
+  else if(keyCode == LEFT){
+    println(a);
+    //a = positions.get(positions.size() - 1);
+  }
 }
