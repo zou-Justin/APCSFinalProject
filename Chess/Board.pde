@@ -42,7 +42,7 @@ class Board{
     for(int i = 0; i < pieces.length; i++){
       for(int j = 0; j < pieces[i].length; j++){
         pieces[i][j].setAvailable(false);
-        pieces2[i][j] = pieces[i][j];
+       // pieces2[i][j] = pieces[i][j];
       }
     }
   }
@@ -162,7 +162,7 @@ class Board{
     //Copying over pieces to pieces2 array
     for(int n = 0; n < pieces.length; n++){
       for(int s = 0; s < pieces[n].length; s++){
-        pieces2[n][s] = pieces[n][s];
+        pieces2[n][s] = clone(pieces[n][s]);
       }
     }
 
@@ -237,24 +237,6 @@ class Board{
     text("g", 540, 693);
     text("h", 620, 697);
     displayDead();
-    //int minute = 0;
-    //String zero = "";
-    //int start = millis() / 1000;
-    
-    //if (Time > 60){
-    //  Time -= 60;
-    //  minute+=1;
-    //  //println("a");
-    //}
-    //if (Time < 10){
-    //  zero = "0";
-    //}
-    //else{
-    //  zero = "";
-    //}
- 
-    //Time -= (start);
-    //text(minute +":"+ zero + Time,600,20);
     if(gameOver){
       fill(255);
       rect(40, 270, 600, 80);
@@ -776,12 +758,10 @@ class Board{
          dead.get(q).Increase();
          a= false;
        }
-   }
-      if (a){
+     }
+     if (a){
        dead.add(p);
      }
-     
-    
   }
   
   void showMoves(){
@@ -836,8 +816,7 @@ class Board{
               }
               if(pieces[r][c].getType().equals("pawn") && (r == i + 2 || r == i - 2) && c == j){
                    pieces[r][c].setEnPassant(true);
-               }
-              
+               } 
              }
            }   
          }
@@ -866,7 +845,7 @@ class Board{
     //Copying over all of the pieces to the test array
     for(int n = 0; n < pieces.length; n++){
       for(int s = 0; s < pieces[n].length; s++){
-        pieces2[n][s] = pieces[n][s];
+        pieces2[n][s] = clone(pieces[n][s]);
       }
     }
     if(movemade){
@@ -880,7 +859,7 @@ class Board{
       }
       for(int s = 0; s < pieces.length; s++){
         for(int t = 0; t < pieces[s].length; t++){
-          pieces2[s][t] = pieces[s][t];
+          pieces2[s][t] = clone(pieces[s][t]);
         }
       }
     }
