@@ -670,13 +670,13 @@ class Board{
           if(arr[7][6].getType().equals("generic") && arr[7][5].getType().equals("generic"))
             arr[7][6].setAvailable(true);
         }
-      }
        //queenside castling
        if(!arr[7][0].getHasMoved()){
          if(arr[7][1].getType().equals("generic") && arr[7][2].getType().equals("generic") && arr[7][3].getType().equals("generic"))
            arr[7][2].setAvailable(true);
        }
-   }
+      }
+    }
   }
   
   void castle(int krow, int kcol, int rrow, int rcol){

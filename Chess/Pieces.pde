@@ -21,6 +21,17 @@ class Pieces{
     PieceCounter = 1;
   }
   
+  public Pieces(boolean w, String t, boolean availability, boolean selectedness, boolean moved, boolean mark, boolean enpass, int Piececount){
+    white = w;
+    type = t;
+    isAvailable = availability;
+    Selected = selectedness;
+    hasMoved = moved;
+    enpassant = enpass;
+    PieceCounter = Piececount;
+    marked = mark;
+  }
+  
   public Pieces(){
     type = "generic";
     isAvailable = false;
@@ -33,6 +44,10 @@ class Pieces{
   
   boolean getEnPassant(){
     return enpassant;
+  }
+  
+  int getPieceCounter(){
+    return PieceCounter;
   }
   
   void setEnPassant(boolean b){
