@@ -10,18 +10,6 @@ void setup(){
 
 Board copy(Board b){
  Board x = new Board(b.getSize(), b.getMoveCount(), b.getPieces(), b.getPieces2(), b.getDead(), b.getTime());
- for(int i = 0; i < x.pieces.length; i++){
-   for(int j = 0; j < x.pieces.length; j++){
-      x.pieces[i][j].setAvailable(false);
-      x.pieces[i][j].setSelected(false);
-   }
- }
- for(int i = 0; i < x.pieces2.length; i++){
-   for(int j = 0; j < x.pieces2.length; j++){
-     x.pieces2[i][j] = x.pieces[i][j];
-   }
- }
- //println(x.makeString("isAvailable", x.pieces));
  return x;
 }
 
@@ -37,7 +25,7 @@ String positionsToString(){
 void draw(){
   a.display();
   if(a.getCopyBoard()){
-    positions.add(copy(a));
+    positions.add(currentPosition, copy(a));
     a.setCopyBoard(false);
     currentPosition += 1;
     //println(positionsToString());
@@ -104,7 +92,13 @@ void keyPressed() {
     if(currentPosition > 0){
       currentPosition -= 1;
       a = positions.get(currentPosition);
-    }
+      for(int i = 0; i < a.pieces.length; i++){
+         for(int j = 0; j < a.pieces.length; j++){
+            a.pieces[i][j].setAvailable(false);
+            a.pieces[i][j].setSelected(false);
+         }
+     }
+   }
     //println(a.makeString("isAvailable", a.pieces));
   }
 }
