@@ -8,19 +8,6 @@ void setup(){
 void draw(){
   a.display();
   textSize(20);
-  int minute = 0;
-  String zero = "";
-  a.Time = millis() / 1000;
-  if (a.Time > 60){
-    a.Time -= 60;
-    minute++;
-  }
-   if (a.Time < 10){
-    zero = "0";
-  }
-  else{
-    zero = "";
-  }
   if(a.movecount % 1 == 0){
     fill(255);
     text("White to move",20,20);
@@ -32,7 +19,7 @@ void draw(){
   //println(a.dead.size());
   fill(0);
  
-  text(minute +":"+ zero + a.Time,600,20);
+  
   //a.displayDead();
   //a.CheckPieces();
 
