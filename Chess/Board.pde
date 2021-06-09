@@ -71,11 +71,19 @@ class Board{
     copyBoard = b;
   }
   
+  Pieces clone(Pieces p){
+    Pieces a = new Pieces();
+    if(!p.getType().equals("generic")){
+      a = new Pieces(p.getColor(), p.getType(), p.getAvailable(), p.getSelected(), p.getHasMoved(), p.getMarked(), p.getEnPassant(), p.getPieceCounter());
+    }
+    return a;
+  }
+  
   Pieces[][] getPieces(){
     Pieces[][] arr = new Pieces[8][8];
     for(int i = 0; i < arr.length; i++){
       for(int j = 0; j < arr[i].length; j++){
-        arr[i][j] = pieces[i][j];
+        arr[i][j] = clone(pieces[i][j]);
       }
     }
     return arr;
@@ -85,7 +93,7 @@ class Board{
     Pieces[][] arr = new Pieces[8][8];
     for(int i = 0; i < arr.length; i++){
       for(int j = 0; j < arr[i].length; j++){
-        arr[i][j] = pieces2[i][j];
+        arr[i][j] = clone(pieces2[i][j]);
       }
     }
     return arr;

@@ -97,14 +97,6 @@ void keyPressed() {
       currentPosition -= 1;
       println(currentPosition);
       a = copy(positions.get(currentPosition - 1));
-      for(int i = 0; i < a.pieces.length; i++){
-         for(int j = 0; j < a.pieces.length; j++){
-            a.pieces[i][j].setAvailable(false);
-            a.pieces[i][j].setSelected(false);
-            a.pieces[i][j].setEnPassant(false);
-            a.pieces[i][j].setHasMoved(false);
-         }
-     }
    }
     //println(a.makeString("isAvailable", a.pieces));
   }
