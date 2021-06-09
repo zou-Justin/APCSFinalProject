@@ -28,7 +28,7 @@ void draw(){
     positions.add(currentPosition, copy(a));
     a.setCopyBoard(false);
     currentPosition += 1;
-    //println(positionsToString());
+    println(positions.get(0).makeString("", positions.get(0).pieces));
   }
   textSize(20);
   int minute = 0;
@@ -92,15 +92,17 @@ void keyPressed() {
   else if(a.getPromote())
     a.Promotion("queen");
   else if(keyCode == LEFT){
-    println(currentPosition);
+    //println(positions.get(0).makeString("", positions.get(0).pieces));
     if(currentPosition > 1){
       currentPosition -= 1;
-      a = positions.get(currentPosition - 1);
+      println(currentPosition);
+      a = copy(positions.get(currentPosition - 1));
       for(int i = 0; i < a.pieces.length; i++){
          for(int j = 0; j < a.pieces.length; j++){
             a.pieces[i][j].setAvailable(false);
             a.pieces[i][j].setSelected(false);
             a.pieces[i][j].setEnPassant(false);
+            a.pieces[i][j].setHasMoved(false);
          }
      }
    }

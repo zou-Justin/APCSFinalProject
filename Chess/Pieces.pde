@@ -6,7 +6,6 @@ class Pieces{
   boolean isAvailable;
   boolean Selected;
   boolean hasMoved;
-  boolean FirstTurnPawn;
   boolean marked;
   boolean enpassant;
   int PieceCounter;
@@ -17,7 +16,6 @@ class Pieces{
     isAvailable = false;
     Selected = false;
     hasMoved = false;
-    FirstTurnPawn = false;
     marked = false;
     enpassant = false;
     PieceCounter = 1;
@@ -52,9 +50,6 @@ class Pieces{
     marked = b;
   }
   
-  void setPawn(boolean b){
-     FirstTurnPawn = b;
-  }
   String getType(){
     return type;
   }
@@ -76,9 +71,7 @@ class Pieces{
   void setSelected(boolean b){
     Selected = b;
   }
-   boolean getFirstTurnPawn(){
-    return FirstTurnPawn;
-  }
+
   boolean getHasMoved(){
     return hasMoved;
   }

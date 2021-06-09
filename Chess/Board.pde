@@ -878,7 +878,8 @@ class Board{
     }
     if(movemade){
         movecount += 0.5;
-        copyBoard = true;
+        if(!promotion)
+          copyBoard = true;
     }
      movemade = false;
   }
