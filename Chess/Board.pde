@@ -10,6 +10,7 @@ class Board{
   boolean stalemate;
   ArrayList<Pieces> dead;
   int Time;
+  boolean copyBoard;
   
   
    public Board(){
@@ -23,17 +24,83 @@ class Board{
     promotion = false;
     stalemate = false;
     Time = 600;
+    copyBoard = false;
+  }
+  
+  public Board(int siz, double movecoun, Pieces[][] piecesarr, Pieces[][] pieces2arr, ArrayList<Pieces> deadarr, int Tim){
+    size = siz;
+    movecount = movecoun;
+    pieces = piecesarr;
+    pieces2 = pieces2arr;
+    dead = deadarr;
+    movemade = false;
+    Time = Tim;
+    selected = false;
+    promotion = false;
+    stalemate = false;
+    copyBoard = false;
+    for(int i = 0; i < pieces.length; i++){
+      for(int j = 0; j < pieces[i].length; j++){
+        pieces[i][j].setAvailable(false);
+        pieces2[i][j] = pieces[i][j];
+      }
+    }
   }
 
   void setSelected(boolean b){
     selected = b;
   }
+  
   boolean getSelected(){
     return selected;
   }
   
   boolean getPromote(){
     return promotion;
+  }
+  
+  double getMoveCount(){
+    return movecount;
+  }
+  
+  boolean getCopyBoard(){
+    return copyBoard;
+  }
+  
+  void setCopyBoard(boolean b){
+    copyBoard = b;
+  }
+  
+  Pieces[][] getPieces(){
+    Pieces[][] arr = new Pieces[8][8];
+    for(int i = 0; i < arr.length; i++){
+      for(int j = 0; j < arr[i].length; j++){
+        arr[i][j] = pieces[i][j];
+      }
+    }
+    return arr;
+  }
+  
+  Pieces[][] getPieces2(){
+    Pieces[][] arr = new Pieces[8][8];
+    for(int i = 0; i < arr.length; i++){
+      for(int j = 0; j < arr[i].length; j++){
+        arr[i][j] = pieces2[i][j];
+      }
+    }
+    return arr;
+  }
+  
+  int getTime(){
+    return Time;
+  }
+  
+  ArrayList<Pieces> getDead(){
+    ArrayList<Pieces> arr = new ArrayList<Pieces>();
+    for(int i = 0; i < dead.size(); i++){
+      arr.add(dead.get(i));
+    } 
+    return arr;
   }
   
   void setUp(){
@@ -44,6 +111,7 @@ class Board{
     spawnPieces();
     dead.clear();
     stalemate = false;
+    copyBoard = false;
   }
   
    int getSize(){
@@ -713,7 +781,7 @@ class Board{
       for (int b = 0; b < pieces[0].length; b++){
          if (pieces[a][b].getAvailable()){
                  stroke(14, 129, 4);
-                 fill(14, 129, 4, 20);
+                 fill(20, 191, 6, 100);
                  circle(70 + (b * 80), 631 - (a * 80), 20);
           }  
        }
@@ -808,8 +876,11 @@ class Board{
         }
       }
     }
-    if(movemade)
+    if(movemade){
         movecount += 0.5;
+        if(!promotion)
+          copyBoard = true;
+    }
      movemade = false;
   }
 

@@ -84,3 +84,6 @@ Made it so you can see all the available squares when selecting a piece.
 
 Adam 6/7/21
 Made an outline for the presentaion. Finished making possible moves available. Fixed a small bug in en passant.
+
+Adam 6/8/21
+Worked on implementing the ability to take back moves.
