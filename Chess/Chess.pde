@@ -1,6 +1,6 @@
 Board a = new Board();
 ArrayList<Board> positions = new ArrayList<Board>();
-int currentPosition = 0;
+int currentPosition = 1;
 
 void setup(){
   size(700, 700);
@@ -71,8 +71,11 @@ void mousePressed(){
     }
   }
   if (mouseButton == LEFT && (mouseX >= 290 && mouseX < 380) && (mouseY < 25)){
-    positions = new ArrayList<Board>();
-    currentPosition = 0;
+    //positions = new ArrayList<Board>();
+    currentPosition = 1;
+    while(positions.size() > 1){
+      positions.remove(positions.size() - 1);
+    }
     a.restart();
   }
 }
@@ -89,13 +92,15 @@ void keyPressed() {
   else if(a.getPromote())
     a.Promotion("queen");
   else if(keyCode == LEFT){
-    if(currentPosition > 0){
+    println(currentPosition);
+    if(currentPosition > 1){
       currentPosition -= 1;
-      a = positions.get(currentPosition);
+      a = positions.get(currentPosition - 1);
       for(int i = 0; i < a.pieces.length; i++){
          for(int j = 0; j < a.pieces.length; j++){
             a.pieces[i][j].setAvailable(false);
             a.pieces[i][j].setSelected(false);
+            a.pieces[i][j].setEnPassant(false);
          }
      }
    }

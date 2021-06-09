@@ -111,6 +111,7 @@ class Board{
     spawnPieces();
     dead.clear();
     stalemate = false;
+    copyBoard = false;
   }
   
    int getSize(){
