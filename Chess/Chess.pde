@@ -21,6 +21,7 @@ Board copy(Board b){
      x.pieces2[i][j] = x.pieces[i][j];
    }
  }
+ //println(x.makeString("isAvailable", x.pieces));
  return x;
 }
 
@@ -104,6 +105,6 @@ void keyPressed() {
       currentPosition -= 1;
       a = positions.get(currentPosition);
     }
-    println(a.makeString("isAvailable", a.pieces));
+    //println(a.makeString("isAvailable", a.pieces));
   }
 }
