@@ -9,10 +9,7 @@ class Board{
   boolean gameOver;
   boolean stalemate;
   ArrayList<Pieces> dead;
-  //int Time;
   boolean copyBoard;
-  int minute = 0;
-  String zero = "";
   
    public Board(){
     size = 700;
