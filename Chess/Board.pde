@@ -31,7 +31,6 @@ class Board{
     pieces2 = pieces2arr;
     dead = deadarr;
     movemade = false;
-    //Time = Tim;
     selected = false;
     promotion = false;
     stalemate = false;

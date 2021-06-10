@@ -88,5 +88,11 @@ Made an outline for the presentaion. Finished making possible moves available. F
 Adam 6/8/21
 Worked on implementing the ability to take back moves.
 
+Justin 6/8/2021
+Did some small changes to displaying moves
+
 Adam 6/9/21
 I finished creating the ability to take back moves. I found and solved a bug in queenside castling. I made it so availableSquares only shows squares that you can move to that aren't illegal.
+
+Justin 6/9/2021
+I made a simple looking start menu as well as updated the UML.
