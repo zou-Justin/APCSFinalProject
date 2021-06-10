@@ -3,13 +3,14 @@ ArrayList<Board> positions = new ArrayList<Board>();
 int currentPosition = 1;
 PImage img;
 boolean accessGame = false;
+
 void setup(){
   img = loadImage("chessBackground.jpg");
   image(img,0,0,width,height);
   rect(width/2- 120,height/2+120,250,40);
   fill(0);
   textSize(40);
-  text("start",width/2- 40,height/2+160);
+  text("start",width/2- 40, height/2+152);
   size(700, 700);
   
   a.setUp();
@@ -32,7 +33,7 @@ String positionsToString(){
 
 void draw(){
   if (accessGame)
-  a.display();
+    a.display();
   if(a.getCopyBoard()){
     positions.add(currentPosition, copy(a));
     a.setCopyBoard(false);
@@ -55,44 +56,47 @@ void draw(){
 }
 
 void mousePressed(){
-  if(!a.promotion && mouseButton == LEFT && (mouseX >= 30 && mouseX < 670) && (mouseY >= 30 && mouseY < 670)){
-    if(a.getSelected() == false){
-      a.availableSquares(mouseX, mouseY);
-    }else if (a.getSelected()){
-      a.setSelected(false);
-      a.move(mouseX,mouseY);
+  if(accessGame){
+    if(!a.promotion && mouseButton == LEFT && (mouseX >= 30 && mouseX < 670) && (mouseY >= 30 && mouseY < 670)){
+      if(a.getSelected() == false){
+        a.availableSquares(mouseX, mouseY);
+      }else if (a.getSelected()){
+        a.setSelected(false);
+        a.move(mouseX,mouseY);
+      }
+    }
+    if (mouseButton == LEFT && (mouseX >= 290 && mouseX < 380) && (mouseY < 25)){
+      currentPosition = 1;
+      while(positions.size() > 1){
+        positions.remove(positions.size() - 1);
+      }
+      a.restart();
     }
   }
   if (mouseButton == LEFT && (mouseX >= width/2- 370 && mouseX < width/2+130) && (mouseY < height/2+160 && mouseY >= height/2+80)){
     accessGame = true;
   }
-  if (mouseButton == LEFT && (mouseX >= 290 && mouseX < 380) && (mouseY < 25)){
-    //positions = new ArrayList<Board>();
-    currentPosition = 1;
-    while(positions.size() > 1){
-      positions.remove(positions.size() - 1);
-    }
-    a.restart();
-  }
 }
 
-void keyPressed() {
-  if(key == 'q' && a.getPromote())
-    a.Promotion("queen");
-  else if(key == 'n' && a.getPromote())
-    a.Promotion("knight");
-  else if(key == 'b' && a.getPromote())
-    a.Promotion("bishop");
-  else if(key == 'r' && a.getPromote())
-    a.Promotion("rook");
-  else if(a.getPromote())
-    a.Promotion("queen");
-  else if(keyCode == LEFT){
+void keyPressed(){
+  if(accessGame){
+    if(key == 'q' && a.getPromote())
+      a.Promotion("queen");
+    else if(key == 'n' && a.getPromote())
+      a.Promotion("knight");
+    else if(key == 'b' && a.getPromote())
+      a.Promotion("bishop");
+    else if(key == 'r' && a.getPromote())
+      a.Promotion("rook");
+    else if(a.getPromote())
+      a.Promotion("queen");
+    else if(keyCode == LEFT){
     //println(positions.get(0).makeString("", positions.get(0).pieces));
-    if(currentPosition > 1){
-      currentPosition -= 1;
-      //println(currentPosition);
-      a = copy(positions.get(currentPosition - 1));
-   }
+      if(currentPosition > 1){
+        currentPosition -= 1;
+        //println(currentPosition);
+        a = copy(positions.get(currentPosition - 1));
+      }
+    }
   }
 }
