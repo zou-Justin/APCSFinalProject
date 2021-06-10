@@ -218,6 +218,11 @@ class Board{
       text("Press 'q' for queen, 'n' for knight,", 400, 12);   
       text("'b' for bishop, or 'r' for rook.", 400, 28);
     }
+    if(!promotion){
+      fill(255);
+      textSize(15);
+      text("Press the back arrow to take back a move", 395, 20);
+    }
     fill(0);
     textSize(30);
     text("8", 7, 80);
