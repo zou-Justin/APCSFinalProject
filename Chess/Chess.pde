@@ -5,9 +5,11 @@ PImage img;
 boolean accessGame = false;
 
 void setup(){
-  img = loadImage("chessBackground.jpg");
+  img = loadImage("chessBackground2.jpg");
   image(img,0,0,width,height);
   textSize(15);
+  fill(255);
+  rect(10,10,680,400);
   fill(0);
   text("Hello, and welcome to our chess game! Here is a brief description of how to operate", 20, 30);
   text("our game. To make a move, first click on the piece you want. Legal squares will be indicated", 20, 50);
