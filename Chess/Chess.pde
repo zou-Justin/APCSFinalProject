@@ -1,9 +1,14 @@
 Board a = new Board();
 ArrayList<Board> positions = new ArrayList<Board>();
 int currentPosition = 1;
-
+PImage img;
+boolean accessGame = false;
 void setup(){
+  img = loadImage("chessBackground.jpg");
+  image(img,0,0);
+  rect(350,350,100,100);
   size(700, 700);
+  
   a.setUp();
   positions.add(copy(a));
 }
@@ -23,6 +28,7 @@ String positionsToString(){
 
 
 void draw(){
+  if (accessGame)
   a.display();
   if(a.getCopyBoard()){
     positions.add(currentPosition, copy(a));
@@ -53,6 +59,9 @@ void mousePressed(){
       a.setSelected(false);
       a.move(mouseX,mouseY);
     }
+  }
+  if (mouseButton == LEFT && (mouseX >= 250 && mouseX < 450) && (mouseY < 450 && mouseY >= 250)){
+    accessGame = true;
   }
   if (mouseButton == LEFT && (mouseX >= 290 && mouseX < 380) && (mouseY < 25)){
     //positions = new ArrayList<Board>();
