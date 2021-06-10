@@ -5,8 +5,11 @@ PImage img;
 boolean accessGame = false;
 void setup(){
   img = loadImage("chessBackground.jpg");
-  image(img,0,0);
-  rect(350,350,100,100);
+  image(img,0,0,width,height);
+  rect(width/2- 120,height/2+120,250,40);
+  fill(0);
+  textSize(40);
+  text("start",width/2- 40,height/2+160);
   size(700, 700);
   
   a.setUp();
@@ -60,7 +63,7 @@ void mousePressed(){
       a.move(mouseX,mouseY);
     }
   }
-  if (mouseButton == LEFT && (mouseX >= 250 && mouseX < 450) && (mouseY < 450 && mouseY >= 250)){
+  if (mouseButton == LEFT && (mouseX >= width/2- 370 && mouseX < width/2+130) && (mouseY < height/2+160 && mouseY >= height/2+80)){
     accessGame = true;
   }
   if (mouseButton == LEFT && (mouseX >= 290 && mouseX < 380) && (mouseY < 25)){
