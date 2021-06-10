@@ -28,7 +28,7 @@ void draw(){
     positions.add(currentPosition, copy(a));
     a.setCopyBoard(false);
     currentPosition += 1;
-    println(positions.get(0).makeString("", positions.get(0).pieces));
+    //println(positions.get(0).makeString("", positions.get(0).pieces));
   }
   textSize(20);
   //int minute = 0;
@@ -95,7 +95,7 @@ void keyPressed() {
     //println(positions.get(0).makeString("", positions.get(0).pieces));
     if(currentPosition > 1){
       currentPosition -= 1;
-      println(currentPosition);
+      //println(currentPosition);
       a = copy(positions.get(currentPosition - 1));
    }
     //println(a.makeString("isAvailable", a.pieces));
