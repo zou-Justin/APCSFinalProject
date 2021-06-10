@@ -9,7 +9,7 @@ void setup(){
 }
 
 Board copy(Board b){
- Board x = new Board(b.getSize(), b.getMoveCount(), b.getPieces(), b.getPieces2(), b.getDead(), b.getTime());
+ Board x = new Board(b.getSize(), b.getMoveCount(), b.getPieces(), b.getPieces2(), b.getDead());
  return x;
 }
 
@@ -28,7 +28,7 @@ void draw(){
     positions.add(currentPosition, copy(a));
     a.setCopyBoard(false);
     currentPosition += 1;
-    println(positions.get(0).makeString("", positions.get(0).pieces));
+    //println(positions.get(0).makeString("", positions.get(0).pieces));
   }
   textSize(20);
   if(a.movecount % 1 == 0){
@@ -41,7 +41,6 @@ void draw(){
   }
   fill(0);
 
-  
 
 
 }
@@ -80,16 +79,8 @@ void keyPressed() {
     //println(positions.get(0).makeString("", positions.get(0).pieces));
     if(currentPosition > 1){
       currentPosition -= 1;
-      println(currentPosition);
+      //println(currentPosition);
       a = copy(positions.get(currentPosition - 1));
-      for(int i = 0; i < a.pieces.length; i++){
-         for(int j = 0; j < a.pieces.length; j++){
-            a.pieces[i][j].setAvailable(false);
-            a.pieces[i][j].setSelected(false);
-            a.pieces[i][j].setEnPassant(false);
-            a.pieces[i][j].setHasMoved(false);
-         }
-     }
    }
   }
 }

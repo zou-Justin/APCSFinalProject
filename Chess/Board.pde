@@ -9,7 +9,7 @@ class Board{
   boolean gameOver;
   boolean stalemate;
   ArrayList<Pieces> dead;
-  int Time;
+  //int Time;
   boolean copyBoard;
   int minute = 0;
   String zero = "";
@@ -24,18 +24,17 @@ class Board{
     movemade = false;
     promotion = false;
     stalemate = false;
-    Time = 0;
     copyBoard = false;
   }
   
-  public Board(int siz, double movecoun, Pieces[][] piecesarr, Pieces[][] pieces2arr, ArrayList<Pieces> deadarr, int Tim){
+  public Board(int siz, double movecoun, Pieces[][] piecesarr, Pieces[][] pieces2arr, ArrayList<Pieces> deadarr){
     size = siz;
     movecount = movecoun;
     pieces = piecesarr;
     pieces2 = pieces2arr;
     dead = deadarr;
     movemade = false;
-    Time = Tim;
+    //Time = Tim;
     selected = false;
     promotion = false;
     stalemate = false;
@@ -43,7 +42,7 @@ class Board{
     for(int i = 0; i < pieces.length; i++){
       for(int j = 0; j < pieces[i].length; j++){
         pieces[i][j].setAvailable(false);
-        pieces2[i][j] = pieces[i][j];
+       // pieces2[i][j] = pieces[i][j];
       }
     }
   }
@@ -72,11 +71,19 @@ class Board{
     copyBoard = b;
   }
   
+  Pieces clone(Pieces p){
+    Pieces a = new Pieces();
+    if(!p.getType().equals("generic")){
+      a = new Pieces(p.getColor(), p.getType(), p.getAvailable(), p.getSelected(), p.getHasMoved(), p.getMarked(), p.getEnPassant(), p.getPieceCounter());
+    }
+    return a;
+  }
+  
   Pieces[][] getPieces(){
     Pieces[][] arr = new Pieces[8][8];
     for(int i = 0; i < arr.length; i++){
       for(int j = 0; j < arr[i].length; j++){
-        arr[i][j] = pieces[i][j];
+        arr[i][j] = clone(pieces[i][j]);
       }
     }
     return arr;
@@ -86,14 +93,10 @@ class Board{
     Pieces[][] arr = new Pieces[8][8];
     for(int i = 0; i < arr.length; i++){
       for(int j = 0; j < arr[i].length; j++){
-        arr[i][j] = pieces2[i][j];
+        arr[i][j] = clone(pieces2[i][j]);
       }
     }
     return arr;
-  }
-  
-  int getTime(){
-    return Time;
   }
   
   ArrayList<Pieces> getDead(){
@@ -155,7 +158,7 @@ class Board{
     //Copying over pieces to pieces2 array
     for(int n = 0; n < pieces.length; n++){
       for(int s = 0; s < pieces[n].length; s++){
-        pieces2[n][s] = pieces[n][s];
+        pieces2[n][s] = clone(pieces[n][s]);
       }
     }
 
@@ -210,6 +213,11 @@ class Board{
       text("Press 'q' for queen, 'n' for knight,", 400, 12);   
       text("'b' for bishop, or 'r' for rook.", 400, 28);
     }
+    if(!promotion){
+      fill(255);
+      textSize(15);
+      text("Press the back arrow to take back a move", 395, 20);
+    }
     fill(0);
     textSize(30);
     text("8", 7, 80);
@@ -229,7 +237,6 @@ class Board{
     text("g", 540, 693);
     text("h", 620, 697);
     displayDead();
-   
     if(gameOver){
       fill(255);
       rect(40, 270, 600, 80);
@@ -380,26 +387,47 @@ class Board{
         availableSquaresKing(r, c, pieces);
       if(pieces[r][c].getType().equals("queen"))
         availableSquaresQueen(r, c, pieces);
-    // for(int i = 0; i < pieces.length; i++){
-    //    for(int j = 0; j < pieces[0].length; j++){
-    //      if(pieces[i][j].getAvailable()){
-    //        Pieces z = pieces2[i][j];
-    //        println(makeString("isAvailable", pieces));
-    //        if(illegalMove(r, c, i, j)){
-    //           pieces[i][j].setAvailable(false);
-    //        }
-    //        println(makeString("isAvailable", pieces));
-    //        pieces2[r][c] = pieces2[i][j];
-    //        pieces2[i][j] = z;
-    //        for(int a = 0; a < pieces2.length; a++){
-    //           for(int b = 0; b < pieces2[0].length; b++){
-    //             pieces2[a][b].setAvailable(false);
-    //           }
-    //        }
-    //        println(makeString("isAvailable", pieces));
-    //      }      
-    //    }
-    //  }    
+     for(int i = 0; i < pieces.length; i++){
+        for(int j = 0; j < pieces[0].length; j++){
+          if(pieces[i][j].getAvailable()){
+            Pieces z = pieces2[i][j];
+            //println(makeString("isAvailable", pieces));
+            if(illegalMove(r, c, i, j)){
+               pieces[i][j].setAvailable(false);
+            }
+            //println(makeString("isAvailable", pieces));
+            pieces2[r][c] = pieces2[i][j];
+            pieces2[i][j] = z;
+            for(int a = 0; a < pieces2.length; a++){
+               for(int b = 0; b < pieces2[0].length; b++){
+                 pieces2[a][b].setAvailable(false);
+               }
+            }
+            //println(makeString("isAvailable", pieces));
+          }
+          //kingside castling
+          if(pieces[r][c].getType().equals("king") && c + 2 == j){
+            Pieces q = pieces2[i][j - 1];
+            if(illegalMove(r, c, i, j - 1))
+              pieces[i][j].setAvailable(false);
+            pieces2[r][c] = pieces2[i][j - 1];
+            pieces2[i][j - 1] = q;
+          }
+          //queenside castling
+          if(pieces[r][c].getType().equals("king") && c - 2 == j){
+            Pieces w = pieces2[i][j + 1];
+            if(illegalMove(r, c, i, j + 1))
+              pieces[i][j].setAvailable(false);
+            pieces2[r][c] = pieces2[i][j + 1];
+            pieces2[i][j + 1] = w;
+          }
+          for(int a = 0; a < pieces2.length; a++){
+             for(int b = 0; b < pieces2[0].length; b++){
+               pieces2[a][b].setAvailable(false);
+             }
+          }
+        }
+      }    
       if(!pieces[r][c].getType().equals("generic")){
         pieces[r][c].setSelected(true);
         setSelected(true);
@@ -637,8 +665,9 @@ class Board{
       if(row == 0 && col == 4){
         //kingside castling
         if(!arr[0][7].getHasMoved()){
-          if(arr[0][5].getType().equals("generic") && arr[0][6].getType().equals("generic"))
+          if(arr[0][5].getType().equals("generic") && arr[0][6].getType().equals("generic")){
             arr[0][6].setAvailable(true);
+          }
         }
         //queenside castling
         if(!arr[0][0].getHasMoved()){
@@ -653,40 +682,40 @@ class Board{
           if(arr[7][6].getType().equals("generic") && arr[7][5].getType().equals("generic"))
             arr[7][6].setAvailable(true);
         }
-      }
        //queenside castling
        if(!arr[7][0].getHasMoved()){
          if(arr[7][1].getType().equals("generic") && arr[7][2].getType().equals("generic") && arr[7][3].getType().equals("generic"))
            arr[7][2].setAvailable(true);
        }
-   }
+      }
+    }
   }
   
   void castle(int krow, int kcol, int rrow, int rcol){
-    for(int k = 0; k < pieces2.length; k++){
-      for(int m = 0; m < pieces2[0].length; m++){
-        pieces2[k][m].setSelected(false);
-        pieces2[k][m].setAvailable(false);
-      }
-    }
-    for(int i = 0; i < pieces2.length; i++){
-      for(int j = 0; j < pieces2[i].length; j++){
-         if((movecount % 1 == 0 && !pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && pieces2[i][j].getColor())){
-          if(pieces2[i][j].getType().equals("pawn"))
-            attackedSquaresPawn(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("rook"))
-            availableSquaresRook(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("bishop"))
-            availableSquaresBishop(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("knight"))
-            availableSquaresKnight(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("king"))
-            availableSquaresKing(i, j, pieces2);
-          if(pieces2[i][j].getType().equals("queen"))
-            availableSquaresQueen(i, j, pieces2);
-          }
-      }
-    }
+    //for(int k = 0; k < pieces2.length; k++){
+    //  for(int m = 0; m < pieces2[0].length; m++){
+    //    pieces2[k][m].setSelected(false);
+    //    pieces2[k][m].setAvailable(false);
+    //  }
+    //}
+    //for(int i = 0; i < pieces2.length; i++){
+    //  for(int j = 0; j < pieces2[i].length; j++){
+    //     if((movecount % 1 == 0 && !pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && pieces2[i][j].getColor())){
+    //      if(pieces2[i][j].getType().equals("pawn"))
+    //        attackedSquaresPawn(i, j, pieces2);
+    //      if(pieces2[i][j].getType().equals("rook"))
+    //        availableSquaresRook(i, j, pieces2);
+    //      if(pieces2[i][j].getType().equals("bishop"))
+    //        availableSquaresBishop(i, j, pieces2);
+    //      if(pieces2[i][j].getType().equals("knight"))
+    //        availableSquaresKnight(i, j, pieces2);
+    //      if(pieces2[i][j].getType().equals("king"))
+    //        availableSquaresKing(i, j, pieces2);
+    //      if(pieces2[i][j].getType().equals("queen"))
+    //        availableSquaresQueen(i, j, pieces2);
+    //      }
+    //  }
+    //}
       if(!pieces2[krow][kcol].getAvailable() && rcol == 6){
         if(!pieces2[krow][5].getAvailable() && !pieces2[krow][6].getAvailable()){
           pieces[krow][6] = pieces[krow][kcol];
@@ -751,12 +780,10 @@ class Board{
          dead.get(q).Increase();
          a= false;
        }
-   }
-      if (a){
+     }
+     if (a){
        dead.add(p);
      }
-     
-    
   }
   
   void showMoves(){
@@ -811,8 +838,7 @@ class Board{
               }
               if(pieces[r][c].getType().equals("pawn") && (r == i + 2 || r == i - 2) && c == j){
                    pieces[r][c].setEnPassant(true);
-               }
-              
+               } 
              }
            }   
          }
@@ -841,7 +867,7 @@ class Board{
     //Copying over all of the pieces to the test array
     for(int n = 0; n < pieces.length; n++){
       for(int s = 0; s < pieces[n].length; s++){
-        pieces2[n][s] = pieces[n][s];
+        pieces2[n][s] = clone(pieces[n][s]);
       }
     }
     if(movemade){
@@ -855,7 +881,7 @@ class Board{
       }
       for(int s = 0; s < pieces.length; s++){
         for(int t = 0; t < pieces[s].length; t++){
-          pieces2[s][t] = pieces[s][t];
+          pieces2[s][t] = clone(pieces[s][t]);
         }
       }
     }
