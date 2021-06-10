@@ -9,7 +9,7 @@ class Board{
   boolean gameOver;
   boolean stalemate;
   ArrayList<Pieces> dead;
-  int Time;
+  //int Time;
   boolean copyBoard;
   
   
@@ -23,18 +23,18 @@ class Board{
     movemade = false;
     promotion = false;
     stalemate = false;
-    Time = 600;
+    //Time = 600;
     copyBoard = false;
   }
   
-  public Board(int siz, double movecoun, Pieces[][] piecesarr, Pieces[][] pieces2arr, ArrayList<Pieces> deadarr, int Tim){
+  public Board(int siz, double movecoun, Pieces[][] piecesarr, Pieces[][] pieces2arr, ArrayList<Pieces> deadarr){
     size = siz;
     movecount = movecoun;
     pieces = piecesarr;
     pieces2 = pieces2arr;
     dead = deadarr;
     movemade = false;
-    Time = Tim;
+    //Time = Tim;
     selected = false;
     promotion = false;
     stalemate = false;
@@ -99,9 +99,9 @@ class Board{
     return arr;
   }
   
-  int getTime(){
-    return Time;
-  }
+  //int getTime(){
+  //  return Time;
+  //}
   
   ArrayList<Pieces> getDead(){
     ArrayList<Pieces> arr = new ArrayList<Pieces>();
@@ -387,26 +387,26 @@ class Board{
         availableSquaresKing(r, c, pieces);
       if(pieces[r][c].getType().equals("queen"))
         availableSquaresQueen(r, c, pieces);
-    // for(int i = 0; i < pieces.length; i++){
-    //    for(int j = 0; j < pieces[0].length; j++){
-    //      if(pieces[i][j].getAvailable()){
-    //        Pieces z = pieces2[i][j];
-    //        println(makeString("isAvailable", pieces));
-    //        if(illegalMove(r, c, i, j)){
-    //           pieces[i][j].setAvailable(false);
-    //        }
-    //        println(makeString("isAvailable", pieces));
-    //        pieces2[r][c] = pieces2[i][j];
-    //        pieces2[i][j] = z;
-    //        for(int a = 0; a < pieces2.length; a++){
-    //           for(int b = 0; b < pieces2[0].length; b++){
-    //             pieces2[a][b].setAvailable(false);
-    //           }
-    //        }
-    //        println(makeString("isAvailable", pieces));
-    //      }      
-    //    }
-    //  }    
+     for(int i = 0; i < pieces.length; i++){
+        for(int j = 0; j < pieces[0].length; j++){
+          if(pieces[i][j].getAvailable()){
+            Pieces z = pieces2[i][j];
+            println(makeString("isAvailable", pieces));
+            if(illegalMove(r, c, i, j)){
+               pieces[i][j].setAvailable(false);
+            }
+            println(makeString("isAvailable", pieces));
+            pieces2[r][c] = pieces2[i][j];
+            pieces2[i][j] = z;
+            for(int a = 0; a < pieces2.length; a++){
+               for(int b = 0; b < pieces2[0].length; b++){
+                 pieces2[a][b].setAvailable(false);
+               }
+            }
+            println(makeString("isAvailable", pieces));
+          }      
+        }
+      }    
       if(!pieces[r][c].getType().equals("generic")){
         pieces[r][c].setSelected(true);
         setSelected(true);
