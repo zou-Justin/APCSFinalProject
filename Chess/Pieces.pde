@@ -1,5 +1,4 @@
 class Pieces{
-  
   boolean white;
   String type;
   PImage img;
