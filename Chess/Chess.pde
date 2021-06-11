@@ -60,7 +60,6 @@ void draw(){
       positions.add(currentPosition, copy(a));
       a.setCopyBoard(false);
       currentPosition += 1;
-      //println(positions.get(0).makeString("", positions.get(0).pieces));
     }
     textSize(20);
     if(a.movecount % 1 == 0){
@@ -111,10 +110,8 @@ void keyPressed(){
     else if(a.getPromote())
       a.Promotion("queen");
     else if(keyCode == LEFT){
-    //println(positions.get(0).makeString("", positions.get(0).pieces));
       if(currentPosition > 1){
         currentPosition -= 1;
-        //println(currentPosition);
         a = copy(positions.get(currentPosition - 1));
       }
     }

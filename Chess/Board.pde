@@ -38,7 +38,6 @@ class Board{
     for(int i = 0; i < pieces.length; i++){
       for(int j = 0; j < pieces[i].length; j++){
         pieces[i][j].setAvailable(false);
-       // pieces2[i][j] = pieces[i][j];
       }
     }
   }
@@ -98,7 +97,7 @@ class Board{
   ArrayList<Pieces> getDead(){
     ArrayList<Pieces> arr = new ArrayList<Pieces>();
     for(int i = 0; i < dead.size(); i++){
-      arr.add(dead.get(i));
+      arr.add(clone(dead.get(i)));
     } 
     return arr;
   }
@@ -387,11 +386,9 @@ class Board{
         for(int j = 0; j < pieces[0].length; j++){
           if(pieces[i][j].getAvailable()){
             Pieces z = pieces2[i][j];
-            //println(makeString("isAvailable", pieces));
             if(illegalMove(r, c, i, j)){
                pieces[i][j].setAvailable(false);
             }
-            //println(makeString("isAvailable", pieces));
             pieces2[r][c] = pieces2[i][j];
             pieces2[i][j] = z;
             for(int a = 0; a < pieces2.length; a++){
@@ -399,7 +396,6 @@ class Board{
                  pieces2[a][b].setAvailable(false);
                }
             }
-            //println(makeString("isAvailable", pieces));
           }
           //kingside castling
           if(pieces[r][c].getType().equals("king") && c + 2 == j){
@@ -906,7 +902,6 @@ class Board{
         pieces2[n][p].setAvailable(false);
       }
      }
-     //println(makeString("", pieces2));
       for(int i = 0; i < pieces2.length; i++){
         for(int j = 0; j < pieces2[0].length; j++){
           if((movecount % 1 == 0 && pieces2[i][j].getColor()) || (movecount % 1 == 0.5 && !(pieces2[i][j].getColor()))){
@@ -935,9 +930,6 @@ class Board{
                 if(pieces2[a][b].getMarked()){
                   Pieces x = pieces2[a][b];
                 if(!illegalMove(i, j, a, b)){
-                  //println(makeString("", pieces2));
-                  //println(makeString("isAvailable", pieces2));
-                  //println(makeString("isMarked", pieces2));
                   movecount = storage;
                   return false;
                 }

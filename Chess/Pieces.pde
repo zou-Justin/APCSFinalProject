@@ -38,7 +38,6 @@ class Pieces{
     hasMoved = false;
     marked = false;
     enpassant = false;
-    //PieceCounter = 0;
   }
   
   boolean getEnPassant(){
