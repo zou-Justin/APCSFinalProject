@@ -99,3 +99,6 @@ I made a simple looking start menu as well as updated the UML.
 
 Adam 6/10/21
 I wrote an intro message in the start menu and polished the design of the page. I tested everything on real games and solved an issue with keeping track of dead pieces while taking back moves.
+
+Justin 6/10/2021
+Tested the game mutiple times using pre found games on the internet, worked on the menu in class and made the final UML.
